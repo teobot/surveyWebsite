@@ -139,11 +139,11 @@ echo <<<_END
 <form action="sign_in.php" method="post">
   <div class="form-group">
     <label for="usernameInput">Username:</label>
-	<input type="text" name="username" maxlength="16" value="$username" required> $username_val
+	<input type="text" name="username" maxlength="16" min="1" value="$username" required> $username_val
   </div>
   <div class="form-group">
     <label for="InputPassword">Password:</label>
-    <input type="password" name="password" maxlength="16" value="$password" required> $password_val
+    <input type="password" name="password" maxlength="16" min="1" value="$password" required> $password_val
   </div>
   <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
 </form>
