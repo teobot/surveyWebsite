@@ -29,8 +29,8 @@ $show_signin_form = false;
 // message to output to user:
 $message = "";
 
-// checks the session variable named 'loggedInSkeleton'
-if (isset($_SESSION['loggedInSkeleton']))
+// checks the session variable named 'loggedIn'
+if (isset($_SESSION['loggedIn']))
 {
 	// user is already logged in, just display a message:
 	echo "You are already logged in, please log out first.<br>";
@@ -60,8 +60,8 @@ elseif (isset($_POST['username']))
 	
 	// now validate the data (both strings must be between 1 and 16 characters long):
 	// (reasons: we don't want empty credentials, and we used VARCHAR(16) in the database table)
-	$username_val = validateString($username, 1, 16);
-	$password_val = validateString($password, 1, 16);
+	$username_val = validateString($username, 1, 16, "Username");
+	$password_val = validateString($password, 1, 16, "Password");
 	
 	// concatenate all the validation results together ($errors will only be empty if ALL the data is valid):
 	$errors = $username_val . $password_val;
@@ -95,7 +95,7 @@ elseif (isset($_POST['username']))
 		if ($n > 0)
 		{
 			// set a session variable to record that this user has successfully logged in:
-			$_SESSION['loggedInSkeleton'] = true;
+			$_SESSION['loggedIn'] = true;
 			// and copy their username into the session data for use by our other scripts:
 			$_SESSION['username'] = $username;
 			

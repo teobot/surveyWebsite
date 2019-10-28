@@ -1,13 +1,11 @@
 <?php
-
+require_once "credentials.php";
 // Things to notice:
 // This script holds the sanitisation function that we pass all our user data to
 // This script holds the validation functions that double-check our user data is valid
 // You can add new PHP functions to validate different kinds of user data (e.g., emails, dates) by following the same convention:
 // if the data is valid return an empty string, if the data is invalid return a help message
 // You are encouraged to create/add your own PHP functions here to make frequently used code easier to handle
-
-
 
 // function to sanitise (clean) user data:
 function sanitise($str, $connection)
@@ -26,31 +24,66 @@ function sanitise($str, $connection)
 	return $str;
 }
 
-
-
-
-
-// if the data is valid return an empty string, if the data is invalid return a help message
-function validateString($field, $minlength, $maxlength) 
-{
+function validateEmail($field, $minlength, $maxlength, $name) {
     if (strlen($field)<$minlength) 
     {
 		// wasn't a valid length, return a help message:		
-        return "Minimum length: " . $minlength; 
+        return $name . " must have a minimum length of: " . $minlength . " <br>"; 
     }
 
 	elseif (strlen($field)>$maxlength) 
     { 
 		// wasn't a valid length, return a help message:
-        return "Maximum length: " . $maxlength; 
-    }
+        return $name . " must have a maximum length of: " . $maxlength . " <br>"; 
+	}
+	
+	elseif (!filter_var($field, FILTER_VALIDATE_EMAIL)) 
+	{
+		return "Invalid Email detected <br>";
+	}
 
 	// data was valid, return an empty string:
     return ""; 
 }
 
+function validateUsername($field, $minlength, $maxlength, $connection, $name) {
+
+	if ( validateString($field, $minlength, $maxlength, $name) == "" ) {
+
+		$query = "SELECT * FROM users WHERE username = '$field' ";
+		$result = $connection->query($query);
+
+		if ($result->num_rows > 0) {
+			return "Username already taken sorry!<br>";
+		} else {
+			return "";
+		}
+
+	} else {
+		return "";
+	}
+
+}
 
 
+// if the data is valid return an empty string, if the data is invalid return a help message
+function validateString($field, $minlength, $maxlength, $name) 
+{
+    if (strlen($field)<$minlength) 
+    {
+		// wasn't a valid length, return a help message:		
+        return $name. " must have a minimum length of: " . $minlength. " <br>"; 
+    }
+
+	elseif (strlen($field)>$maxlength) 
+    { 
+		// wasn't a valid length, return a help message:
+        return $name. " must have a maximum length of: " . $maxlength . " <br>"; 
+    }
+
+	// data was valid, return an empty string:
+    return ""; 
+}
 
 
 // if the data is valid return an empty string, if the data is invalid return a help message
@@ -62,7 +95,7 @@ function validateInt($field, $min, $max)
 	if (!filter_var($field, FILTER_VALIDATE_INT, $options)) 
     { 
 		// wasn't a valid integer, return a help message:
-        return "Not a valid number (must be whole and in the range: " . $min . " to " . $max . ")"; 
+        return "Not a valid number (must be whole and in the range: " . $min . " to " . $max . ") <br>"; 
     }
 	// data was valid, return an empty string:
     return ""; 
