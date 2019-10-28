@@ -4,10 +4,11 @@
 require_once "header.php";
 
 echo <<<_END
-	<table class="table">
+	<table class="table table-hover">
 	<thead>
 		<tr>
 		<th scope="col">Action</th>
+		<th>Name</th>
 		<th scope="col">Complete?</th>
 		</tr>
 	</thead>
@@ -44,8 +45,9 @@ if (mysqli_query($connection, $sql))
 {
 	echo <<<_END
 		<tr>
-      		<td scope="row">Create database</td>
-      		<td>DONE</td>
+			<td scope="row">Create database</td>
+			<td>{$dbname}</td> 
+      		<td class="p-3 mb-2 bg-success text-white">Success</td>
 		</tr>
 _END;
 } 
@@ -69,8 +71,9 @@ if (mysqli_query($connection, $sql))
 {
 	echo <<<_END
 		<tr>
-      		<td scope="row">Drop existing table</td>
-      		<td>DONE</td>
+			<td scope="row">Drop existing table</td>
+			<td>users</td>
+			<td class="p-3 mb-2 bg-success text-white">Success</td>
 		</tr>
 _END;
 }
@@ -82,15 +85,28 @@ else
 
 // make our table:
 // notice that the username field is a PRIMARY KEY and so must be unique in each record
-$sql = "CREATE TABLE users (username VARCHAR(16), password VARCHAR(16), email VARCHAR(64), PRIMARY KEY(username))";
+$sql = "
+	CREATE TABLE users 
+		(
+			username VARCHAR(16), 
+			password VARCHAR(16), 
+			firstname VARCHAR(32), 
+			surname VARCHAR(64), 
+			email VARCHAR(64),
+			dob DATE,
+			telephoneNumber VARCHAR(13),
+			PRIMARY KEY(username)
+		)
+	";
 
 // no data returned, we just test for true(success)/false(failure):
 if (mysqli_query($connection, $sql)) 
 {
 	echo <<<_END
 		<tr>
-      		<td scope="row">Create Table</td>
-      		<td>DONE</td>
+			<td scope="row">Create Table</td>
+			<td>users</td>
+			<td class="p-3 mb-2 bg-success text-white">Success</td>
 		</tr>
 _END;
 }
@@ -102,20 +118,43 @@ else
 
 // put some data in our table:
 // create an array variable for each field in the DB that we want to populate
-$usernames[] = 'barrym'; $passwords[] = 'letmein'; $emails[] = 'barry@m-domain.com';
-$usernames[] = 'mandyb'; $passwords[] = 'abc123'; $emails[] = 'webmaster@mandy-g.co.uk';
-$usernames[] = 'timmy'; $passwords[] = 'secret95'; $emails[] = 'timmy@lassie.com';
-$usernames[] = 'briang'; $passwords[] = 'password'; $emails[] = 'brian@quahog.gov';
-$usernames[] = 'a'; $passwords[] = 'test'; $emails[] = 'a@alphabet.test.com';
-$usernames[] = 'b'; $passwords[] = 'test'; $emails[] = 'b@alphabet.test.com';
-$usernames[] = 'c'; $passwords[] = 'test'; $emails[] = 'c@alphabet.test.com';
-$usernames[] = 'd'; $passwords[] = 'test'; $emails[] = 'd@alphabet.test.com';
+$usernames[] = 'barrym'; 
+	$passwords[] = 'letmein'; 
+	$firstnames[] = 'Barry'; 
+	$surnames[] = 'Misstop'; 
+	$emails[] = 'barry@m-domain.com'; 
+	$dobs[] = '1998-08-09'; 
+	$telephoneNumbers[] = '07568232144';
 
+$usernames[] = 'mandyb'; 
+	$passwords[] = 'abc123'; 
+	$firstnames[] = 'Mandy'; 
+	$surnames[] = 'Bless'; 
+	$emails[] = 'webmaster@mandy-g.co.uk'; 
+	$dobs[] = '1999-07-08'; 
+	$telephoneNumbers[] = '07589123456';
+
+$usernames[] = 'timmy'; 
+	$passwords[] = 'secret95'; 
+	$firstnames[] = 'Timmy'; 
+	$surnames[] = 'Stoke'; 
+	$emails[] = 'timmy@lassie.com'; 
+	$dobs[] = '1991-02-05'; 
+	$telephoneNumbers[] = '07568456394';
+
+$usernames[] = 'admin'; 
+	$passwords[] = 'secret'; 
+	$firstnames[] = 'Theo'; 
+	$surnames[] = 'Clapperton'; 
+	$emails[] = 'totallyRealEmail@real.com'; 
+	$dobs[] = '1998-02-06'; 
+	$telephoneNumbers[] = '07999888666';
+	
 // loop through the arrays above and add rows to the table:
 for ($i=0; $i<count($usernames); $i++)
 {
 	// create the SQL query to be executed
-    $sql = "INSERT INTO users (username, password, email) VALUES ('$usernames[$i]', '$passwords[$i]', '$emails[$i]')";
+    $sql = "INSERT INTO users (username, password, firstname, surname, email, dob, telephoneNumber) VALUES ('$usernames[$i]', '$passwords[$i]', '$firstnames[$i]', '$surnames[$i]', '$emails[$i]','$dobs[$i]', '$telephoneNumbers[$i]')";
 	
 	// run the above query '$sql' on our DB
     // no data returned, we just test for true(success)/false(failure):
@@ -123,8 +162,9 @@ for ($i=0; $i<count($usernames); $i++)
 	{
 	echo <<<_END
 		<tr>
-      		<td scope="row">Insert Row</td>
-      		<td>DONE</td>
+			<td scope="row">Insert Row</td>
+			<td>{$usernames[$i]}</td>
+			<td class="p-3 mb-2 bg-success text-white">Success</td>
 		</tr>
 _END;
 	}
@@ -140,7 +180,7 @@ _END;
 echo <<<_END
 		</tbody>
 	</table>
-	<a href="index.php?"><h1>Click here to return to menu</h1></a>
+	<a class="text-center" href="index.php?"><h1>Click here to return to menu</h1></a>
 _END;
 
 mysqli_close($connection);

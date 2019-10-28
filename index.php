@@ -26,7 +26,7 @@ echo "This is the skeleton code for 2CWK50. See the assignment specification for
     if ($n > 0) {
         echo <<<_END
         <div class="alert alert-success" role="alert">
-            Database and data exist, Welcome!
+            Database and data exist, Welcome! You can reset <a href="create_data.php">Here</a>
         </div>    
 _END;
     } else {
