@@ -120,16 +120,52 @@ if ($show_signup_form)
 // show the form that allows users to sign up
 // Note we use an HTTP POST request to avoid their password appearing in the URL:	
 echo <<<_END
-<form action="sign_up.php" method="post">
-  Please choose a username and password:<br>
-  Username: <input type="text" name="username" maxlength="16" min="1" value="$username" required> $username_val
-  <br>
-  Password: <input type="password" name="password" maxlength="16" value="$password" required> $password_val
-  <br>
-  Email: <input type="email" name="email" maxlength="64" value="$email" required> $email_val
-  <br>
-  <input type="submit" value="Submit">
-</form>	
+<form action="sign_up.php" method="post" class="needs-validation">
+
+	<div class="row">
+		<div class="col">
+			<label>Username</label>
+				<input type="text" name="username" maxlength="16" min="1" class="form-control" required>
+				<small id="usernameHelp" class="form-text text-muted">This is your display name.</small>
+		</div>
+		<div class="col">
+			<label>Password</label>
+				<input type="password" name="password" maxlength="16" class="form-control" required>
+				<small id="usernameHelp" class="form-text text-muted">Enter your account password.</small>
+		</div>
+  	</div><br><br><br>
+	
+	<div class="row">
+		<div class="col">
+			<label>Firstname</label>
+				<input type="text" class="form-control" placeholder="Firstname" required>
+		</div>
+		<div class="col">
+			<label>Surname</label>
+				<input type="text" class="form-control" placeholder="Surname" required>
+		</div>
+  	</div><br><br><br>
+
+	<div class="row">
+		<div class="col">
+			<label>Date of Birth</label>
+				<input type="date" class="form-control" placeholder="D.O.B" required>
+		</div>
+		<div class="col">
+ 	   		<label>Phone Number</label>
+ 	   			<input type="text" class="form-control" placeholder="Phone Number" required>
+		</div>
+	</div><br><br><br>
+
+	<div class="row">
+			<div class="col">
+			<label>Email</label>
+				<input type="email" name="email" maxlength="64" class="form-control" placeholder="Email" required>
+		</div>
+	</div><br>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 _END;
 }
 
