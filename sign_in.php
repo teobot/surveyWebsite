@@ -8,8 +8,8 @@
 //
 // Other notes:
 // client-side validation using "password","text" inputs and "required","maxlength" attributes (but we can't rely on it happening!)
-// we sanitise the user's credentials - see helper.php (included via header.php) for the sanitisation function
-// we validate the user's credentials - see helper.php (included via header.php) for the validation functions
+// we sanitise the user's credentials - see validationChecker.php (included via header.php) for the sanitisation function
+// we validate the user's credentials - see validationChecker.php (included via header.php) for the validation functions
 // the validation functions all follow the same rule: return an empty string if the data is valid...
 // ... otherwise return a help message saying what is wrong with the data.
 // if validation of any field fails then we display the help messages (see previous) when re-displaying the form
@@ -50,13 +50,13 @@ elseif (isset($_POST['username']))
 		die("Connection failed: " . $mysqli_connect_error);
 	}	
 	
-	// SANITISATION (see helper.php for the function definition)
+	// SANITISATION (see validationChecker.php for the function definition)
 	
 	// take copies of the credentials the user submitted and sanitise (clean) them:
 	$username = sanitise($_POST['username'], $connection);
 	$password = sanitise($_POST['password'], $connection);
 	
-	// VALIDATION (see helper.php for the function definitions)
+	// VALIDATION (see validationChecker.php for the function definitions)
 	
 	// now validate the data (both strings must be between 1 and 16 characters long):
 	// (reasons: we don't want empty credentials, and we used VARCHAR(16) in the database table)

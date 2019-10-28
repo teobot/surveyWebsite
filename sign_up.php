@@ -5,8 +5,8 @@
 // However, the assignment specification tells you that you need more fields than this for each user.
 // So you will need to amend this script to include them. Don't forget to update your database (create_data.php) in tandem so they match
 // This script does client-side validation using "password","text" inputs and "required","maxlength" attributes (but we can't rely on it happening!)
-// we sanitise the user's credentials - see helper.php (included via header.php) for the sanitisation function
-// we validate the user's credentials - see helper.php (included via header.php) for the validation functions
+// we sanitise the user's credentials - see validationChecker.php (included via header.php) for the sanitisation function
+// we validate the user's credentials - see validationChecker.php (included via header.php) for the validation functions
 // the validation functions all follow the same rule: return an empty string if the data is valid...
 // ... otherwise return a help message saying what is wrong with the data.
 // if validation of any field fails then we display the help messages (see previous) when re-displaying the form
@@ -17,12 +17,20 @@ require_once "header.php";
 // default values we show in the form:
 $username = "";
 $password = "";
+$firstname = "";
+$surname = "";
+$dob = "";
+$telephoneNumber = "";
 $email = "";
 
 // strings to hold any validation error messages:
-$username_val = "";
-$password_val = "";
-$email_val = "";
+$username_err = "";
+$password_err = "";
+$firstname_err = "";
+$surname_err = "";
+$dob_err = "";
+$phoneNumber_err = "";
+$email_err = "";
 
 // should we show the signup form?:
 $show_signup_form = false;
@@ -37,7 +45,7 @@ if (isset($_SESSION['loggedIn']))
 	
 }
 
-elseif (isset($_POST['username']))
+elseif ( isset($_POST['username']) && isset($_POST['password']) && isset($_POST['firstname']) && isset($_POST['surname']) && isset($_POST['dob']) && isset($_POST['phoneNumber']) && isset($_POST['email']) )
 {
 	// user just tried to sign up:
 	
@@ -50,15 +58,19 @@ elseif (isset($_POST['username']))
 		die("Connection failed: " . $mysqli_connect_error);
 	}	
 	
-	// SANITISATION (see helper.php for the function definition)
+	// SANITISATION (see validationChecker.php for the function definition)
 	
 	// take copies of the credentials the user submitted, and sanitise (clean) them:
 	$username = sanitise($_POST['username'], $connection);
 	$password = sanitise($_POST['password'], $connection);
-    $email = sanitise($_POST['email'], $connection);
+	$firstname = sanitise($_POST['firstname'], $connection);
+	$surname = sanitise($_POST['surname'], $connection);
+	$dob = sanitise($_POST['dob'], $connection);
+	$telephoneNumber = sanitise($_POST['phoneNumber'], $connection);
+	$email = sanitise($_POST['email'], $connection);
+	
 
-
-	// VALIDATION (see helper.php for the function definitions)
+	// VALIDATION (see validationChecker.php for the function definitions)
 	// now validate the data (both strings must be between 1 and 16 characters long):
 	// (reasons: we don't want empty credentials, and we used VARCHAR(16) in the database table for username and password)
     // firstname is VARCHAR(32) and lastname is VARCHAR(64) in the DB
@@ -76,7 +88,8 @@ elseif (isset($_POST['username']))
 	{
 		
 		// try to insert the new details:
-		$query = "INSERT INTO users (username, password, email) VALUES ('$username', '$password', '$email');";
+		$query = "INSERT INTO users (username, password, firstname, surname, email, dob, telephoneNumber) VALUES ('$username', '$password', '$firstname', '$surname', '$email', '$dob', '$telephoneNumber')";
+
 		$result = mysqli_query($connection, $query);
 		
 		// no data returned, we just test for true(success)/false(failure):
@@ -122,45 +135,51 @@ if ($show_signup_form)
 echo <<<_END
 <form action="sign_up.php" method="post" class="needs-validation">
 
+	<h5>Account Details</h5>
 	<div class="row">
 		<div class="col">
 			<label>Username</label>
 				<input type="text" name="username" maxlength="16" min="1" class="form-control" required>
-				<small id="usernameHelp" class="form-text text-muted">This is your display name.</small>
+				<small class="form-text text-muted">This is your display name.</small>
 		</div>
 		<div class="col">
 			<label>Password</label>
-				<input type="password" name="password" maxlength="16" class="form-control" required>
-				<small id="usernameHelp" class="form-text text-muted">Enter your account password.</small>
-		</div>
-  	</div><br><br><br>
-	
-	<div class="row">
-		<div class="col">
-			<label>Firstname</label>
-				<input type="text" class="form-control" placeholder="Firstname" required>
-		</div>
-		<div class="col">
-			<label>Surname</label>
-				<input type="text" class="form-control" placeholder="Surname" required>
+				<input type="password" name="password" maxlength="16" min="1" class="form-control" required>
+				<small class="form-text text-muted">Enter your account password.</small>
 		</div>
   	</div><br><br><br>
 
+	<h5>Personal Details</h5>
+	<div class="row">
+		<div class="col">
+			<label>Firstname</label>
+				<input type="text" name="firstname" maxlength="32" min="1" class="form-control"required>
+				<small class="form-text text-muted">Enter your firstname.</small>
+		</div>
+		<div class="col">
+			<label>Surname</label>
+				<input type="text" name="surname" maxlength="64" min="1"  class="form-control" required>
+				<small class="form-text text-muted">Enter your surname.</small>
+		</div>
+  	</div><br>
 	<div class="row">
 		<div class="col">
 			<label>Date of Birth</label>
-				<input type="date" class="form-control" placeholder="D.O.B" required>
+				<input name="dob" type="date" min="1919-01-01" max="2018-01-01" class="form-control" required>
+				<small class="form-text text-muted">Enter your date of birth.</small>
 		</div>
 		<div class="col">
  	   		<label>Phone Number</label>
- 	   			<input type="text" class="form-control" placeholder="Phone Number" required>
+				<input name="telephoneNumber" type="text" min="13" min="11" class="form-control" required>
+				<small class="form-text text-muted">Enter your phone number.</small>
 		</div>
-	</div><br><br><br>
+	</div><br>
 
 	<div class="row">
 			<div class="col">
 			<label>Email</label>
-				<input type="email" name="email" maxlength="64" class="form-control" placeholder="Email" required>
+				<input type="email" name="email" maxlength="64" min="7" class="form-control" required>
+				<small class="form-text text-muted">Enter your email address.</small>
 		</div>
 	</div><br>
 

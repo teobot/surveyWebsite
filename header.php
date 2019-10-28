@@ -19,7 +19,7 @@
 require_once "credentials.php";
 
 // our helper functions:
-require_once "helper.php";
+require_once "validationChecker.php";
 
 // start/restart the session:
 // this allows use to make use of session variables
