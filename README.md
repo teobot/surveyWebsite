@@ -7,7 +7,6 @@
 - [x] Database script is written so that It will create the more complex database 
 - [x] Sign_up page now allows user to give more details than before
 - [x] Added reset feature for database if it becomes damaged
-- [x] 
 
 ### Features to add
 - [ ] Date of birth needs validation, I've already done this somewhere, just need to find it
