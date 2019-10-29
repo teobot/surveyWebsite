@@ -104,5 +104,19 @@ function validateInt($field, $min, $max)
 // all other validation functions should follow the same rule:
 // if the data is valid return an empty string, if the data is invalid return a help message
 // ...
+function validateDate($date)
+{
+    $timestamp = strtotime($date);
+    
+    $day = date('d', $timestamp);
+	$month = date('j', $timestamp);
+	$year = date('Y', $timestamp);
+    
+	if (checkdate($month,$day,$year)) {
+		return "";
+	} else {
+		echo "Incorrect Date entered!";
+	}
+}
 
 ?>
