@@ -1,15 +1,13 @@
 <?php
 
-// Things to notice:
-// The main job of this script is to execute an INSERT statement to add the submitted username, password and email address
-// However, the assignment specification tells you that you need more fields than this for each user.
-// So you will need to amend this script to include them. Don't forget to update your database (create_data.php) in tandem so they match
-// This script does client-side validation using "password","text" inputs and "required","maxlength" attributes (but we can't rely on it happening!)
-// we sanitise the user's credentials - see validationChecker.php (included via header.php) for the sanitisation function
-// we validate the user's credentials - see validationChecker.php (included via header.php) for the validation functions
-// the validation functions all follow the same rule: return an empty string if the data is valid...
-// ... otherwise return a help message saying what is wrong with the data.
-// if validation of any field fails then we display the help messages (see previous) when re-displaying the form
+//    Page Name - || Sign_up.php
+//                --
+// Page Purpose - || Allows the user to make new accounts using their own data, This data gets santitised and checked
+//                || if its valid. Once the data is checked its then pushed into a database and the user can login.
+//                --
+//        Notes - ||
+//         		  ||
+//                --
 
 // execute the header script:
 require_once "header.php";
@@ -81,7 +79,7 @@ elseif ( isset($_POST['username']) )
 	$password_err = validateString($password_val, 1, 16, "Password");
 	$firstname_err = validateString($firstname_val, 1, 64, "firstname");
 	$surname_err = validateString($surname_val, 1, 32, "Surname");
-	$dob_err = "";
+	$dob_err = validateDate($dob_val);
 	$telephoneNumber_err = validateString($telephoneNumber_val, 11, 13, "Phone Number");
 	$email_err = validateEmail($email_val, 1, 64, "Email");
 	
