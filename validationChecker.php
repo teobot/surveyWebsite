@@ -115,7 +115,7 @@ function validateDate($date)
 	if (checkdate($month,$day,$year)) {
 		return "";
 	} else {
-		echo "Incorrect Date entered!";
+		return "Incorrect Date entered!";
 	}
 }
 
