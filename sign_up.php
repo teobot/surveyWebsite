@@ -97,6 +97,7 @@ elseif ( isset($_POST['username']) )
 		// Create the query string to insert the user data into the users table:
 		$query = "INSERT INTO users (username, password, firstname, surname, email, dob, telephoneNumber) VALUES ('$username_val', '$password_val', '$firstname_val', '$surname_val', '$email_val', '$dob_val', '$telephoneNumber_val');";
 
+		// Get the result by passing the query to the database for exacution:
 		$result = mysqli_query($connection, $query);
 		
 		// no data returned, we just test for true(success)/false(failure):
@@ -108,10 +109,10 @@ elseif ( isset($_POST['username']) )
 		} 
 		else 
 		{
-			// show the form:
+			// show the SignUp form:
 			$show_signup_form = true;
 			// show an unsuccessful signup message:
-			$signUpMessage = '<div class="alert alert-danger" role="alert">Sign up failed, please try again</div><br>';
+			$signUpMessage = '<div class="alert alert-danger" role="alert">Sign up failed, please try again!</div><br>';
 		}
 			
 	}
@@ -121,7 +122,7 @@ elseif ( isset($_POST['username']) )
 		// validation failed, show the form again with guidance:
 		$show_signup_form = true;
 		// show an unsuccessful signin message:
-		$signUpMessage = '<div class="alert alert-danger" role="alert">Sign up failed, please check the errors shown above and try again</div><br>';
+		$signUpMessage = '<div class="alert alert-danger" role="alert">Sign up failed, please check the errors shown above and try again!</div><br>';
 	}
 	
 	// we're finished with the database, close the connection:
@@ -141,12 +142,15 @@ if ($show_signup_form)
 // show the form that allows users to sign up
 // Note we use an HTTP POST request to avoid their password appearing in the URL:
 
+// If there are any errors then group them at the top aswell as underneath the input where the input in invalid:
 if ($errors != "") {
 	echo <<<_END
 	{$errors}
 _END;
 }
 
+// This is the signUp form,
+// We also place any user input into the form if the signUp failed, so the user doesn't have to insert everything again:
 echo <<<_END
 <form action="sign_up.php" method="post">
 	<h5>Account Details</h5>
@@ -203,7 +207,7 @@ echo <<<_END
 _END;
 }
 
-// display our message to the user:
+// Display if the signUp has failed or passed:
 echo $signUpMessage;
 
 // finish off the HTML for this page:
