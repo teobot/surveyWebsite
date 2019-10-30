@@ -28,18 +28,18 @@ function validateEmail($field, $minlength, $maxlength, $name) {
     if (strlen($field)<$minlength) 
     {
 		// wasn't a valid length, return a help message:		
-        return $name . " must have a minimum length of: " . $minlength . " <br>"; 
+		return "<div class='alert alert-danger' role='alert'>{$name} must have a minimum length of: {$minlength}</div>";
     }
 
 	elseif (strlen($field)>$maxlength) 
     { 
 		// wasn't a valid length, return a help message:
-        return $name . " must have a maximum length of: " . $maxlength . " <br>"; 
+		return "<div class='alert alert-danger' role='alert'>{$name} must have a maximum length of: {$maxlength}</div>";
 	}
 	
 	elseif (!filter_var($field, FILTER_VALIDATE_EMAIL)) 
 	{
-		return "Invalid Email detected <br>";
+		return '<div class="alert alert-danger" role="alert">Invalid Email detected</div>';
 	}
 
 	// data was valid, return an empty string:
@@ -54,7 +54,8 @@ function validateUsername($field, $minlength, $maxlength, $connection, $name) {
 		$result = $connection->query($query);
 
 		if ($result->num_rows > 0) {
-			return "Username already taken sorry!<br>";
+			return "<div class='alert alert-danger' role='alert'>Username already taken sorry!</div>";
+			
 		} else {
 			return "";
 		}
@@ -72,13 +73,13 @@ function validateString($field, $minlength, $maxlength, $name)
     if (strlen($field)<$minlength) 
     {
 		// wasn't a valid length, return a help message:		
-        return $name. " must have a minimum length of: " . $minlength. " <br>"; 
+		return "<div class='alert alert-danger' role='alert'>{$name} must have a minimum length of: {$minlength}</div>";
     }
 
 	elseif (strlen($field)>$maxlength) 
     { 
 		// wasn't a valid length, return a help message:
-        return $name. " must have a maximum length of: " . $maxlength . " <br>"; 
+		return "<div class='alert alert-danger' role='alert'>{$name} must have a maximum length of: {$maxlength}</div>";
     }
 
 	// data was valid, return an empty string:
@@ -95,7 +96,7 @@ function validateInt($field, $min, $max)
 	if (!filter_var($field, FILTER_VALIDATE_INT, $options)) 
     { 
 		// wasn't a valid integer, return a help message:
-        return "Not a valid number (must be whole and in the range: " . $min . " to " . $max . ") <br>"; 
+		return "<div class='alert alert-danger' role='alert'>Not a valid number (must be whole and in the range: " . $min . " to " . $max . ")</div>";
     }
 	// data was valid, return an empty string:
     return ""; 
@@ -115,7 +116,7 @@ function validateDate($date)
 	if (checkdate($month,$day,$year)) {
 		return "";
 	} else {
-		return "Incorrect Date entered!";
+		return "<div class='alert alert-danger' role='alert'>Incorrect date entered!</div>";
 	}
 }
 

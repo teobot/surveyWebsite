@@ -89,12 +89,12 @@ elseif ( isset($_POST['username']) )
 	// Concatenate all the validation results together ($errors will only be empty if ALL the data is valid):
 	$errors = $username_err . $password_err . $email_err . $firstname_err . $surname_err . $dob_err . $telephoneNumber_err;
 	
-	
-	// Check if there are any validation messages and if validation passed with no errors then insert into database
+
+	// Check if there are any validation messages and if validation passed with no errors then insert into database:
 	if ($errors == "")
 	{
 		
-		// try to insert the new details:
+		// Create the query string to insert the user data into the users table:
 		$query = "INSERT INTO users (username, password, firstname, surname, email, dob, telephoneNumber) VALUES ('$username_val', '$password_val', '$firstname_val', '$surname_val', '$email_val', '$dob_val', '$telephoneNumber_val');";
 
 		$result = mysqli_query($connection, $query);
