@@ -25,6 +25,20 @@ if (!isset($_SESSION['loggedIn']))
 else
 {
 	echo "Your information for the Analysis and Design component of the coursework goes here... See the assignment specification for more details.<br>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 }
 
 // finish off the HTML for this page:
