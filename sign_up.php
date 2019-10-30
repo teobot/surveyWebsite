@@ -9,10 +9,12 @@
 //         		  ||
 //                --
 
-// execute the header script:
+// Execute the header script:
 require_once "header.php";
 
-// default values we show in the form:
+
+// Default values for the user input, this way if the $_POST fails
+// then the user inputted data is saved and placed back into the form:
 $username_val = "";
 $password_val = "";
 $firstname_val = "";
@@ -21,7 +23,8 @@ $dob_val = "";
 $telephoneNumber_val = "";
 $email_val = "";
 
-// strings to hold any validation error messages:
+
+// Strings to hold any validation error messages:
 $username_err = "";
 $password_err = "";
 $firstname_err = "";
@@ -31,24 +34,29 @@ $telephoneNumber_err = "";
 $email_err = "";
 $errors = "";
 
-// should we show the signup form?:
-$show_signup_form = false;
-// message to output to user:
-$message = "";
 
-// checks the session variable named 'loggedIn'
+// This displays the sign_up form, if the user isn't logged in:
+$show_signup_form = false;
+
+
+// This displays the signUp message if the user has signed Up successfully or has failed:
+$signUpMessage = "";
+
+
+// Checks if the user is already logged into a account:
 if (isset($_SESSION['loggedIn']))
 {
-	// user is already logged in, just display a message:
+	// User is already logged in, just display a message:
 	echo "You are already logged in, please log out if you wish to create a new account<br>";
 	
 }
 
+// Checks if the user has tried to input data into the signUp form:
 elseif ( isset($_POST['username']) )
 {
-	// user just tried to sign up:
+	// User just attempted to signUp:
 	
-	// connect directly to our database (notice 4th argument) we need the connection for sanitisation:
+	// Making a new connection to the database:
 	$connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 	
 	// if the connection fails, we need to know, so allow this exit:
@@ -57,9 +65,7 @@ elseif ( isset($_POST['username']) )
 		die("Connection failed: " . $mysqli_connect_error);
 	}	
 	
-	// SANITISATION (see validationChecker.php for the function definition)
-	
-	// take copies of the credentials the user submitted, and sanitise (clean) them:
+	// Retrieve the posted data, santise them and save them to the corrisponding variable:
 	$username_val = sanitise($_POST['username'], $connection);
 	$password_val = sanitise($_POST['password'], $connection);
 	$firstname_val = sanitise($_POST['firstname'], $connection);
@@ -69,21 +75,17 @@ elseif ( isset($_POST['username']) )
 	$email_val = sanitise($_POST['email'], $connection);
 	
 
-	// VALIDATION (see validationChecker.php for the function definitions)
-	// now validate the data (both strings must be between 1 and 16 characters long):
-	// (reasons: we don't want empty credentials, and we used VARCHAR(16) in the database table for username and password)
-    // firstname is VARCHAR(32) and lastname is VARCHAR(64) in the DB
-    // email is VARCHAR(64) and telephone is VARCHAR(16) in the DB
-    //the following line will validate the email as a string, but maybe you can do a better job...
+	// Validate each of the variables that the user posted and return any errors if the data posted is invalid,
+	// errors messages are saved to each variableName_err:
 	$username_err = validateUsername($username_val, 1, 16, $connection, "Username");
 	$password_err = validateString($password_val, 1, 16, "Password");
-	$firstname_err = validateString($firstname_val, 1, 64, "firstname");
+	$firstname_err = validateString($firstname_val, 1, 64, "Firstname");
 	$surname_err = validateString($surname_val, 1, 32, "Surname");
 	$dob_err = validateDate($dob_val);
-	$telephoneNumber_err = validateString($telephoneNumber_val, 11, 13, "Phone Number");
+	$telephoneNumber_err = validateString($telephoneNumber_val, 11, 13, "PhoneNumber");
 	$email_err = validateEmail($email_val, 1, 64, "Email");
 	
-	// concatenate all the validation results together ($errors will only be empty if ALL the data is valid):
+	// Concatenate all the validation results together ($errors will only be empty if ALL the data is valid):
 	$errors = $username_err . $password_err . $email_err . $firstname_err . $surname_err . $dob_err . $telephoneNumber_err;
 	
 	// check that all the validation tests passed before going to the database:
@@ -99,7 +101,7 @@ elseif ( isset($_POST['username']) )
 		if ($result) 
 		{
 			// show a successful signup message:
-			$message = '<div class="alert alert-success" role="alert">Signup was successful, Please sign in <a href="sign_in.php">here!</a></div><br>';
+			$signUpMessage = '<div class="alert alert-success" role="alert">Signup was successful, Please sign in <a href="sign_in.php">here!</a></div><br>';
 			
 		} 
 		else 
@@ -107,7 +109,7 @@ elseif ( isset($_POST['username']) )
 			// show the form:
 			$show_signup_form = true;
 			// show an unsuccessful signup message:
-			$message = '<div class="alert alert-danger" role="alert">Sign up failed, please try again</div><br>';
+			$signUpMessage = '<div class="alert alert-danger" role="alert">Sign up failed, please try again</div><br>';
 		}
 			
 	}
@@ -117,7 +119,7 @@ elseif ( isset($_POST['username']) )
 		// validation failed, show the form again with guidance:
 		$show_signup_form = true;
 		// show an unsuccessful signin message:
-		$message = '<div class="alert alert-danger" role="alert">Sign up failed, please check the errors shown above and try again</div><br>';
+		$signUpMessage = '<div class="alert alert-danger" role="alert">Sign up failed, please check the errors shown above and try again</div><br>';
 	}
 	
 	// we're finished with the database, close the connection:
@@ -139,9 +141,7 @@ if ($show_signup_form)
 
 if ($errors != "") {
 	echo <<<_END
-	<div class="alert alert-danger" role="alert">
-  		{$errors}
-	</div>
+	{$errors}
 _END;
 }
 
@@ -202,7 +202,7 @@ _END;
 }
 
 // display our message to the user:
-echo $message;
+echo $signUpMessage;
 
 // finish off the HTML for this page:
 require_once "footer.php";
