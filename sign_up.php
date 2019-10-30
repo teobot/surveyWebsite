@@ -85,10 +85,12 @@ elseif ( isset($_POST['username']) )
 	$telephoneNumber_err = validateString($telephoneNumber_val, 11, 13, "PhoneNumber");
 	$email_err = validateEmail($email_val, 1, 64, "Email");
 	
+
 	// Concatenate all the validation results together ($errors will only be empty if ALL the data is valid):
 	$errors = $username_err . $password_err . $email_err . $firstname_err . $surname_err . $dob_err . $telephoneNumber_err;
 	
-	// check that all the validation tests passed before going to the database:
+	
+	// Check if there are any validation messages and if validation passed with no errors then insert into database
 	if ($errors == "")
 	{
 		
