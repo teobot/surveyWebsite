@@ -24,21 +24,40 @@ if (!isset($_SESSION['loggedIn']))
 // the user must be signed-in, show them suitable page content
 else
 {
-	echo "Your information for the Analysis and Design component of the coursework goes here... See the assignment specification for more details.<br>";
+	echo <<<_END
 
+	<div class="container" style="background-color: #e3f2fd;">
+		<h2 class="text-center">
+			Google Forms
+		</h2>
 
+		<div class="card mb-3">
+			<img src="assets/img/googleFormsLayoutPres.PNG" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">
+				Layout/presentation of surveys
+				</h5>
+				<p class="card-text">
+					With supporting text below as a natural lead-in to additional content.
+				</p>
+			</div>
+		 </div><br>
+		 
+		<div class="card mb-3">
+			<img src="assets/img/googleFormsLayout.PNG" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">
+				Ease of use
+				</h5>
+				<p class="card-text">
+					With supporting text below as a natural lead-in to additional content.
+				</p>
+			</div>
+	 	</div><br>
 
+	</div><br>
 
-
-
-
-
-
-
-
-
-
-	
+_END;
 }
 
 // finish off the HTML for this page:
