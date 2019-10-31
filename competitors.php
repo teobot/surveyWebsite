@@ -7,7 +7,7 @@
 // This will help you to shape your own designs and functionality. 
 // Your analysis of competitor sites should follow an approach that you can decide for yourself. 
 // Examining each site and evaluating it against a common set of criteria will make it easier for you to draw comparisons between them. 
-// You should use client-side code (i.e., HTML5/JavaScript/jQuery) to help you organise and present your information and analysis 
+// You should use client-side code (i.e., HTML5/JavaScript/jQuery) to help you organize and present your information and analysis 
 // For example, using tables, bullet point lists, images, hyperlinking to relevant materials, etc.
 
 // execute the header script:
@@ -24,40 +24,49 @@ if (!isset($_SESSION['loggedIn']))
 // the user must be signed-in, show them suitable page content
 else
 {
-	echo <<<_END
 
-	<div class="container" style="background-color: #e3f2fd;">
-		<h2 class="text-center">
-			Google Forms
-		</h2>
+$loadCompetitor = "googleForms";
 
-		<div class="card mb-3">
-			<img src="assets/img/googleFormsLayoutPres.PNG" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">
-				Layout/presentation of surveys
-				</h5>
-				<p class="card-text">
-					With supporting text below as a natural lead-in to additional content.
-				</p>
+$googleFormClass = "nav-link";
+$placeholder2 = "nav-link";
+$placeholder3 = "nav-link";
+
+if ( (empty($_GET["competitors"])) || (($_GET['competitors'] == "googleForms")) ) 
+{
+	$loadCompetitor = "googleForms.php";
+	$googleFormClass = "nav-link active";
+} 
+elseif (($_GET['competitors'] == "placeholder2"))
+{
+	$loadCompetitor = "admin.php";
+	$placeholder2 = "nav-link active";
+}
+elseif (($_GET['competitors'] == "placeholder3"))
+{
+	$loadCompetitor = "account.php";
+	$placeholder3 = "nav-link active";
+}
+echo <<<_END
+	<div class="container">
+		<div class="card text-center">
+			<div class="card-header">
+			<ul class="nav nav-tabs card-header-tabs">
+				<li class="nav-item">
+					<a class="{$googleFormClass}" href="competitors.php?competitors=googleForms">Google Forms</a>
+				</li>
+				<li class="nav-item">
+					<a class="{$placeholder2}" href="competitors.php?competitors=placeholder2">PLACEHOLDER</a>
+				</li>
+				<li class="nav-item">
+					<a class="{$placeholder3}" href="competitors.php?competitors=placeholder3">PLACEHOLDER</a>
+				</li>
+			</ul>
 			</div>
-		 </div><br>
-		 
-		<div class="card mb-3">
-			<img src="assets/img/googleFormsLayout.PNG" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">
-				Ease of use
-				</h5>
-				<p class="card-text">
-					With supporting text below as a natural lead-in to additional content.
-				</p>
-			</div>
-	 	</div><br>
-
-	</div><br>
-
 _END;
+
+require_once "assets/competitors/{$loadCompetitor}";
+
+echo "</div></div>";
 }
 
 // finish off the HTML for this page:
