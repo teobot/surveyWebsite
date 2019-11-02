@@ -7,8 +7,19 @@
 require_once "header.php";
 require_once "credentials.php";
 
-echo "This is the skeleton code for 2CWK50. See the assignment specification for details of how you need to extend it.<br>You may wish to include a short description of your survey site and how to use the main features it has here.<br><br>";
+echo<<<_END
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Welcome!</h1>
+    <p class="lead">
+        This is Theo's survey website coursework, <br><br>
 
+        Its made primarily from PHP, <br>
+        It also uses HTML, CSS, Javascript, Bootstrap and JQuery.
+    </p>
+  </div>
+</div>
+_END;
 // connect directly to our database (notice 4th argument) we need the connection for sanitisation:
     $connection = mysqli_connect($dbhost, $dbuser, $dbpass);
 
@@ -38,8 +49,6 @@ _END;
     }
 
     mysqli_close($connection);
-
-    echo "<br>";
 
 require_once "footer.php";
 

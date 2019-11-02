@@ -1,14 +1,15 @@
+<?php
+echo<<<_END
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>A Survey Website</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="assets/style/mystyle.css">
+		<noscript><div class="p-3 mb-2 bg-danger text-white">Sorry, your browser does not support JavaScript!</div></noscript>
 	</head>
-	<noscript><div class="p-3 mb-2 bg-danger text-white">Sorry, your browser does not support JavaScript!</div></noscript>
-<body class="container">
-
-<?php
+		<div class="container-fluid">
+_END;
 
 // Things to notice:
 // This script is called by every other script (via require_once)
@@ -51,17 +52,23 @@ echo <<<_END
 	  <li class="nav-item">
 	    <a class="nav-link" href="sign_out.php">Sign Out ({$_SESSION['username']})</a>
 	  </li>
-	</ul>
-</nav>
-
 _END;
 
     // add an extra menu option if this was the admin:
     // this allows us to display the admin tools to them only
 	if ($_SESSION['username'] == "admin")
 	{
-		echo " |||| <a href='admin.php'>Admin Tools</a>";
+		echo<<<_END
+		<li class="nav-item">
+	    	<a class="nav-link" href="admin.php">Admin Tools</a>
+		</li>
+_END;
 	}
+	
+echo<<<_END
+	</ul>
+</nav>
+_END;
 }
 
 else
@@ -86,8 +93,12 @@ _END;
 }
 
 echo <<<_END
-<br>
-<h1>2CWK50: A Survey Website</h1>
-<br>
+</div>
+	<body>
+		<div class="container">
+
+	<br>
+	<h1>2CWK50: A Survey Website</h1>
+	<br>
 _END;
 ?>
