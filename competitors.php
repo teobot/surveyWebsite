@@ -13,6 +13,11 @@
 // execute the header script:
 require_once "header.php";
 
+$loadCompetitor = "googleForms";
+$googleFormClass = "nav-link";
+$checkBox = "nav-link";
+$surveyMonkey = "nav-link";
+
 // checks the session variable named 'loggedIn'
 // take note that of the '!' (NOT operator) that precedes the 'isset' function
 if (!isset($_SESSION['loggedIn']))
@@ -25,26 +30,20 @@ if (!isset($_SESSION['loggedIn']))
 else
 {
 
-$loadCompetitor = "googleForms";
-
-$googleFormClass = "nav-link";
-$placeholder2 = "nav-link";
-$placeholder3 = "nav-link";
-
 if ( (empty($_GET["competitors"])) || (($_GET['competitors'] == "googleForms")) ) 
 {
 	$loadCompetitor = "googleForms.php";
 	$googleFormClass = "nav-link active";
 } 
-elseif (($_GET['competitors'] == "placeholder2"))
+elseif (($_GET['competitors'] == "checkBox"))
 {
-	$loadCompetitor = "admin.php";
-	$placeholder2 = "nav-link active";
+	$loadCompetitor = "checkBox.php";
+	$checkBox = "nav-link active";
 }
-elseif (($_GET['competitors'] == "placeholder3"))
+elseif (($_GET['competitors'] == "surveyMonkey"))
 {
-	$loadCompetitor = "account.php";
-	$placeholder3 = "nav-link active";
+	$loadCompetitor = "surveyMonkey.php";
+	$surveyMonkey = "nav-link active";
 }
 echo <<<_END
 	<div class="container">
@@ -55,10 +54,10 @@ echo <<<_END
 					<a class="{$googleFormClass}" href="competitors.php?competitors=googleForms">Google Forms</a>
 				</li>
 				<li class="nav-item">
-					<a class="{$placeholder2}" href="competitors.php?competitors=placeholder2">PLACEHOLDER</a>
+					<a class="{$checkBox}" href="competitors.php?competitors=checkBox">Check Box</a>
 				</li>
 				<li class="nav-item">
-					<a class="{$placeholder3}" href="competitors.php?competitors=placeholder3">PLACEHOLDER</a>
+					<a class="{$surveyMonkey}" href="competitors.php?competitors=surveyMonkey">Survey Monkey</a>
 				</li>
 			</ul>
 			</div>
