@@ -47,33 +47,49 @@ else
 		$row = mysqli_fetch_assoc($result);
 		// display their profile data:
 		echo<<<_END
-			<div class="card text-center">
-			  <div class="card-header">
-			    Account Information
-			  </div>
-			  <div class="card-body">
-				<table class="table table-borderless">
-				  <thead>
-				    <tr>
-				      <th scope="col">Username</th>
-				      <th scope="col">Password</th>
-				      <th scope="col">Email Address</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr>
-				      <td>{$row['username']}</td>
-				      <td>{$row['password']}</td>
-				      <td>{$row['email']}</td>
-				    </tr>
-				  </tbody>
-				</table>
-			  </div>
-			  <div class="card-footer text-muted">
-			    You can <a href='account_set.php'>update</a> your account details here.
-			  </div>
+		<div class="container">
+			<h4>Account Information</h4>
+			<small>Here you can view/edit account information.</small>
+			<hr>
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<label><p class="h6">Username:</p></label>
+						<input type="text" class="form-control" placeholder="{$row['username']}" aria-label="username" aria-describedby="addon-wrapping">
+					</div>
+					<div class="col">
+						<label><p class="h6">Password:</p></label>
+						<input type="text" class="form-control" placeholder="{$row['password']}" aria-label="password" aria-describedby="addon-wrapping">
+					</div>
+				</div><hr>
+				<div class="row">
+					<div class="col">
+						<label><p class="h6">Firstname:</p></label>
+						<input type="text" class="form-control" placeholder="{$row['firstname']}" aria-label="Firstname" aria-describedby="addon-wrapping">
+					</div>
+					<div class="col">
+						<label><p class="h6">Surname:</p></label>
+						<input type="text" class="form-control" placeholder="{$row['surname']}" aria-label="Surname" aria-describedby="addon-wrapping">
+					</div>
+				</div><br>
+				<div class="row">
+					<div class="col">
+						<label><p class="h6">Telephone number:</p></label>
+						<input type="text" class="form-control" placeholder="{$row['telephoneNumber']}" aria-label="telephone" aria-describedby="addon-wrapping">
+					</div>
+					<div class="col">
+						<label><p class="h6">Date of birth:</p></label>
+						<input type="text" class="form-control" placeholder="{$row['dob']}" aria-label="dob" aria-describedby="addon-wrapping">
+					</div>
+				</div><br>
+				<div class="row">
+					<div class="col">
+						<label><p class="h6">Email:</p></label>
+						<input type="text" class="form-control" placeholder="{$row['email']}" aria-label="email" aria-describedby="addon-wrapping">
+					</div>
+				</div>
 			</div>
-
+		</div>
 _END;
 	}
 
