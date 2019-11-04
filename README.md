@@ -4,8 +4,8 @@
 
 
 ### What am I doing / have done?
-- Just started the competitors page,
-- Useful, when making screenshots, take a full window snap and keeping the width the same reduce the length
+- Update section 5 on the google forms compet page
+- - [ ] Go through and fix the formatting.
 
 ### Latest update notes 02/11/2019
 - [x] Tweaked the look of the ReadMe.md page
