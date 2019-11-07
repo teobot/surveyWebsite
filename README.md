@@ -2,6 +2,18 @@
 ## Created by Theo Jed Barber Clapperton
 ### Student id: 18055445
 
+### Things to think about after reading through specification
+- [] Sign Up using  a unique username, I think I may have added a user ID (maybe remove)
+- [] Check over server side validation it should be able to do
+- - [] check if a firstname has been supplied and its not too long
+- - [] check a valid surname and not too long
+- - [] email, supplied, length, not to long for db, if its valid
+- - [] dob, supplied, actual date
+- - [] telenum, supplied, valid, length
+- [] Admin page
+- - [] see all users, and view that users account information, update account info, create a user, del a user
+- [] maybe move the competitors to the same competitiors page
+
 
 ### What am I doing / have done?
 - Update section 5 on the google forms compet page
