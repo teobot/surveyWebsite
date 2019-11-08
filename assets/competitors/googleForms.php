@@ -76,7 +76,7 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">Really easy to add a new question.</li>
+                <li class="list-group-item">Really easy to add a new questions.</li>
                 <li class="list-group-item">Can easily add multiple question types.</li>
                 <li class="list-group-item">Embed images and youtube videos.</li>
                 <li class="list-group-item">Able to create complete sections that have their own title and questions.</li> 
@@ -86,7 +86,7 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">PLACEHOLDER</li>         
+                <li class="list-group-item">You can not drag a question on top of the first question, You have to drag all questions down until the question gets pushed to top.</li>         
             </ul>
         </div>
     </div>
@@ -162,19 +162,13 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">Wide range of question types covering nearly everything someone would want.</li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>  
+                <li class="list-group-item">Wide range of question types covering nearly everything someone would want.</li>  
             </ul>
         </div>
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">Doesn't have a phone Number question type.</li>
-                <li class="list-group-item">PLACEHOLDER</li> 
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>             
+                <li class="list-group-item">Doesn't have a Number question type.</li>             
             </ul>
         </div>
     </div>
@@ -189,18 +183,18 @@
         <div class="col">
             <h4>5. Analysis tools</h4>
             <p class="text-center">
-							Google forms has a response section where all the submitted form data gets analyzed and displayed. <br>
-							
-							The user can select between the "summary" section which collects all the data submitted and shows graphs based on the question type. <br>
-							
-							The other section the user can select is the "individual" section where the user can see all the individual forms that the users have submitted, 
-							this would be good for applications where the user need to view each candidate e.g. a job application. 
+                Google forms has a response section where all the submitted form data gets analyzed and displayed. <br>
+                
+                The user can select between the "summary" section which collects all the data submitted and shows graphs based on the question type. <br>
+                
+                The other section the user can select is the "individual" section where the user can see all the individual forms that the users have submitted, 
+                this would be good for applications where the user need to view each candidate e.g. a job application. 
 
-							For a text/text area answer, Google has opted for a list of all the responses. 
-							Multiple choice gets a pie chart, checkboxes get a line chart, and dropdown questions also get a pie chart. 
-							Linear scales question types get a line chart, and so do multiple choice grid and checkbox questions. 
-							Date questions get grouped by month and year, having the individual days within those months displayed next to it. 
-							Time responses are similar to the date display method, with same hour answers getting grouped with the complete time displayed next to it.
+                For a text/text area answer, Google has opted for a list of all the responses. 
+                Multiple choice gets a pie chart, checkboxes get a line chart, and dropdown questions also get a pie chart. 
+                Linear scales question types get a line chart, and so do multiple choice grid and checkbox questions. 
+                Date questions get grouped by month and year, having the individual days within those months displayed next to it. 
+                Time responses are similar to the date display method, with same hour answers getting grouped with the complete time displayed next to it.
             </p>  
         </div>
     </div>
@@ -218,9 +212,9 @@
                 <li class="list-group-item">The presented data is incredibly clean and efficient in showing the form data.</li>
                 <li class="list-group-item">Date and time data are grouped to reduce wasted space/spam.</li>
                 <li class="list-group-item">Text/text area data is placed into a table and coloured so its easy to read.</li>
-								<li class="list-group-item">Each chart and data set can be copied and exported relatively easily.</li>
-								<li class="list-group-item">The analyzed data colors match the theme of the form.</li>
-								<li class="list-group-item">Above each represented question shows the number of submitted data for that question.</li> 
+				<li class="list-group-item">Each chart and data set can be copied and exported relatively easily.</li>
+				<li class="list-group-item">The analyzed data colors match the theme of the form.</li>
+				<li class="list-group-item">Above each represented question shows the number of submitted data for that question.</li> 
             </ul>
         </div>
         <div class="col">
