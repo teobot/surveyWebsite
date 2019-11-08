@@ -94,7 +94,7 @@ $sql = "
 			surname VARCHAR(64), 
 			email VARCHAR(64),
 			dob DATE,
-			telephoneNumber VARCHAR(13),
+			telephoneNumber CHAR(11),
 			PRIMARY KEY(username)
 		)
 	";
@@ -124,7 +124,7 @@ $usernames[] = 'barrym';
 	$surnames[] = 'Misstop'; 
 	$emails[] = 'barry@m-domain.com'; 
 	$dobs[] = '1998-08-09'; 
-	$telephoneNumbers[] = '07568232144';
+	$telephoneNumbers[] = '07111222333';
 
 $usernames[] = 'mandyb'; 
 	$passwords[] = 'abc123'; 
@@ -132,7 +132,7 @@ $usernames[] = 'mandyb';
 	$surnames[] = 'Bless'; 
 	$emails[] = 'webmaster@mandy-g.co.uk'; 
 	$dobs[] = '1999-07-08'; 
-	$telephoneNumbers[] = '07589123456';
+	$telephoneNumbers[] = '07444555666';
 
 $usernames[] = 'timmy'; 
 	$passwords[] = 'secret95'; 
@@ -140,7 +140,7 @@ $usernames[] = 'timmy';
 	$surnames[] = 'Stoke'; 
 	$emails[] = 'timmy@lassie.com'; 
 	$dobs[] = '1991-02-05'; 
-	$telephoneNumbers[] = '07568456394';
+	$telephoneNumbers[] = '07777888999';
 
 $usernames[] = 'admin'; 
 	$passwords[] = 'secret'; 
@@ -148,7 +148,7 @@ $usernames[] = 'admin';
 	$surnames[] = 'Clapperton'; 
 	$emails[] = 'totallyRealEmail@real.com'; 
 	$dobs[] = '1998-02-06'; 
-	$telephoneNumbers[] = '07999888666';
+	$telephoneNumbers[] = '07123123123';
 
 $usernames[] = 'bonfire'; 
 	$passwords[] = 'getout1'; 
