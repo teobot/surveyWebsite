@@ -48,15 +48,17 @@ function validateEmail($field, $minlength, $maxlength, $name) {
 
 function validateUsername($field, $minlength, $maxlength, $connection, $name) {
 
-	if ( validateString($field, $minlength, $maxlength, $name) == "" ) {
-
+	if ( validateString($field, $minlength, $maxlength, $name) == "" ) 
+	{
 		$query = "SELECT * FROM users WHERE username = '$field' ";
 		$result = $connection->query($query);
 
-		if ($result->num_rows > 0) {
+		if ($result->num_rows > 0) 
+		{
 			return "<div class='alert alert-danger' role='alert'>Username already taken sorry!</div>";
-			
-		} else {
+		} 
+		else 
+		{
 			return "";
 		}
 
@@ -66,6 +68,47 @@ function validateUsername($field, $minlength, $maxlength, $connection, $name) {
 
 }
 
+// Validate a phone number
+function validateTelephoneNumber($field, $length) 
+{
+	// Check if the length of the 'number' is valid
+	if (strlen($field)<$length)
+	{
+		return "Phone Number to short";
+	} 
+	elseif (strlen($field)>$length)
+	{
+		return "Phone Number to long";
+	} 
+	// The length is valid now to check if its actually a number
+	else 
+	{
+		// Check that the number is a actual int/float/decimal
+		if (is_numeric($field)) 
+		{
+			// is_numeric checks if the 'number' is a int/float/decimal
+			// This can allow '0.0111222', '.00111222' or even '-11222333' as its technically a 'number'
+			// But a phone number cannot contain anything but digits so
+			// preg_match checks the number against a pattern and in this case the pattern i've select is
+			// '\D' which checks for 'Any non-digit' and if it finds anything that not a 'digit'
+			// then the number is a invalid telephone number. The forward slash's are for php
+			// to differentiate the pattern from its container.
+			if ( preg_match("/\D/", $field) )
+			{		
+				return "Phone Number must be a number only";
+			} 
+			else 
+			{
+				// The value has passed all tests and can now be entered into the database
+				return "";
+			}
+		} 
+		else 
+		{
+			return "Phone Number is not numeric";
+		}
+	}
+}
 
 // if the data is valid return an empty string, if the data is invalid return a help message
 function validateString($field, $minlength, $maxlength, $name) 
