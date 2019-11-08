@@ -49,7 +49,7 @@ else
 		echo<<<_END
 		<div class="container">
 			<h4>Account Information</h4>
-			<small>Here you can view/edit account information.</small>
+			<small>Here you can view/edit account information. Update information <a href="account_set.php">here.</a></small>
 			<hr>
 			<div class="container">
 				<div class="row">
