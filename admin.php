@@ -1,36 +1,84 @@
 <?php
+//    Page Name - || admin.php
+//                --
+// Page Purpose - || This is the admin tool page, from here the administrator can:
+//                || access a list of all the current users, updating in real time using a API call
+//                || View the users account information and edit/delete that user
+//                || Create new account
+//                || access a list of all surveys, updating in real time using a API call
+//                --
+//        Notes - || This is the admin section for managing the website
+//         		  ||
+//                --
 
-// Things to notice:
-// You need to add code to this script to implement the admin functions and features
-// Notice that the code not only checks whether the user is logged in, but also whether they are the admin, before it displays the page content
-// When an admin user is verified, you can implement all the admin tools functionality from this script, or distribute them over multiple pages - your choice
-
-// execute the header script:
+// Inserts the header into the webpage
 require_once "header.php";
 
-// checks the session variable named 'loggedIn'
-// take note that of the '!' (NOT operator) that precedes the 'isset' function
+// Check if the user is logged in, if not then tell them to sign in
 if (!isset($_SESSION['loggedIn']))
 {
-	// user isn't logged in, display a message saying they must be:
+	// The user is not logged in, Tell them to go sign in
 	echo "You must be logged in to view this page.<br>";
 }
-
-// the user must be signed-in, show them suitable page content
+// The user is logged in so can view the page if them are a admin
 else
 {
-	// only display the page content if this is the admin account (all other users get a "you don't have permission..." message):
+	// The user has to be a admin to view this page, If they are allow access
 	if ($_SESSION['username'] == "admin")
 	{
-		echo "Implement the admin tools here... See the assignment specification for more details.<br>";
-	}
+	// Creating the table for all of the users information to be displayed in
+	echo<<<_END
+		<table class="table" id="allUsersTable">
+			<tr>
+				<th>username</th>
+			</tr>
+		</table>
+_END;
 
+	// Making a API call to the returnUsers.php API, asking for all the usernames in the database,
+	// And also posting the current username of the logged in user to make sure they're a admin.
+	$username = $_SESSION['username'];
+	echo<<<_END
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {	
+				// start checking for updates:
+				getUsers();	
+			});
+
+			function getUsers() {
+				$.post('assets/api/returnUsers.php', {username: '$username' })
+					.done(function(data) {
+						
+						// remove the old table rows:
+						$('.users').remove();
+						
+						// loop through what we got and add it to the table (data is already a JavaScript object thanks to getJSON()):
+						$.each(data, function(index, value) {
+							$('#allUsersTable').append("<tr class='users'><td>" + value.username + "</td></tr>");
+						});
+					})
+					.fail(function(jqXHR) {
+						// debug message to help during development:
+						console.log('request returned failure, HTTP status code ' + jqXHR.status);
+					})
+						
+					// call this function again after a brief pause:
+				setTimeout(getUsers, 1000);       
+			}
+		</script>
+_END;
+	}
+	// If they aren't a admin, then they cannot access the page
 	else
 	{
+		// Telling the user that they do not have the correct user account
 		echo "You don't have permission to view this page...<br>";
 	}
 }
 
-// finish off the HTML for this page:
+
+
+// Inserting the footer into the bottom of the webpage
 require_once "footer.php";
 ?>
