@@ -3,7 +3,7 @@
 ### Student id: 18055445
 
 ### Things to think about after reading through specification
-- [ ] Sign Up using  a unique username, I think I may have added a user ID (maybe remove)
+- [x] Sign Up using  a unique username, I think I may have added a user ID (maybe remove)
 - [ ] Check over server side validation it should be able to do
 - - [ ] check if a firstname has been supplied and its not too long
 - - [ ] check a valid surname and not too long
@@ -16,14 +16,13 @@
 
 
 ### What am I doing / have done?
-- Update section 5 on the google forms compet page
-- - [ ] Go through and fix the formatting.
+- [x] Created a RESTful API that returns all the usernames if the user is logged in
+- [x] The admin page now displays all the current users usernames in real time
+- [x] added another user into the database creation
 
 ### Latest update notes 02/11/2019
-- [x] Tweaked the look of the ReadMe.md page
-- [x] Show the new database information in account.php page
-- [x] Lots more work on the competitors page
-- [x] fixed the navbar admin tool link, and made it fullscreen with the body been in a container
+- Update section 5 on the google forms compet page
+- - [x] Go through and fix the formatting.
 
 ### Features to add
 - [ ] Phone Number must be checked to see its actually a phonenumber
@@ -46,7 +45,10 @@
 - [x] Show the new database information in account.php page
 - [x] Lots more work on the competitors page
 - [x] fixed the navbar admin tool link, and made it fullscreen with the body been in a container
-
+- [x] Tweaked the look of the ReadMe.md page
+- [x] Show the new database information in account.php page
+- [x] Lots more work on the competitors page
+- [x] fixed the navbar admin tool link, and made it fullscreen with the body been in a container
 
 
 SETUP:
