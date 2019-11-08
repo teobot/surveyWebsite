@@ -82,7 +82,7 @@ elseif ( isset($_POST['username']) )
 	$firstname_err = validateString($firstname_val, 1, 64, "Firstname");
 	$surname_err = validateString($surname_val, 1, 32, "Surname");
 	$dob_err = validateDate($dob_val);
-	$telephoneNumber_err = validateString($telephoneNumber_val, 11, 13, "PhoneNumber");
+	$telephoneNumber_err = validateTelephoneNumber($telephoneNumber_val, 9);
 	$email_err = validateEmail($email_val, 1, 64, "Email");
 	
 
@@ -95,9 +95,9 @@ elseif ( isset($_POST['username']) )
 	{
 		
 		// Create the query string to insert the user data into the users table:
-		$query = "INSERT INTO users (username, password, firstname, surname, email, dob, telephoneNumber) VALUES ('$username_val', '$password_val', '$firstname_val', '$surname_val', '$email_val', '$dob_val', '$telephoneNumber_val');";
+		$query = "INSERT INTO users (username, password, firstname, surname, email, dob, telephoneNumber) VALUES ('$username_val', '$password_val', '$firstname_val', '$surname_val', '$email_val', '$dob_val', '07$telephoneNumber_val');";
 
-		// Get the result by passing the query to the database for exacution:
+		// Get the result by passing the query to the database for execution:
 		$result = mysqli_query($connection, $query);
 		
 		// no data returned, we just test for true(success)/false(failure):
@@ -142,7 +142,7 @@ if ($show_signup_form)
 // show the form that allows users to sign up
 // Note we use an HTTP POST request to avoid their password appearing in the URL:
 
-// If there are any errors then group them at the top aswell as underneath the input where the input in invalid:
+// If there are any errors then group them at the top as well as underneath the input where the input in invalid:
 if ($errors != "") {
 	echo <<<_END
 	{$errors}
@@ -187,8 +187,14 @@ echo <<<_END
 				<small class="form-text text-muted">Enter your date of birth.</small>
 		</div>
 		<div class="col">
- 	   		<label>Phone Number</label>
-				<input name="telephoneNumber" type="text" max="13" min="11" class="form-control" value="{$telephoneNumber_val}" required>{$telephoneNumber_err}
+				<label>Phone Number</label>
+				<div class="input-group mb-2">
+					<div class="input-group-prepend">
+						<div class="input-group-text">07</div>
+					</div>
+					<input name="telephoneNumber" type="text" maxlength="9" min="9" class="form-control" value="{$telephoneNumber_val}" required>
+				  </div>
+				{$telephoneNumber_err}
 				<small class="form-text text-muted">Enter your phone number.</small>
 		</div>
 	</div><br>
