@@ -19,13 +19,14 @@
 - [x] Created a RESTful API that returns all the usernames if the user is logged in
 - [x] The admin page now displays all the current users usernames in real time
 - [x] added another user into the database creation
+- [x] Phone Number is now server validated but is in format 111222333, its 9 digits long
 
 ### Latest update notes 02/11/2019
 - Update section 5 on the google forms compet page
 - - [x] Go through and fix the formatting.
 
 ### Features to add
-- [ ] Phone Number must be checked to see its actually a phonenumber
+- [x] Phone Number must be checked to see its actually a phonenumber
 - [ ] Look into filter_var($field, FILTER_VALIDATE_INT, $options) for validation
 - [ ] Similar validation on the sign in page, sign up page is mostly done
 - [ ] Check over both server side and client side validation
