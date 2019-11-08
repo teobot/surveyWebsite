@@ -49,9 +49,6 @@ echo <<<_END
 	  <li class="nav-item">
 	    <a class="nav-link" href="competitors.php">Design and Analysis</a>
 	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="sign_out.php">Sign Out ({$_SESSION['username']})</a>
-	  </li>
 _END;
 
     // add an extra menu option if this was the admin:
@@ -66,6 +63,9 @@ _END;
 	}
 	
 echo<<<_END
+		<li class="nav-item">
+			<a class="nav-link" href="sign_out.php">Sign Out ({$_SESSION['username']})</a>
+		</li>
 	</ul>
 </nav>
 _END;
