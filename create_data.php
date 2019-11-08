@@ -149,6 +149,14 @@ $usernames[] = 'admin';
 	$emails[] = 'totallyRealEmail@real.com'; 
 	$dobs[] = '1998-02-06'; 
 	$telephoneNumbers[] = '07999888666';
+
+$usernames[] = 'bonfire'; 
+	$passwords[] = 'getout1'; 
+	$firstnames[] = 'Joe'; 
+	$surnames[] = 'Dover'; 
+	$emails[] = 'johnMarsden@red.com'; 
+	$dobs[] = '1995-01-05'; 
+	$telephoneNumbers[] = '07555666333';
 	
 // loop through the arrays above and add rows to the table:
 for ($i=0; $i<count($usernames); $i++)
