@@ -183,6 +183,58 @@ _END;
 	}
 }
 
+///////////////////////////////////////////
+////////////// SURVEY TABLE //////////////
+///////////////////////////////////////////
+
+// if there's an old version of our table, then drop it:
+	$sql = "DROP TABLE IF EXISTS surveys";
+
+	// no data returned, we just test for true(success)/false(failure):
+	if (mysqli_query($connection, $sql)) 
+	{
+		echo <<<_END
+			<tr>
+				<td scope="row">Drop existing table</td>
+				<td>surveys</td>
+				<td class="p-3 mb-2 bg-success text-white">Success</td>
+			</tr>
+	_END;
+	}
+	
+	else 
+	{	
+		die("Error checking for existing table: " . mysqli_error($connection));
+	}
+	
+	// make our table:
+	// notice that the username field is a PRIMARY KEY and so must be unique in each record
+	$sql = "
+	CREATE TABLE surveys
+			(
+				survey_id bigint(20),
+				survey_title varchar(32),
+				survey_JSON longtext,
+				PRIMARY KEY(survey_id)
+			)	 		 
+		";
+	
+	// no data returned, we just test for true(success)/false(failure):
+	if (mysqli_query($connection, $sql)) 
+	{
+		echo <<<_END
+			<tr>
+				<td scope="row">Create Table</td>
+				<td>surveys</td>
+				<td class="p-3 mb-2 bg-success text-white">Success</td>
+			</tr>
+	_END;
+	}
+	
+	else 
+	{
+		die("Error creating table: " . mysqli_error($connection));
+	}
 
 // we're finished, close the connection:
 echo <<<_END

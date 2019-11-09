@@ -2,6 +2,11 @@
 ## Created by Theo Jed Barber Clapperton
 ### Student id: 18055445
 
+### To pick up
+I created a survey table and inserted a JSON question object,
+its in the database now so now I want to display the json object
+
+
 ### Things to think about after reading through specification
 - [x] Sign Up using  a unique username, I think I may have added a user ID (maybe remove)
 - [ ] Check over server side validation it should be able to do
