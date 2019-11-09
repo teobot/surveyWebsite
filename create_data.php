@@ -1,5 +1,3 @@
-
-
 <?php
 require_once "header.php";
 
@@ -58,6 +56,42 @@ else
 
 // connect to our database:
 mysqli_select_db($connection, $dbname);
+
+//SET SOME DATABASE VARIABLES //////////////////////////
+$sql = 'SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO"';
+if (mysqli_query($connection, $sql)) 
+{
+	echo <<<_END
+		<tr>
+			<td scope="row">Set database attributes</td>
+			<td>variables</td>
+			<td class="p-3 mb-2 bg-success text-white">Success</td>
+		</tr>
+_END;
+}
+
+else 
+{
+	die("Error creating table: " . mysqli_error($connection));
+}	
+
+$sql = "SET AUTOCOMMIT = 0";
+if (mysqli_query($connection, $sql)) 
+{
+	echo <<<_END
+		<tr>
+			<td scope="row">Set database attributes</td>
+			<td>variables</td>
+			<td class="p-3 mb-2 bg-success text-white">Success</td>
+		</tr>
+_END;
+}
+
+else 
+{
+	die("Error creating table: " . mysqli_error($connection));
+}
+///////////////////////////// END OF SETTING DATABASE VARIABLES
 
 ///////////////////////////////////////////
 ////////////// USERS TABLE //////////////
@@ -212,7 +246,7 @@ _END;
 	$sql = "
 	CREATE TABLE surveys
 			(
-				survey_id bigint(20),
+				survey_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 				survey_title varchar(32),
 				survey_JSON longtext,
 				PRIMARY KEY(survey_id)
@@ -244,4 +278,41 @@ echo <<<_END
 _END;
 
 mysqli_close($connection);
+
+/*
+{
+  "surveydata": [
+    {
+      "question": {
+        "title": "favourite colour?",
+        "label": "enter your fav colour",
+        "inputType": "text",
+        "min": 3,
+        "max": 10,
+        "required": true
+      }
+    },
+    {
+      "question": {
+        "title": "favourite date?",
+        "label": "enter you favourite date",
+        "inputType": "date",
+        "min": "1930-01-01T00:00:00.000Z",
+        "max": "2019-01-01T00:00:00.000Z",
+        "required": false
+      }
+    },
+    {
+      "question": {
+        "title": "Email address",
+        "label": "please enter your email address",
+        "inputType": "email",
+        "min": 7,
+        "max": 32,
+        "required": false
+      }
+    }
+  ]
+}
+*/
 ?>
