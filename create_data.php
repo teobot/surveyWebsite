@@ -247,6 +247,7 @@ _END;
 	CREATE TABLE surveys
 			(
 				survey_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+				survey_creator varchar(16),
 				survey_title varchar(32),
 				survey_JSON longtext,
 				PRIMARY KEY(survey_id)
