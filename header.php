@@ -98,7 +98,9 @@ echo <<<_END
 		<div class="container">
 
 	<br>
-	<h1>2CWK50: A Survey Website</h1>
+	<div class="text-center">
+		<h1>2CWK50: A Survey Website</h1>
+	</div>
 	<br>
 _END;
 ?>
