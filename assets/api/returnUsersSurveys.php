@@ -58,9 +58,9 @@ else
     if ($resultQueryRows > 0) 
     {
         // For each of the usernames push them into the return array
-        for ($i=0; $i<$resultQueryRows; $i++) 
-        {
-            array_push($allUsersSurveys, mysqli_fetch_assoc($resultQuery) );
+        while($row = $resultQuery->fetch_assoc()) {
+            //CREATE ARRAY
+            $allUsersSurveys[] = (object) array('survey_id' => $row["survey_id"],'survey_title' => $row["survey_title"]);
         }
     } 
     
