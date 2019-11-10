@@ -22,8 +22,47 @@ if (!isset($_SESSION['loggedIn']))
 // the user must be signed-in, show them suitable page content
 else
 {
-	echo "Use this space to allow your users to create and manage their surveys<br>";
-    echo "At present, there are no surveys to display<br>";
+	echo<<<_END
+		<table class="table" id="surveyTable">
+			<tr>
+				<th>Survey ID</th>
+				<th>Survey Title</th>
+				<th>Survey Link</th>
+			</tr>
+		</table>
+_END;
+
+	// Making a API call to the returnUsers.php API, asking for all the usernames in the database,
+	// And also posting the current username of the logged in user to make sure they're a admin.
+	$username = $_SESSION['username'];
+	echo<<<_END
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {	
+				// start checking for updates:
+				getSurveys();	
+			});
+
+			function getSurveys() {
+				$.post('assets/api/returnUsersSurveys.php', {username: '$username' })
+					.done(function(data) {
+						
+						// remove the old table rows:
+						$('.surveys').remove();
+						
+						// loop through what we got and add it to the table (data is already a JavaScript object thanks to getJSON()):
+						$.each(data, function(index, value) {
+							$('#surveyTable').append("<tr class='surveys'> <td>"+value.survey_id+"</td> <td> "+ value.survey_title+" </td> <td> <a href='survey_view.php?surveyID=" + value.survey_id + "'>Link</a> </td></tr>");
+						});
+					})
+					.fail(function(jqXHR) {
+						// debug message to help during development:
+						console.log('request returned failure, HTTP status code ' + jqXHR.status);
+					}) 
+				setTimeout(getSurveys, 1000);
+			}
+		</script>
+_END;
     
     // a little extra text that only the admin will see:
 	if ($_SESSION['username'] == "admin")
