@@ -2,11 +2,6 @@
 ## Created by Theo Jed Barber Clapperton
 ### Student id: 18055445
 
-### To pick up
-I created a survey table and inserted a JSON question object,
-its in the database now so now I want to display the json object
-
-
 ### Things to think about after reading through specification
 - [x] Sign Up using  a unique username, I think I may have added a user ID (maybe remove)
 - [ ] Check over server side validation it should be able to do
@@ -20,24 +15,19 @@ its in the database now so now I want to display the json object
 - [ ] maybe move the competitors to the same competitiors page
 
 
-### What am I doing / have done?
-- [x] Created a RESTful API that returns all the usernames if the user is logged in
-- [x] The admin page now displays all the current users usernames in real time
-- [x] added another user into the database creation
-- [x] Phone Number is now server validated but is in format 111222333, its 9 digits long
-
-### Latest update notes 02/11/2019
-- Update section 5 on the google forms compet page
-- - [x] Go through and fix the formatting.
+### Latest update notes 10/11/2019
+- [x] Created a new API that returns a list of surveys of a user
+- [x] Survey management page now returns a constantly updating list of surveys using a API
+- [x] Create data now inserts a test form for the bonfire account user
+- [x] Created a survey view form that gets the survey id and displays the information
 
 ### Features to add
 - [x] Phone Number must be checked to see its actually a phonenumber
-- [ ] Look into filter_var($field, FILTER_VALIDATE_INT, $options) for validation
 - [ ] Similar validation on the sign in page, sign up page is mostly done
 - [ ] Check over both server side and client side validation
 - [x] Show the new database information in account.php page
 - Complete the competition evaluation for:
-    - - [ ] Google Forms, 
+    - - [x] Google Forms, 
     - - [ ] CheckBox,
     - - [ ] Survey Monkey
 
@@ -55,7 +45,12 @@ its in the database now so now I want to display the json object
 - [x] Show the new database information in account.php page
 - [x] Lots more work on the competitors page
 - [x] fixed the navbar admin tool link, and made it fullscreen with the body been in a container
-
+- [x] Created a RESTful API that returns all the usernames if the user is logged in
+- [x] The admin page now displays all the current users usernames in real time
+- [x] added another user into the database creation
+- [x] Phone Number is now server validated but is in format 111222333, its 9 digits long
+- Update section 5 on the google forms compet page
+- - [x] Go through and fix the formatting.
 
 SETUP:
 ...
