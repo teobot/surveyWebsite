@@ -22,7 +22,12 @@
 - [x] Create data now inserts a test form for the bonfire account user
 - [x] Created a survey view form that gets the survey id and displays the information
 
-### Features to add
+### Features to add / Things to do
+- [ ] Make sure that all the images on the competitors pages are correct to the section
+- [ ] Make sure that all the text has gone through a autocorrector
+- - [ ] googleforms.php
+- - [ ] surveyMonkey.php
+- - [ ] checkbox.php
 - [x] Phone Number must be checked to see its actually a phonenumber
 - [ ] Similar validation on the sign in page, sign up page is mostly done
 - [ ] Check over both server side and client side validation
