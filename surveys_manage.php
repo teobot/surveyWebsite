@@ -22,6 +22,7 @@ if (!isset($_SESSION['loggedIn']))
 // the user must be signed-in, show them suitable page content
 else
 {
+	echo '<a class="btn btn-primary btn-lg btn-block" href="surveyCreator.php" role="button">Click to create new survey!</a><br>';
 	echo<<<_END
 		<table class="table" id="surveyTable">
 			<tr>
