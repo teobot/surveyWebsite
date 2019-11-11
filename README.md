@@ -17,6 +17,10 @@
 
 ### Latest update notes 10/11/2019
 - Started work on a survey creator tool
+- - Users can now add as many questions as they please
+- - Users can now delete each question
+- - [ ] Submit button need to receive all the variables and place into a array 
+
 - [x] Created a new API that returns a list of surveys of a user
 - [x] Survey management page now returns a constantly updating list of surveys using a API
 - [x] Create data now inserts a test form for the bonfire account user
