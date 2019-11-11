@@ -92,14 +92,17 @@
 </div>
 <?php // END Ease of Use of surveys section Card END ?>
 
-<?php // PLACEHOLDER section Card ?>
+<?php // 3. User account set-up/login process section Card ?>
 <div class="container" style="background-color: paleturquoise; border-left: 6px solid mediumturquoise;">    
     <br>
     <div class="row">
         <div class="col">
-            <h4>PLACEHOLDERTITLE</h4>
+            <h4>3. User account set-up/login process</h4>
             <p class="text-center">
-                PLACEHOLDERTEXT
+                The user doesn't have to login to complete and submit a form, To create a form however the user
+	   	has to provide the basic amount of information, including a username, password and email address. 
+	    	Creating a account is very easy and once complete the user can create free surveys. Logginning in 
+	    	is also very quick and easy.
             </p>  
         </div>
     </div>
@@ -113,25 +116,21 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>  
+                <li class="list-group-item">Creating a account is free.</li>
+                <li class="list-group-item">User does not need a account to complete a form.</li>
+                <li class="list-group-item">Even though the user didn't log in the survey does have some protection against multiple submissions.</li>
             </ul>
         </div>
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li> 
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>             
+                <li class="list-group-item">If the user has to create a account before submitting they will most likely leave.</li>           
             </ul>
         </div>
     </div>
     <hr>
 </div>
-<?php // END PLACEHOLDER section Card END ?>
+<?php // END User account set-up/login process section Card END ?>
 
 <?php // PLACEHOLDER section Card ?>
 <div class="container" style="background-color: paleturquoise; border-left: 6px solid mediumturquoise;">    
