@@ -16,6 +16,7 @@
 
 
 ### Latest update notes 10/11/2019
+- Started work on a survey creator tool
 - [x] Created a new API that returns a list of surveys of a user
 - [x] Survey management page now returns a constantly updating list of surveys using a API
 - [x] Create data now inserts a test form for the bonfire account user
