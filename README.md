@@ -2,6 +2,15 @@
 ## Created by Theo Jed Barber Clapperton
 ### Student id: 18055445
 
+### Where I left it
+```
+I've just finished the JQuery that retrieves all the questions and _POSTS them to a API called insertSurveyIntoDatabase.php,
+From in the script i've encode from a javascript array into a JSON array and then back into a php array,
+```
+- [ ] Validate all the values and if anything is incorrect send back a error,
+- [ ] Have the Survey creator convert a validation error into a error message and ask again,
+- [ ] Once the user has submitted correct data then take them back to the survey Management,
+
 ### Things to think about after reading through specification
 - [x] Sign Up using  a unique username, I think I may have added a user ID (maybe remove)
 - [ ] Check over server side validation it should be able to do
@@ -13,6 +22,14 @@
 - [ ] Admin page
 - - [ ] see all users, and view that users account information, update account info, create a user, del a user
 - [ ] maybe move the competitors to the same competitiors page
+
+### Bugs and issues
+- SurveyCreator.php
+- - [ ] The nth card is not working
+- - [ ] When removing all questions the footer gets pushed up
+- [ ] Card styling is affecting every page
+- [ ] Go though and add client side validation to addedQuestions on survey creator
+- [ ] For some reason in the insertSurveyIntoDatabase.php it needs to be encoded and then decoded
 
 
 ### Latest update notes 10/11/2019
