@@ -24,6 +24,15 @@ function sanitise($str, $connection)
 	return $str;
 }
 
+// function to sanitise (clean) user data:
+function sanitiseStrip($str, $connection)
+{
+	$str = sanitise($str, $connection);
+	$str = preg_replace("/[^a-zA-Z0-9\s]/", "", $str);
+	// return the cleaned string:
+	return $str;
+}
+
 function validateEmail($field, $minlength, $maxlength, $name) {
     if (strlen($field)<$minlength) 
     {
