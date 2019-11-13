@@ -3,6 +3,8 @@
 // execute the header script:
 require_once "header.php";
 
+echo '<link rel="stylesheet" type="text/css" href="assets/style/surveyStyle.css">';
+
 // finish off the HTML for this page:
 if (!isset($_SESSION['loggedIn']))
 {
@@ -26,6 +28,7 @@ echo<<<_END
 
     <div class="row">
 
+    <div class="col-md-2">
       <div class='text-center' id='questionControls'>
         <hr>
           <h6>Click to add new question</h6>
@@ -35,8 +38,9 @@ echo<<<_END
             <button id="submitSurvey">Submit</button>
         <hr>
       </div>
+    </div>
 
-      <div class="col-md-8 offset-md-2" id="currentQuestions">
+      <div class="col-md-8" id="currentQuestions">
 
           <form class="card" style="width: 100%;">
             <div class="card-body">
@@ -80,17 +84,17 @@ echo<<<_END
                   <div class="form-check">
                     <div class="col">
                       <small>True</small>
-                      <input type="radio" name="questionRequired" value="true">
+                      <input type="radio" name="questionRequired" value="true"></input>
                     </div>
                     <div class="col">
                       <small>False</small>
-                      <input type="radio" name="questionRequired" value="false" checked="checked">
+                      <input type="radio" name="questionRequired" value="false" checked="checked"></input>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <button class="removeQuestion">Delete Question</button>
+            <button type="button" class="removeQuestion">Delete Question</button>
           </form>
 
       </div>
@@ -105,18 +109,18 @@ echo<<<_END
   $(document).ready(function(){
 
     // If the user wants to delete a question this function is called and the questionDiv removes itself
-  $(document).on('click', '.removeQuestion', function(){
-        $(this).parent('div').remove();
+    $(document).on('click', '.removeQuestion', function(){
+        $(this).parent('form').remove();
     });
     
     // If the user would like a new question box this inserts the div using the function below.
-  $(document).on('click', '#addQuestion', function(){
+    $(document).on('click', '#addQuestion', function(){
         $( "#currentQuestions" ).append(createQuestion());
     });
 
     // This returns the formatted div for a new question
     function createQuestion() {
-        return '<form class="card" style="width: 100%;"> <div class="card-body"> <div class="row"> <div class="col"> <h6>Enter a question title:</h6> <input name="questionTitle"></input> <small class="form-text text-muted" >e.g. Enter you favorite animal?</small> </div> <div class="col"> <h6>Enter a small label:</h6> <input name="questionLabel"></input> <small class="form-text text-muted" >Just like me :)</small> </div> </div> <hr> <div class="row"> <div class="col"> <h6>Enter a minimum value:</h6> <input name="questionMin"></input> <small class="form-text text-muted" >e.g. 5</small> </div> <div class="col"> <h6>Enter a maximum value:</h6> <input name="questionMax"></input> <small class="form-text text-muted" >e.g. 32</small> </div> </div> <hr> <div class="row"> <div class="col"> <h6>Select a dataType:</h6> <select class="custom-select" name="questionDataType"> <option value="text"selected>text</option> <option value="email">email</option> <option value="password">password</option> </select> </div> <div class="col"> <h6>Required Question?</h6> <div class="form-check"> <div class="col"> <small>True</small> <input type="radio" name="questionRequired" value="true" aria-label="..."> </div> <div class="col"> <small>False</small> <input type="radio" name="questionRequired" value="false" aria-label="..." value="false" checked="checked"> </div> </div> </div> </div> </div> <button class="removeQuestion">Delete Question</button> </form>';
+      return ' <form class="card" style="width: 100%;"> <div class="card-body"> <div class="row"> <div class="col"> <h6>Enter a question title:</h6> <input name="questionTitle"></input> <small class="form-text text-muted" >e.g. Enter you favorite animal?</small> </div> <div class="col"> <h6>Enter a small label:</h6> <input name="questionLabel"></input> <small class="form-text text-muted" >Just like me :)</small> </div> </div> <hr> <div class="row"> <div class="col"> <h6>Enter a minimum value:</h6> <input name="questionMin"></input> <small class="form-text text-muted" >e.g. 5</small> </div> <div class="col"> <h6>Enter a maximum value:</h6> <input name="questionMax"></input> <small class="form-text text-muted" >e.g. 32</small> </div> </div> <hr> <div class="row"> <div class="col"> <h6>Select a dataType:</h6> <select class="custom-select" name="questionDataType"> <option value="text"selected>text</option> <option value="email">email</option> <option value="password">password</option> </select> </div> <div class="col"> <h6>Required Question?</h6> <div class="form-check"> <div class="col"> <small>True</small> <input type="radio" name="questionRequired" value="true"></input> </div> <div class="col"> <small>False</small> <input type="radio" name="questionRequired" value="false" checked="checked"></input> </div> </div> </div> </div> </div> <button type="button" class="removeQuestion">Delete Question</button> </form>';
     }
 
     // If the user clicks submit this function handles getting all the data back
