@@ -25,8 +25,9 @@ From in the script i've encode from a javascript array into a JSON array and the
 
 ### Bugs and issues
 - SurveyCreator.php
-- - [ ] The nth card is not working
+- - [x] The nth card is not working, moved the styleSheet to just the creator
 - - [ ] When removing all questions the footer gets pushed up
+- - [x] Cannot delete questions, Change script to delete parent "form" not "div"
 - [ ] Card styling is affecting every page
 - [ ] Go though and add client side validation to addedQuestions on survey creator
 - [ ] For some reason in the insertSurveyIntoDatabase.php it needs to be encoded and then decoded
