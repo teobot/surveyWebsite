@@ -27,6 +27,10 @@ if (!isset($_POST['username']))
 else 
 {
     require_once('../../validationChecker.php');
+    require_once('../../credentials.php');
+
+    // connect to the host:
+    $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
     $json = $_POST['survey_JSON'];
     
@@ -37,47 +41,46 @@ else
     $questionCount = count($json);
 
     for ($x = 1; $x < $questionCount; $x++) {
+
+        $questionTitle = sanitiseStrip($json[$x][0]->value, $connection);
+        $questionLabel = sanitiseStrip($json[$x][1]->value, $connection);
+        $questionType = sanitiseStrip($json[$x][2]->value, $connection);
+        $questionMin = sanitiseStrip($json[$x][3]->value, $connection);
+        $questionMax = sanitiseStrip($json[$x][4]->value, $connection);
+        $questionRequired = sanitiseStrip($json[$x][5]->value, $connection);
+
         $allUsersSurveys[] = (object) array(
-            'title' => $json[$x][0]->value,
-            'label' => $json[$x][1]->value,
-            'inputType' => $json[$x][2]->value,
-            'min' => $json[$x][3]->value,
-            'max' => $json[$x][4]->value,
-            'required' => $json[$x][5]->value,
+            'title' => $questionTitle,
+            'label' => $questionLabel,
+            'inputType' => $questionType,
+            'min' => $questionMin,
+            'max' => $questionMax,
+            'required' => $questionRequired
         );
     }
 
     //Survey Title
-    $survey_title = $json[0][0]->value;
-
-    //var_dump($allUsersSurveys);
-    echo json_encode($allUsersSurveys);
-
-    exit;
-
-
-    /*
+    $survey_title = sanitiseStrip($json[0][0]->value, $connection);
+    //Survey Questions
     $insertJSON = json_encode($allUsersSurveys);
-	$creator = $_GET['username'];
-	$sql = "INSERT INTO `surveys` (`survey_id`, `survey_creator`, `survey_title`, `survey_JSON`) VALUES (NULL, '$creator', 'First Test Form', '$insertJSON' )";
-	
-    if ($conn->query($sql) === TRUE) {
-		echo <<<_END
-			<tr>
-				<td scope="row">insert data</td>
-				<td>inserting survey</td>
-				<td class="p-3 mb-2 bg-success text-white">Success</td>
-			</tr>
-_END;
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+    //Survey Creator 
+    $creator = $_POST['username'];
+
+    // exit the script with a useful message if there was an error:
+    if (!$connection)
+    {
+        die("Connection failed: " . $mysqli_connect_error);
     }
-*/
 
+	$sql = "INSERT INTO `surveys` (`survey_id`, `survey_creator`, `survey_title`, `survey_JSON`) VALUES (NULL, '$creator', '$survey_title', '$insertJSON' )";
+	
+    if ($connection->query($sql) === TRUE) {
+		echo "success";
+    } else {
+        echo "Error: " . $sql . "<br>" . $connection->error;
+    }
 
-
-
-
+    mysqli_close($connection);
 
 
 
