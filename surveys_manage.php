@@ -29,6 +29,8 @@ else
 				<th>Survey ID</th>
 				<th>Survey Title</th>
 				<th>Survey Link</th>
+				<th>View Responses</th>
+				<th>Survey Response Count</th>
 			</tr>
 		</table>
 _END;
@@ -53,7 +55,7 @@ _END;
 						
 						// loop through what we got and add it to the table (data is already a JavaScript object thanks to getJSON()):
 						$.each(data, function(index, value) {
-							$('#surveyTable').append("<tr class='surveys'> <td>"+value.survey_id+"</td> <td> "+ value.survey_title+" </td> <td> <a href='survey_view.php?surveyID=" + value.survey_id + "'>Link</a> </td></tr>");
+							$('#surveyTable').append("<tr class='surveys'> <td>"+value.survey_id+"</td> <td> "+ value.survey_title+" </td> <td> <a href='survey_view.php?surveyID=" + value.survey_id + "'>Link</a> </td><td><a href='#'>Link</a></td><td><span class='badge badge-primary badge-pill'>"+value.responseCount+"</span></td></tr>");
 						});
 					})
 					.fail(function(jqXHR) {
