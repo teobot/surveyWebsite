@@ -3,13 +3,8 @@
 ### Student id: 18055445
 
 ### Where I left it
-```
-I've just finished the JQuery that retrieves all the questions and _POSTS them to a API called insertSurveyIntoDatabase.php,
-From in the script i've encode from a javascript array into a JSON array and then back into a php array,
-```
-- [ ] Validate all the values and if anything is incorrect send back a error,
-- [ ] Have the Survey creator convert a validation error into a error message and ask again,
-- [ ] Once the user has submitted correct data then take them back to the survey Management,
+> User reponses are now inserted into the database
+- [ ] Users responses now need to be analizied
 
 ### Things to think about after reading through specification
 - [x] Sign Up using  a unique username, I think I may have added a user ID (maybe remove)
@@ -25,24 +20,8 @@ From in the script i've encode from a javascript array into a JSON array and the
 
 ### Bugs and issues
 - SurveyCreator.php
-- - [x] The nth card is not working, moved the styleSheet to just the creator
 - - [ ] When removing all questions the footer gets pushed up
-- - [x] Cannot delete questions, Change script to delete parent "form" not "div"
-- [ ] Card styling is affecting every page
 - [ ] Go though and add client side validation to addedQuestions on survey creator
-- [ ] For some reason in the insertSurveyIntoDatabase.php it needs to be encoded and then decoded
-
-
-### Latest update notes 10/11/2019
-- Started work on a survey creator tool
-- - Users can now add as many questions as they please
-- - Users can now delete each question
-- - [ ] Submit button need to receive all the variables and place into a array 
-
-- [x] Created a new API that returns a list of surveys of a user
-- [x] Survey management page now returns a constantly updating list of surveys using a API
-- [x] Create data now inserts a test form for the bonfire account user
-- [x] Created a survey view form that gets the survey id and displays the information
 
 ### Features to add / Things to do
 - [ ] Make sure that all the images on the competitors pages are correct to the section
@@ -50,10 +29,8 @@ From in the script i've encode from a javascript array into a JSON array and the
 - - [ ] googleforms.php
 - - [ ] surveyMonkey.php
 - - [ ] checkbox.php
-- [x] Phone Number must be checked to see its actually a phonenumber
 - [ ] Similar validation on the sign in page, sign up page is mostly done
 - [ ] Check over both server side and client side validation
-- [x] Show the new database information in account.php page
 - Complete the competition evaluation for:
     - - [x] Google Forms, 
     - - [ ] CheckBox,
@@ -79,6 +56,10 @@ From in the script i've encode from a javascript array into a JSON array and the
 - [x] Phone Number is now server validated but is in format 111222333, its 9 digits long
 - Update section 5 on the google forms compet page
 - - [x] Go through and fix the formatting.
+- [x] Created a new API that returns a list of surveys of a user
+- [x] Survey management page now returns a constantly updating list of surveys using a API
+- [x] Create data now inserts a test form for the bonfire account user
+- [x] Created a survey view form that gets the survey id and displays the information
 
 SETUP:
 ...
