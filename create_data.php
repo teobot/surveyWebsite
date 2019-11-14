@@ -250,6 +250,7 @@ _END;
 				survey_creator varchar(16),
 				survey_title varchar(32),
 				survey_JSON longtext,
+				survey_RESPONSE longtext,
 				PRIMARY KEY(survey_id)
 			)	 		 
 		";
@@ -271,44 +272,39 @@ _END;
 		die("Error creating table: " . mysqli_error($connection));
 	}
 
-	// Create connection
-	$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	}
-
 	$allUsersSurveys[] = (object) array(
 		'title' => 'Favorite color?',
 		'label' => 'Please enter your favorite color!',
 		'inputType' => 'text',
-		'min' => 3,
-		'max' => 10,
-		'required' => true
+	);
+
+	$allUsersSurveys[] = (object) array(
+		'title' => 'Favorite animal?',
+		'label' => 'Please enter your favorite animal!',
+		'inputType' => 'text',
 	);
 
 	$allUsersSurveys[] = (object) array(
 		'title' => 'Personal Email?',
 		'label' => 'Please enter your personal email!',
 		'inputType' => 'email',
-		'min' => 5,
-		'max' => 32,
-		'required' => false
 	);
 
 	$allUsersSurveys[] = (object) array(
 		'title' => 'Birthday Date?',
 		'label' => 'Please enter your birthday!',
 		'inputType' => 'date',
-		'min' => '1950-01-01',
-		'max' => '2019-01-01',
-		'required' => false
 	);
 
+	$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+	// Check connection
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}
+	
     $json = json_encode($allUsersSurveys);
 	$creator = "bonfire";
-	$sql = "INSERT INTO `surveys` (`survey_id`, `survey_creator`, `survey_title`, `survey_JSON`) VALUES (NULL, '$creator', 'First Test Form', '$json' )";
-	
+	$sql = "INSERT INTO `surveys` (`survey_id`, `survey_creator`, `survey_title`, `survey_JSON`, `survey_RESPONSE`) VALUES (NULL, '$creator', 'First Test Form', '$json', '[]')";
     if ($conn->query($sql) === TRUE) {
 		echo <<<_END
 			<tr>
@@ -319,7 +315,9 @@ _END;
 _END;
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+	}
+	
+	$conn->close();
 
 // we're finished, close the connection:
 echo <<<_END
