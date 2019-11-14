@@ -78,7 +78,7 @@ else
         die("Connection failed: " . $mysqli_connect_error);
     }
 
-	$sql = "INSERT INTO `surveys` (`survey_id`, `survey_creator`, `survey_title`, `survey_JSON`) VALUES (NULL, '$creator', '$survey_title', '$insertJSON' )";
+	$sql = "INSERT INTO `surveys` (`survey_id`, `survey_creator`, `survey_title`, `survey_JSON`, `survey_RESPONSE`) VALUES (NULL, '$creator', '$survey_title', '$insertJSON', '[]' )";
 	
     if ($connection->query($sql) === TRUE) {
 		echo "success";
