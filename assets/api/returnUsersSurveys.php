@@ -59,8 +59,11 @@ else
     {
         // For each of the usernames push them into the return array
         while($row = $resultQuery->fetch_assoc()) {
+            
+            $responseCount = count(json_decode($row["survey_RESPONSE"]));
+
             //CREATE ARRAY
-            $allUsersSurveys[] = (object) array('survey_id' => $row["survey_id"],'survey_title' => $row["survey_title"]);
+            $allUsersSurveys[] = (object) array('survey_id' => $row["survey_id"],'survey_title' => $row["survey_title"], 'responseCount' => $responseCount);
         }
     } 
     
