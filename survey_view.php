@@ -71,8 +71,9 @@ echo<<<_END
             $.post('assets/api/insertResponse.php', {survey_RESPONSE: surveyData, surveyID: $surveyID})
             .done(function(data) {
                 //REPLACE WITH A THANK YOU FOR SUBMITTING MESSAGE
-                //window.location.replace("index.php");
-                console.log(data);
+                window.location.replace("index.php");
+                //-----------------------------------------------
+                //console.log(data);
             })
             .fail(function() {
               document.getElementById("errorMessage").style.display= 'block';

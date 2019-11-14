@@ -39,7 +39,8 @@ else
 
     for($i = 0; $i < count($json);$i++)
     {
-        $userResponse[] = array($json[$i][0]->value);
+        //$userResponse[] = array($json[$i][0]->value);
+        array_push($userResponse, $json[$i][0]->value);
     }
 
     // Create connection
@@ -69,7 +70,7 @@ else
 
     }
 
-    $returnedJSON[] = (object) $userResponse;
+    $returnedJSON[] = $userResponse;
 
 
     //UPDATE THE RECORD WITH THE NEW RESPONSE

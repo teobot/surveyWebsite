@@ -5,6 +5,8 @@
 ### Where I left it
 > User reponses are now inserted into the database
 - [ ] Users responses now need to be analizied
+- [ ] Inserted new questions need new data types
+- [x] make sure the data is inserted into the responses correctly, removed inserting as a object
 
 ### Things to think about after reading through specification
 - [x] Sign Up using  a unique username, I think I may have added a user ID (maybe remove)
