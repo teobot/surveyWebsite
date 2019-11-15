@@ -24,15 +24,20 @@ else
 {
 	echo '<a class="btn btn-primary btn-lg btn-block" href="surveyCreator.php" role="button">Click to create new survey!</a><br>';
 	echo<<<_END
-		<table class="table" id="surveyTable">
-			<tr>
-				<th>Survey ID</th>
-				<th>Survey Title</th>
-				<th>Survey Link</th>
-				<th>View Responses</th>
-				<th>Survey Response Count</th>
-			</tr>
+	<div class="table-responsive">
+		<table class="table table-hover table-sm text-center" id="surveyTable">
+			<thead>
+				<tr>
+					<th>Survey ID</th>
+					<th>Survey Title</th>
+					<th>Survey Edit</th>
+					<th>Survey View</th>
+					<th>Analytics</th>
+					<th>Responses</th>
+				</tr>
+			</thead>
 		</table>
+	</div>
 _END;
 
 	// Making a API call to the returnUsers.php API, asking for all the usernames in the database,
@@ -55,14 +60,14 @@ _END;
 						
 						// loop through what we got and add it to the table (data is already a JavaScript object thanks to getJSON()):
 						$.each(data, function(index, value) {
-							$('#surveyTable').append("<tr class='surveys'> <td>"+value.survey_id+"</td> <td> "+ value.survey_title+" </td> <td> <a href='survey_view.php?surveyID=" + value.survey_id + "'>Link</a> </td><td><a href='#'>Link</a></td><td><span class='badge badge-primary badge-pill'>"+value.responseCount+"</span></td></tr>");
+							$('#surveyTable').append("<tr class='surveys'> <td>"+value.survey_id+"</td> <td> "+ value.survey_title+" </td><td><a href='#'>Edit Survey</a></td> <td> <a href='survey_view.php?surveyID=" + value.survey_id + "'>View Survey</a> </td><td><a href='surveyAnalysis.php?surveyID="+value.survey_id+"'>View Analytics</a></td><td><div class='text-center'><span class='badge badge-primary badge-pill'>"+value.responseCount+"</span></div></td></tr>");
 						});
 					})
 					.fail(function(jqXHR) {
 						// debug message to help during development:
 						console.log('request returned failure, HTTP status code ' + jqXHR.status);
 					}) 
-				setTimeout(getSurveys, 1000);
+				//setTimeout(getSurveys, 1000);
 			}
 		</script>
 _END;
