@@ -3,10 +3,9 @@
 ### Student id: 18055445
 
 ### Where I left it
-> User reponses are now inserted into the database
-- [ ] Users responses now need to be analizied
-- [ ] Inserted new questions need new data types
-- [x] make sure the data is inserted into the responses correctly, removed inserting as a object
+> i've created the analysis part of the website, all the survey data is returned with all the responses,
+I created the different sections of relaying the information back but need to get the number one going.
+
 
 ### Things to think about after reading through specification
 - [x] Sign Up using  a unique username, I think I may have added a user ID (maybe remove)
@@ -24,6 +23,11 @@
 - SurveyCreator.php
 - - [ ] When removing all questions the footer gets pushed up
 - [ ] Go though and add client side validation to addedQuestions on survey creator
+- [ ] Misspelt internal for a response code
+> User reponses are now inserted into the database
+- [ ] Users responses now need to be analizied
+- [ ] Inserted new questions need new data types
+- [x] make sure the data is inserted into the responses correctly, removed inserting as a object
 
 ### Features to add / Things to do
 - [ ] Make sure that all the images on the competitors pages are correct to the section
