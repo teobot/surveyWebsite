@@ -7,6 +7,23 @@ require_once "credentials.php";
 // if the data is valid return an empty string, if the data is invalid return a help message
 // You are encouraged to create/add your own PHP functions here to make frequently used code easier to handle
 
+
+function selectValidation($stringToCheck, $datatype) {
+	if ($datatype == "text")
+	{
+		return validateString($stringToCheck, 0, 64, $stringToCheck);
+	}
+
+	elseif ($datatype == "number")
+	{
+		$intToCheck = (int)$stringToCheck;
+
+		return validateInt($intToCheck, 1, 999999999999999);
+		
+	}
+		
+	return "";
+}
 // function to sanitise (clean) user data:
 function sanitise($str, $connection)
 {
@@ -27,8 +44,8 @@ function sanitise($str, $connection)
 // function to sanitise (clean) user data:
 function sanitiseStrip($str, $connection)
 {
+	$str = preg_replace("/[^a-zA-Z0-9!?#@.,\s]/", "", $str);
 	$str = sanitise($str, $connection);
-	$str = preg_replace("/[^a-zA-Z0-9\s]/", "", $str);
 	// return the cleaned string:
 	return $str;
 }
