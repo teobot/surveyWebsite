@@ -30,6 +30,19 @@ else
     require_once('../../credentials.php');
 
 
+    // Create connection
+    $responseConn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+        // Check connection
+        if ($responseConn->connect_error) 
+        {
+            // Set the error response code to 400 meaning 'bad request'
+            header("Content-Type: application/json", NULL, 503);
+            // Encode the current empty array and return it
+            echo json_encode($allUsersSurveys);
+            // Exit out of the API, to not run any other bits of code
+            exit;
+        }
+
     // Get the users response
     $json = $_POST['survey_RESPONSE'];
     $json = json_encode($json);
@@ -39,17 +52,34 @@ else
 
     for($i = 0; $i < count($json);$i++)
     {
-        //$userResponse[] = array($json[$i][0]->value);
-        array_push($userResponse, $json[$i][0]->value);
-    }
+        $responseINI = sanitiseStrip($json[$i][0]->value, $responseConn);
+        $responseDataType = $json[$i][0]->name;
 
-    // Create connection
-    $responseConn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-    
-    // Check connection
-    if ($responseConn->connect_error) 
-    {
-        die("Connection failed: " . $responseConn->connect_error);
+        if (empty($responseINI)) 
+        {
+            $allUsersSurveys[] = "<strong>Some fields are still empty!</strong>, Please enter into all fields!";
+            header("Content-Type: application/json", NULL, 500);
+            echo json_encode($allUsersSurveys);
+            exit;
+        } 
+        else 
+        {
+            $validationError = selectValidation($responseINI, $responseDataType);
+
+             if ($validationError != "") 
+             {
+                $allUsersSurveys[] = "<strong>You've entered a incorrect Data Type!</strong> Please make sure all your answers are in the correct data Type!";
+                $allUsersSurveys[] = $validationError;
+                header("Content-Type: application/json", NULL, 406);
+                echo json_encode($allUsersSurveys);
+                exit;
+             }
+             else
+             {
+                //DATA IS ALL VALID
+                array_push($userResponse, $responseINI);
+             }
+        }    
     }
 
     $survey_id = $_POST["surveyID"];
