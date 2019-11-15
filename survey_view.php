@@ -6,7 +6,6 @@ $surveyID = $_GET['surveyID'];
 
 echo<<<_END
     <div class="alert alert-danger" id="errorMessage" style="display: none;">
-        <strong>Error!</strong> Please make sure all data is correct and inputted!
     </div>
 _END;
 
@@ -30,8 +29,6 @@ echo<<<_END
             $.post('assets/api/returnSurveyData.php', {surveyID: '$surveyID' })
                 .done(function(data) {
 
-                    console.log(data);
-
                     // remove the old table rows:
                     $('.questions').remove();
 
@@ -40,7 +37,7 @@ echo<<<_END
                     $('#surveyTitle').html(data.survey_title);
 
                     $.each(data.survey_JSON, function( key, value ) {
-                        $('#questionsContainer').append("<form class='card'> <div class='h6'>"+ value.title +"</div> <div><small>"+value.label+"</small></div> <div class='input'><input name='questionAnswer' type='"+value.inputType+"'></input></div> </form><br>");
+                        $('#questionsContainer').append("<form class='card'> <div class='h6'>"+ value.title +"</div> <div><small>"+value.label+"</small></div> <div class='input'><input name='"+value.inputType+"' type='"+value.inputType+"'></input></div> </form><br>");
                       });
 
                       $('#questionsContainer').append("<div><button id='submitSurvey' type='button'>Submit</button><div>");
@@ -70,13 +67,15 @@ echo<<<_END
         //Now we post this array to a API that looks to see if the data is valid
             $.post('assets/api/insertResponse.php', {survey_RESPONSE: surveyData, surveyID: $surveyID})
             .done(function(data) {
-                //REPLACE WITH A THANK YOU FOR SUBMITTING MESSAGE
-                window.location.replace("index.php");
-                //-----------------------------------------------
-                //console.log(data);
+                document.getElementById("errorMessage").style.display= 'none';
+                window.location.replace("submitted.php");
             })
-            .fail(function() {
+            .fail(function(error) {
               document.getElementById("errorMessage").style.display= 'block';
+              $('.errors').remove();
+              $.each(error.responseJSON, function( key, reason ) {
+                    $('#errorMessage').append("<div class='errors'><hr>"+reason+"</div>");
+                });
             })        
     });
 
