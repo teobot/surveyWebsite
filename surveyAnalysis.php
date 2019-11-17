@@ -8,7 +8,7 @@ echo '<link rel="stylesheet" type="text/css" href="assets/style/analysisStyle.cs
 if (!isset($_SESSION['loggedIn']))
 {
 	// user isn't logged in, display a message saying they must be:
-	echo "You must be logged in to view this page.<br>";
+    echo "<div class='col-md-6 offset-md-3 text-center'><div class='alert alert-success' role='alert'>You are already logged in, please log out first.</div></div>";
 }
 
 // the user must be signed-in, show them suitable page content
@@ -17,7 +17,6 @@ else
     echo '<div id="error_message" style="display: none;" class="alert alert-danger" role="alert"></div>';
     echo<<<_END
     <div id='surveyResponses' class='col-md-8 offset-md-2'>
-        <div id='responseNum' style="display: block;" class='text-left'></div>
     </div>
 _END;
 
@@ -45,30 +44,55 @@ _END;
                                 var responseNum = responseData[Object.keys(responseData)[0]].length
 
                                 console.log(surveyData);
-        
-                                $('#responseNum').append("<div class='display-4' id='responseNumText'>"+responseNum + " responses </div><small class='form-text text-muted'>Title : "+surveyData.survey_title+"</small>");
+                                console.log("^survey data^");
+                                
+                                
+                                $('#responseNum').remove();
+                                $('#surveyResponses').append("<div id='responseNum' style='display: block;' class='text-left'><div class='display-4' id='responseNumText'>"+responseNum + " responses </div><small class='form-text text-muted'>Title : "+surveyData.survey_title+"</small></div>");
 
                                 $.each(surveyData.survey_JSON, function(index, value) {
                                     surveyArray = value;
                                     responsesArray = responseData[Object.keys(responseData)[index]];
 
                                     console.log(surveyArray);
-                                    console.log(responsesArray);	
+                                    console.log("^surveyarray - value^");
+                                    console.log(responsesArray);
+                                    console.log("^responsesarray^");
 
                                     if (value.inputType == "number") {
                                         console.log("found number");
 
-                                        google.charts.load('current', {'packages':['corechart']});
-
-                                        google.charts.setOnLoadCallback(drawChart);
-
                                         var responseSection = document.createElement("div");
                                         responseSection.className = "responses text-center";
+                                        var divLocation = value.title;
+                                        $(responseSection).append('<div class="d-flex justify-content-center" id="'+divLocation+'"></div>');
+                                        $( "#surveyResponses" ).append(responseSection); 
 
-                                        $(responseSection).append('<div class="d-flex justify-content-center" id="chart_div"></div>'); 
-                                        
-                                        $( "#surveyResponses" ).append(responseSection);  
+                                        google.charts.load('current', {'packages':['corechart']});
+                                        google.charts.setOnLoadCallback(drawChart);
 
+                                        function drawChart() {
+
+                                            // Create the data table.
+                                            var data = google.visualization.arrayToDataTable([
+                                                ['Task', 'Hours per Day'],
+                                                ['Work',     11],
+                                                ['Eat',      2],
+                                                ['Commute',  2],
+                                                ['Watch TV', 2],
+                                                ['Sleep',    7]
+                                              ]);
+                                    
+                                            // Set chart options
+                                            var options = {
+                                                'title':value.title,
+                                            };
+                                    
+                                            // Instantiate and draw our chart, passing in some options.
+                                            var chart = new google.visualization.PieChart(document.getElementById(divLocation));
+                                            chart.draw(data, options);
+                            
+                                        }                                        
 
                                     } else if (value.inputType == "text") { 
                                         console.log("found text");
@@ -85,18 +109,34 @@ _END;
                                         $( "#surveyResponses" ).append(responseSection);    
    
                                     } else {
-                                        console.log("found unknown");
+                                        console.log("found text based data");
+
+                                        var responseSection = document.createElement("div");
+                                        responseSection.className = "responses text-center";
+            
+                                        $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small></p>");  
+            
+                                        $.each(responsesArray, function(index, response) {
+                                            $(responseSection).append("<div class='resText text-left'>"+response+"</div>");      
+                                        });
+            
+                                        $( "#surveyResponses" ).append(responseSection);
                                     }
 
                                     console.log("--------------------");
                                 });
 
                                 document.getElementById("error_message").style.display= 'none';
-                                document.getElementById("numberOfResponses").style.display= 'block';
+                                document.getElementById("surveyResponses").style.display= 'block';
 
                                 console.log("FINISHED");
 
-                            });
+                        })
+                        .fail(function(jqXHR) {
+                            document.getElementById("error_message").style.display= 'block';
+                            document.getElementById('error_message').innerHTML = jqXHR.responseJSON[0];
+                        });
+                            
 					})
 					.fail(function(jqXHR) {
                         document.getElementById("error_message").style.display= 'block';
@@ -104,30 +144,6 @@ _END;
                     });
 				//setTimeout(getResponses, 1000);
             }
-
-            function drawChart() {
-
-                // Create the data table.
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Topping');
-                data.addColumn('number', 'Slices');
-                data.addRows([
-                  ['Mushrooms', 1],
-                  ['Onions', 3],
-                  ['Olives', 5],
-                  ['Zucchini', 1],
-                  ['Pepperoni', 2]
-                ]);
-        
-                // Set chart options
-                var options = {'title':'How Much Pizza I Ate Last Night',
-                               'width':400,
-                               'height':300};
-        
-                // Instantiate and draw our chart, passing in some options.
-                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-                chart.draw(data, options);
-              }
         </script>
 _END;
 }
