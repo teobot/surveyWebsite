@@ -9,7 +9,7 @@ echo '<link rel="stylesheet" type="text/css" href="assets/style/surveyStyle.css"
 if (!isset($_SESSION['loggedIn']))
 {
 	// user isn't logged in, display a message saying they must be:
-	echo "You must be logged in to view this page.<br>";
+  echo "<div class='col-md-6 offset-md-3 text-center'><div class='alert alert-success' role='alert'>You are already logged in, please log out first.</div></div>";
 } else 
 {
 
@@ -20,17 +20,21 @@ _END;
 echo "<div class='text-center'>";
 
 echo<<<_END
-  <div class="container">
+<div class="container">
+  <form>
+    <h3>Enter a survey Title</h3>
+    <input min="1" max="32" name="surveyTitle" type="text"></input>
+  </form>
+  
+  <br>
 
-    <form><h3>Enter a survey Title</h3><input min="1" max="32" name="surveyTitle" type="text"></input></form><br>
+  <div class="alert alert-danger" id="errorMessage" style="display: none;">
+    <strong>Error!</strong> Please make sure all data is correct and inputted!
+  </div>
 
-    <div class="alert alert-danger" id="errorMessage" style="display: none;">
-      <strong>Error!</strong> Please make sure all data is correct and inputted!
-    </div>
+  <hr>
 
-    <hr>
-
-    <div class="row">
+  <div class="row">
 
     <div class="col-md-2">
       <div class='text-center' id='questionControls'>
@@ -44,42 +48,42 @@ echo<<<_END
       </div>
     </div>
 
-      <div class="col-md-8" id="currentQuestions">
+    <div class="col-md-8" id="currentQuestions">
 
-          <form class="card" style="width: 100%;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h6>Enter a question title:</h6>
-                    <input name="questionTitle"></input>
-                  <small class="form-text text-muted" >e.g. Enter you favorite animal?</small>
-                </div>
-                <div class="col">
-                  <h6>Enter a small label:</h6>
-                    <input name="questionLabel"></input>
-                  <small class="form-text text-muted" >Just like me :)</small>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col">
-                  <h6>Select a dataType:</h6>
-                    <select class="custom-select" name="questionDataType">
-                      <option value="text"selected>text</option>
-                      <option value="email">email</option>
-                      <option value="password">password</option>
-                      <option value="number">number</option>
-                      <option value="tel">tel</option>
-                    </select>
-                </div>
-              </div>
-            </div>
-            <button type="button" class="removeQuestion">Delete Question</button>
-          </form>
-
+    <form class="card" style="width: 100%;">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <h6>Enter a question title:</h6>
+              <input name="questionTitle"></input>
+            <small class="form-text text-muted" >e.g. Enter you favorite animal?</small>
+          </div>
+          <div class="col">
+            <h6>Enter a small label:</h6>
+              <input name="questionLabel"></input>
+            <small class="form-text text-muted" >Just like me :)</small>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <h6>Select a dataType:</h6>
+              <select class="custom-select" name="questionDataType">
+                <option value="text"selected>text</option>
+                <option value="email">email</option>
+                <option value="password">password</option>
+                <option value="number">number</option>
+                <option value="tel">tel</option>
+              </select>
+          </div>
+        </div>
       </div>
+    </form>
+
     </div>
+
   </div>
+
 </div>
 _END;
 
@@ -100,8 +104,7 @@ echo<<<_END
 
     // This returns the formatted div for a new question
     function createQuestion() {
-      return ' <form class="card" style="width: 100%;"> <div class="card-body"> <div class="row"> <div class="col"> <h6>Enter a question title:</h6> <input name="questionTitle"></input> <small class="form-text text-muted" >e.g. Enter you favorite animal?</small> </div> <div class="col"> <h6>Enter a small label:</h6> <input name="questionLabel"></input> <small class="form-text text-muted" >Just like me :)</small> </div> </div> <hr> <div class="row"> <div class="col"> <h6>Select a dataType:</h6> <select class="custom-select" name="questionDataType"> <option value="text"selected>text</option> <option value="email">email</option> <option value="password">password</option> </select> </div> </div> </div> <button type="button" class="removeQuestion">Delete Question</button> </form>';
-    }
+      return '<form class="card" style="width: 100%;"> <div class="card-body"> <div class="row"> <div class="col"> <h6>Enter a question title:</h6> <input name="questionTitle"></input> <small class="form-text text-muted" >e.g. Enter you favorite animal?</small> </div> <div class="col"> <h6>Enter a small label:</h6> <input name="questionLabel"></input> <small class="form-text text-muted" >Just like me :)</small> </div> </div> <hr> <div class="row"> <div class="col"> <h6>Select a dataType:</h6> <select class="custom-select" name="questionDataType"> <option value="text"selected>text</option> <option value="email">email</option> <option value="password">password</option> <option value="number">number</option> <option value="tel">tel</option> </select> </div> </div> </div> <button type="button" class="removeQuestion">Delete Question</button> </form>';    }
 
     // If the user clicks submit this function handles getting all the data back
     $(document).on('click', '#submitSurvey', function(){
