@@ -5,6 +5,8 @@
 ### Where I left it
 > i've created the analysis part of the website, all the survey data is returned with all the responses,
 I created the different sections of relaying the information back but need to get the number one going.
+> changed some styling
+> user can now edit all their information on the accounts page
 
 
 ### Things to think about after reading through specification
@@ -28,19 +30,20 @@ I created the different sections of relaying the information back but need to ge
 - [ ] Users responses now need to be analizied
 - [ ] Inserted new questions need new data types
 - [x] make sure the data is inserted into the responses correctly, removed inserting as a object
+- SurveyAnalysis.php
+- [x] the function to update causes the numOfResponses to append not replace, fixed
+- SurveyView.php
+- [ ] When pressing enter in a input box it throws a error
 
 ### Features to add / Things to do
 - [ ] Make sure that all the images on the competitors pages are correct to the section
-- [ ] Make sure that all the text has gone through a autocorrector
-- - [ ] googleforms.php
-- - [ ] surveyMonkey.php
-- - [ ] checkbox.php
 - [ ] Similar validation on the sign in page, sign up page is mostly done
 - [ ] Check over both server side and client side validation
 - Complete the competition evaluation for:
     - - [x] Google Forms, 
     - - [ ] CheckBox,
     - - [ ] Survey Monkey
+- [ ] Go back to the analysis page and do something with the different input types
 
 ### Features done
 - [x] Added new validation to the sign_up page, so that data is both client side and server validated
