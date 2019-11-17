@@ -23,7 +23,7 @@ $surveyMonkey = "nav-link";
 if (!isset($_SESSION['loggedIn']))
 {
 	// user isn't logged in, display a message saying they must be:
-	echo "You must be logged in to view this page.<br>";
+	echo "<div class='col-md-6 offset-md-3 text-center'><div class='alert alert-success' role='alert'>You are already logged in, please log out first.</div></div>";
 }
 
 // the user must be signed-in, show them suitable page content

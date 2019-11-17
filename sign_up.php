@@ -47,8 +47,7 @@ $signUpMessage = "";
 if (isset($_SESSION['loggedIn']))
 {
 	// User is already logged in, just display a message:
-	echo "You are already logged in, please log out if you wish to create a new account<br>";
-	
+	echo "<div class='col-md-6 offset-md-3 text-center'><div class='alert alert-success' role='alert'>You are already logged in, please log out first.</div></div>";
 }
 
 // Checks if the user has tried to input data into the signUp form:

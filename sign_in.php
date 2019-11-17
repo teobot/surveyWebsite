@@ -33,8 +33,7 @@ $message = "";
 if (isset($_SESSION['loggedIn']))
 {
 	// user is already logged in, just display a message:
-	echo "You are already logged in, please log out first.<br>";
-
+	echo "<div class='col-md-6 offset-md-3 text-center'><div class='alert alert-success' role='alert'>You are already logged in, please log out first.</div></div>";
 }
 
 elseif (isset($_POST['username']))
@@ -100,7 +99,7 @@ elseif (isset($_POST['username']))
 			$_SESSION['username'] = $username;
 			
 			// show a successful signin message:
-			$message = "Hi, $username, you have successfully logged in, please <a href='account.php'>click here</a><br>";
+			$message = "<div class='alert alert-success' role='alert'>Hi, $username, you have successfully logged in, please <a href='account.php'>click here</a></div>";
 		}
 
 		else
@@ -108,7 +107,7 @@ elseif (isset($_POST['username']))
 			// no matching credentials found so redisplay the signin form with a failure message:
 			$show_signin_form = true;
 			// show an unsuccessful signin message:
-			$message = "Sign in failed, please try again<br>";
+			$message = '<div class="alert alert-danger" role="alert">Sign in failed, please try again!</div>';
 		}
 		
 	}
@@ -117,7 +116,7 @@ elseif (isset($_POST['username']))
 		// validation failed, show the form again with guidance:
 		$show_signin_form = true;
 		// show an unsuccessful signin message:
-		$message = "Sign in failed, please check the errors shown above and try again<br>";
+		$message = '<div class="alert alert-danger" role="alert">Sign in failed, please try again!</div>';
 	}
 	
 	// we're finished with the database, close the connection:
@@ -130,28 +129,32 @@ else
 	// show signin form:
 	$show_signin_form = true;
 }
+echo '<div class="col-md-6 offset-md-3 text-center">';
+echo $message;
 
 if ($show_signin_form)
 {
 // show the form that allows users to log in
 // Note we use an HTTP POST request to avoid their password appearing in the URL:
 echo <<<_END
-<form action="sign_in.php" method="post">
-  <div class="form-group">
-    <label for="usernameInput">Username:</label>
-	<input type="text" name="username" maxlength="16" min="1" value="$username" required> $username_val
-  </div>
-  <div class="form-group">
-    <label for="InputPassword">Password:</label>
-    <input type="password" name="password" maxlength="16" value="$password" required> $password_val
-  </div>
-  <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
-</form>
+	<form class="form" action="sign_in.php" method="post">
+		<div class="form-group row">
+			<label for="usernameInput" class="col-sm-2 col-form-label">Username:</label>
+			<div class="col-sm-10">
+				<input class="form-control" type="text" name="username" maxlength="16" min="1" value="$username" required> $username_val
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="InputPassword" class="col-sm-2 col-form-label">Password:</label>
+			<div class="col-sm-10">
+				<input class="form-control" type="password" name="password" maxlength="16" value="$password" required> $password_val
+			</div>
+		</div>
+		<button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
 _END;
 }
-
-// display our message to the user:
-echo $message;
 
 // finish off the HTML for this page:
 require_once "footer.php";

@@ -18,7 +18,7 @@ require_once "header.php";
 if (!isset($_SESSION['loggedIn']))
 {
 	// The user is not logged in, Tell them to go sign in
-	echo "You must be logged in to view this page.<br>";
+	echo "<div class='col-md-6 offset-md-3 text-center'><div class='alert alert-success' role='alert'>You are already logged in, please log out first.</div></div>";
 }
 // The user is logged in so can view the page if them are a admin
 else
