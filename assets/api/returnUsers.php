@@ -23,20 +23,9 @@ if (!isset($_POST['username']))
     // Exit out of the API, to not run any other bits of code
     exit;
 }
-// If the posted username is a not a admin then return NULL
-elseif ($_POST['username'] != "admin")
-{
-    // Set the error response code to 403 meaning 'forbidden' as the user is not a admin
-    header("Content-Type: application/json", NULL, 403);
-    // Encode the current empty array and return it
-    echo json_encode($allUsers);
-    // Exit out of the API, to not run any other bits of code
-    exit; 
-}
 // The API call has specified the user is a admin, we now need to return the data
 else 
 {
-
     // Get the database connection details
     include_once "../../credentials.php";
 
@@ -54,14 +43,34 @@ else
         exit; 
     }
 
+    $username = $_POST['username'];
+    
+    //IF THE USER IS NOT A ADMIN THEN EXIT
+    $sql = "SELECT * FROM `users` WHERE `username` = '$username' AND `accountType` = 'admin'";
+    $checkAccountType = mysqli_query($adminConnection, $sql);
+    $checkAccountResult = mysqli_num_rows($checkAccountType);
+
+    if (empty($checkAccountResult))
+    {
+       // Set the error response code to 500 meaning 'Interal Server Error'
+       header("Content-Type: application/json", NULL, 501);
+       // Encode the current empty array and return it
+       echo json_encode($allUsers);
+       // Exit out of the API, to not run any other bits of code:
+       exit;        
+    }
+
+
     // Create the query to get all the usernames from the user table
-    $userQuery = "SELECT username FROM `users`";
+    $userQuery = "SELECT username FROM `users` WHERE `username` != '$username'";
 
     // Send the query off to the mysql database using the connection details
     $resultQuery = mysqli_query($adminConnection, $userQuery);
 
     // Get the total number of rows from the results
     $resultQueryRows = mysqli_num_rows($resultQuery);
+
+    $adminConnection->close();
 
     // If nothing is returned, return error code 400 otherwise insert the db.data into the return.data
     if ($resultQueryRows > 0) 
@@ -71,23 +80,28 @@ else
         {
             array_push($allUsers, mysqli_fetch_assoc($resultQuery) );
         }
-    } 
-    
+        // If nothing returned, set the error response code to 400 meaning 'bad request'
+        header("Content-Type: application/json", NULL, 201);     
+        echo json_encode($allUsers);
+        exit;
+    }
+    elseif (empty($resultQueryRows))
+    {
+        // If nothing returned, set the error response code to 400 meaning 'bad request'
+        header("Content-Type: application/json", NULL, 400);        
+        // Return the array of all the usernames
+        echo json_encode($return);
+        exit;
+    }
     else 
     {
         // If nothing returned, set the error response code to 400 meaning 'bad request'
-        header("Content-Type: application/json", NULL, 400);
+        header("Content-Type: application/json", NULL, 500);
         // Encode the empty array and return
-        echo json_encode($return);           
+        echo json_encode($return);
+        exit;   
     }
+    
 
-    // close the connection when finished getting data
-    $adminConnection->close();
-
-    // Set the response code to 200 meaning the operation was a success
-    header("Content-Type: application/json", NULL, 200);
-
-    // Return the array of all the usernames
-    echo json_encode($allUsers);
 }
 ?>
