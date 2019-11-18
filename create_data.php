@@ -129,6 +129,7 @@ $sql = "
 			email VARCHAR(64),
 			dob DATE,
 			telephoneNumber CHAR(11),
+			accountType VARCHAR(12) NOT NULL DEFAULT 'default',
 			PRIMARY KEY(username)
 		)
 	";
@@ -159,6 +160,7 @@ $usernames[] = 'barrym';
 	$emails[] = 'barry@m-domain.com'; 
 	$dobs[] = '1998-08-09'; 
 	$telephoneNumbers[] = '07111222333';
+	$accountType[] = "default";
 
 $usernames[] = 'mandyb'; 
 	$passwords[] = 'abc123'; 
@@ -167,6 +169,7 @@ $usernames[] = 'mandyb';
 	$emails[] = 'webmaster@mandy-g.co.uk'; 
 	$dobs[] = '1999-07-08'; 
 	$telephoneNumbers[] = '07444555666';
+	$accountType[] = "default";
 
 $usernames[] = 'timmy'; 
 	$passwords[] = 'secret95'; 
@@ -175,6 +178,7 @@ $usernames[] = 'timmy';
 	$emails[] = 'timmy@lassie.com'; 
 	$dobs[] = '1991-02-05'; 
 	$telephoneNumbers[] = '07777888999';
+	$accountType[] = "default";
 
 $usernames[] = 'admin'; 
 	$passwords[] = 'secret'; 
@@ -183,6 +187,7 @@ $usernames[] = 'admin';
 	$emails[] = 'totallyRealEmail@real.com'; 
 	$dobs[] = '1998-02-06'; 
 	$telephoneNumbers[] = '07123123123';
+	$accountType[] = "admin";
 
 $usernames[] = 'bonfire'; 
 	$passwords[] = 'getout1'; 
@@ -191,12 +196,13 @@ $usernames[] = 'bonfire';
 	$emails[] = 'johnMarsden@red.com'; 
 	$dobs[] = '1995-01-05'; 
 	$telephoneNumbers[] = '07555666333';
+	$accountType[] = "default";
 	
 // loop through the arrays above and add rows to the table:
 for ($i=0; $i<count($usernames); $i++)
 {
 	// create the SQL query to be executed
-    $sql = "INSERT INTO users (username, password, firstname, surname, email, dob, telephoneNumber) VALUES ('$usernames[$i]', '$passwords[$i]', '$firstnames[$i]', '$surnames[$i]', '$emails[$i]','$dobs[$i]', '$telephoneNumbers[$i]')";
+    $sql = "INSERT INTO users (username, password, firstname, surname, email, dob, telephoneNumber, accountType) VALUES ('$usernames[$i]', '$passwords[$i]', '$firstnames[$i]', '$surnames[$i]', '$emails[$i]','$dobs[$i]', '$telephoneNumbers[$i]', '$accountType[$i]')";
 	
 	// run the above query '$sql' on our DB
     // no data returned, we just test for true(success)/false(failure):
