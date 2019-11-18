@@ -28,11 +28,18 @@ else
 	{
 	// Creating the table for all of the users information to be displayed in
 	echo<<<_END
-		<table class="table" id="allUsersTable">
-			<tr>
-				<th>username</th>
-			</tr>
-		</table>
+	<div id="error_message" style="display: none;" class="alert alert-danger" role="alert"></div>
+		<div class="table-responsive">
+			<table id="allUsersTable" class="table table-hover table-sm text-center" id="surveyTable">
+				<thead>
+					<tr>
+						<th>username</th>
+						<th>Account Type</th>
+						<th>Delete User</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
 _END;
 
 	// Making a API call to the returnUsers.php API, asking for all the usernames in the database,
@@ -43,7 +50,18 @@ _END;
 		<script>
 			$(document).ready(function() {	
 				// start checking for updates:
-				getUsers();	
+				getUsers();
+			});
+
+			$(document).on('click', '.deleteUser', function(){
+				var usernameToDel = $(this).data('username');
+				$.post('assets/api/deleteUserAccount.php', {toDeleteUsername: usernameToDel, username: '$username' })
+				.done(function(data) {
+					console.log(data);
+				}).fail(function(error) {
+					console.log(error.responseText);
+				});
+
 			});
 
 			function getUsers() {
@@ -55,12 +73,20 @@ _END;
 						
 						// loop through what we got and add it to the table (data is already a JavaScript object thanks to getJSON()):
 						$.each(data, function(index, value) {
-							$('#allUsersTable').append("<tr class='users'><td>" + value.username + "</td></tr>");
+							$('#allUsersTable').append("<tr class='users'><td>" + value.username + "</td><td><button type='button' class='btn btn-warning'>Make admin</button></td><td><button type='button' data-username='"+value.username+"' class='deleteUser btn btn-danger'>Delete</button></td></tr>");
 						});
+
+						document.getElementById("error_message").style.display= 'none';
 					})
 					.fail(function(jqXHR) {
 						// debug message to help during development:
-						console.log('request returned failure, HTTP status code ' + jqXHR.status);
+						if (jqXHR.status = 400)
+						{
+							document.getElementById("error_message").style.display= 'block';
+							document.getElementById("error_message").innerHTML = "There are no Users!";
+						} else {
+						}
+						
 					})
 						
 					// call this function again after a brief pause:
