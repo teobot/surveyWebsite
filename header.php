@@ -50,15 +50,26 @@ echo <<<_END
 	  </li>
 _END;
 
-    // add an extra menu option if this was the admin:
-    // this allows us to display the admin tools to them only
-	if ($_SESSION['username'] == "admin")
+    // Create a new connection to database
+    $checkAdmin = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+
+    // Check if the connection worked otherwise return a error
+    if (!$checkAdmin) 
+    { 
+		echo "could not check if the user is a admin!";
+    }
+
+    $username = $_SESSION['username'];
+    
+    //IF THE USER IS NOT A ADMIN THEN EXIT
+    $sql = "SELECT * FROM `users` WHERE `username` = '$username' AND `accountType` = 'admin'";
+    $checkAccountType = mysqli_query($checkAdmin, $sql);
+	$checkAccountResult = mysqli_num_rows($checkAccountType);
+	$checkAdmin->close();
+
+    if (!empty($checkAccountResult))
 	{
-		echo<<<_END
-		<li class="nav-item">
-	    	<a class="nav-link" href="admin.php">Admin Tools</a>
-		</li>
-_END;
+		echo '<li class="nav-item"><a class="nav-link" href="admin.php">Admin Tools</a></li>';
 	}
 	
 echo<<<_END
