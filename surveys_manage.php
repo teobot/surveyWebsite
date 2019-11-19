@@ -34,6 +34,7 @@ else
 					<th>Survey View</th>
 					<th>Analytics</th>
 					<th>Responses</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 		</table>
@@ -51,6 +52,16 @@ _END;
 				getSurveys();	
 			});
 
+			$(document).on('click', '.deleteSurvey', function(){
+				var surveyToDel = $(this).data('surveyid');
+				$.post('assets/api/deleteSurvey.php', {surveyid: surveyToDel, username: '$username' })
+				.done(function(data) {
+					console.log(data);
+				}).fail(function(error) {
+					console.log(error);
+				});
+			});
+
 			function getSurveys() {
 				$.post('assets/api/returnUsersSurveys.php', {username: '$username' })
 					.done(function(data) {
@@ -60,14 +71,16 @@ _END;
 						
 						// loop through what we got and add it to the table (data is already a JavaScript object thanks to getJSON()):
 						$.each(data, function(index, value) {
-							$('#surveyTable').append("<tr class='surveys'> <td>"+value.survey_id+"</td> <td> "+ value.survey_title+" </td><td><a href='#'>Edit Survey</a></td> <td> <a href='survey_view.php?surveyID=" + value.survey_id + "'>View Survey</a> </td><td><a href='surveyAnalysis.php?surveyID="+value.survey_id+"'>View Analytics</a></td><td><div class='text-center'><span class='badge badge-primary badge-pill'>"+value.responseCount+"</span></div></td></tr>");
+							$('#surveyTable').append("<tr class='surveys'> <td>"+value.survey_id+"</td> <td> "+ value.survey_title+" </td><td><a href='#'>Edit Survey</a></td> <td> <a href='survey_view.php?surveyID=" + value.survey_id + "'>View Survey</a> </td><td><a href='surveyAnalysis.php?surveyID="+value.survey_id+"'>View Analytics</a></td><td><div class='text-center'><span class='badge badge-primary badge-pill'>"+value.responseCount+"</span></div></td><th><button type='button' data-surveyid='"+value.survey_id+"' class='deleteSurvey btn btn-outline-danger btn-sm'>Delete Survey</button></th></tr>");
 						});
-					})
-					.fail(function(jqXHR) {
-						// debug message to help during development:
-						console.log('request returned failure, HTTP status code ' + jqXHR.status);
+
+						console.log("done");
+					}).fail(function(jqXHR) {
+						// remove the old table rows:
+						$('.surveys').remove();
 					}) 
-				//setTimeout(getSurveys, 1000);
+					
+				setTimeout(getSurveys, 2000);
 			}
 		</script>
 _END;
