@@ -65,14 +65,15 @@ else
             //CREATE ARRAY
             $allUsersSurveys[] = (object) array('survey_id' => $row["survey_id"],'survey_title' => $row["survey_title"], 'responseCount' => $responseCount);
         }
-    } 
-    
+    }  
     else 
     {
+        $userConnection->close();
         // If nothing returned, set the error response code to 400 meaning 'bad request'
-        header("Content-Type: application/json", NULL, 400);
+        header("Content-Type: application/json", NULL, 401);
         // Encode the empty array and return
-        echo json_encode($return);           
+        echo json_encode($allUsersSurveys);
+        exit;   
     }
 
     // close the connection when finished getting data
