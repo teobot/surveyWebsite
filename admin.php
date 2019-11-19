@@ -61,7 +61,6 @@ _END;
 				}).fail(function(error) {
 					console.log(error.responseText);
 				});
-
 			});
 
 			function getUsers() {
@@ -84,10 +83,12 @@ _END;
 						{
 							document.getElementById("error_message").style.display= 'block';
 							document.getElementById("error_message").innerHTML = "There are no Users!";
-						} else {
+						} else 
+						{
+							
 						}
 						
-					})
+					});
 						
 					// call this function again after a brief pause:
 				setTimeout(getUsers, 1000);       
