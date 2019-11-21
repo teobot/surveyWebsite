@@ -53,6 +53,7 @@ else
     for($i = 0; $i < count($json);$i++)
     {
         $responseINI = sanitiseStrip($json[$i][0]->value, $responseConn);
+
         $responseDataType = $json[$i][0]->name;
 
         if (empty($responseINI)) 
@@ -66,18 +67,17 @@ else
         {
             $validationError = selectValidation($responseINI, $responseDataType);
 
-             if ($validationError != "") 
+             if ($validationError = " ")
+             {
+                array_push($userResponse, $responseINI);
+             }
+             else
              {
                 $allUsersSurveys[] = "<strong>You've entered a incorrect Data Type!</strong> Please make sure all your answers are in the correct data Type!";
                 $allUsersSurveys[] = $validationError;
                 header("Content-Type: application/json", NULL, 406);
                 echo json_encode($allUsersSurveys);
                 exit;
-             }
-             else
-             {
-                //DATA IS ALL VALID
-                array_push($userResponse, $responseINI);
              }
         }    
     }
