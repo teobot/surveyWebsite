@@ -40,11 +40,16 @@ else
 
     $questionCount = count($json);
 
+    //CREATE A ARRAY OF ALL QUESTION TITLES
+    $duplicateTitles = array();
+    
+
     for ($x = 1; $x < $questionCount; $x++) {
 
         $questionTitle = sanitiseStrip($json[$x][0]->value, $connection);
         $questionLabel = sanitiseStrip($json[$x][1]->value, $connection);
         $questionType = sanitiseStrip($json[$x][2]->value, $connection);
+
 
         $errors = validateString($questionTitle, 1, 64, "title") . validateString($questionLabel, 1, 64, "label") . validateString($questionType, 1, 64, "questionType");
 
@@ -56,6 +61,16 @@ else
             echo $errors;
             // Exit out of the API, to not run any other bits of code
             exit;                           
+        }
+
+        //THIS CHECKS FOR DUPLICATE QUESTION TITLES
+        if (in_array($questionTitle, $duplicateTitles)) 
+        {
+            $questionTitle = $questionTitle . " : " . $x;
+        } 
+        else 
+        {
+            array_push($duplicateTitles, $questionTitle);
         }
 
         $allUsersSurveys[] = (object) array(
