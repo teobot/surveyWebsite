@@ -44,86 +44,98 @@ _END;
                                 var responseNum = responseData[Object.keys(responseData)[0]].length
 
                                 console.log(surveyData);
-                                console.log("^survey data^");
-                                
+                                console.log("END---------^survey data^---------END");
+                                console.log(responseData);
+                                console.log("END---------^responseData^---------END");                               
                                 
                                 $('#responseNum').remove();
                                 $('#surveyResponses').append("<div id='responseNum' style='display: block;' class='text-left'><div class='display-4' id='responseNumText'>"+responseNum + " responses </div><small class='form-text text-muted'>Title : "+surveyData.survey_title+"</small></div>");
 
+                                var counter = 0;
                                 $.each(surveyData.survey_JSON, function(index, value) {
+
+                                    console.log("START---------------START");
                                     surveyArray = value;
-                                    responsesArray = responseData[Object.keys(responseData)[index]];
+                                    responsesArray = responseData[Object.keys(responseData)[counter]];
 
                                     console.log(surveyArray);
                                     console.log("^surveyarray - value^");
                                     console.log(responsesArray);
                                     console.log("^responsesarray^");
+                                    console.log(counter);
+                                    console.log("^counter - value^");
 
-                                    if (value.inputType == "number") {
-                                        console.log("found number");
+                                    counter++;
 
-                                        var responseSection = document.createElement("div");
-                                        responseSection.className = "responses text-center";
-                                        var divLocation = value.title;
-                                        $(responseSection).append('<div class="d-flex justify-content-center" id="'+divLocation+'"></div>');
-                                        $( "#surveyResponses" ).append(responseSection); 
-
-                                        google.charts.load('current', {'packages':['corechart']});
-                                        google.charts.setOnLoadCallback(drawChart);
-
-                                        function drawChart() {
-
-                                            // Create the data table.
-                                            var data = google.visualization.arrayToDataTable([
-                                                ['Task', 'Hours per Day'],
-                                                ['Work',     11],
-                                                ['Eat',      2],
-                                                ['Commute',  2],
-                                                ['Watch TV', 2],
-                                                ['Sleep',    7]
-                                              ]);
+                                    if(typeof responsesArray != 'undefined') 
+                                    {
                                     
-                                            // Set chart options
-                                            var options = {
-                                                'title':value.title,
-                                            };
-                                    
-                                            // Instantiate and draw our chart, passing in some options.
-                                            var chart = new google.visualization.PieChart(document.getElementById(divLocation));
-                                            chart.draw(data, options);
-                            
-                                        }                                        
+                                        if (value.inputType == "number") {
+                                            console.log("found number");
 
-                                    } else if (value.inputType == "text") { 
-                                        console.log("found text");
+                                            var responseSection = document.createElement("div");
+                                            responseSection.className = "responses text-center";
+                                            var divLocation = value.title;
+                                            $(responseSection).append('<div class="d-flex justify-content-center" id="'+divLocation+'"></div>');
+                                            $( "#surveyResponses" ).append(responseSection); 
 
-                                        var responseSection = document.createElement("div");
-                                        responseSection.className = "responses text-center";
-            
-                                        $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small></p>");  
-            
-                                        $.each(responsesArray, function(index, response) {
-                                            $(responseSection).append("<div class='resText text-left'>"+response+"</div>");      
-                                        });
-            
-                                        $( "#surveyResponses" ).append(responseSection);    
-   
-                                    } else {
-                                        console.log("found text based data");
+                                            google.charts.load('current', {'packages':['corechart']});
+                                            google.charts.setOnLoadCallback(drawChart);
 
-                                        var responseSection = document.createElement("div");
-                                        responseSection.className = "responses text-center";
-            
-                                        $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small></p>");  
-            
-                                        $.each(responsesArray, function(index, response) {
-                                            $(responseSection).append("<div class='resText text-left'>"+response+"</div>");      
-                                        });
-            
-                                        $( "#surveyResponses" ).append(responseSection);
+                                            function drawChart() {
+
+                                                // Create the data table.
+                                                var data = google.visualization.arrayToDataTable([
+                                                    ['Task', 'Hours per Day'],
+                                                    ['Work',     11],
+                                                    ['Eat',      2],
+                                                    ['Commute',  2],
+                                                    ['Watch TV', 2],
+                                                    ['Sleep',    7]
+                                                ]);
+                                        
+                                                // Set chart options
+                                                var options = {
+                                                    'title':value.title,
+                                                };
+                                        
+                                                // Instantiate and draw our chart, passing in some options.
+                                                var chart = new google.visualization.PieChart(document.getElementById(divLocation));
+                                                chart.draw(data, options);
+                                
+                                            }                                        
+
+                                        } else if (value.inputType == "text") { 
+                                            console.log("found text");
+
+                                            var responseSection = document.createElement("div");
+                                            responseSection.className = "responses text-center";
+                
+                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small></p>");  
+                
+                                            $.each(responsesArray, function(index, response) {
+                                                $(responseSection).append("<div class='resText text-left'>"+response+"</div>");      
+                                            });
+                
+                                            $( "#surveyResponses" ).append(responseSection);    
+    
+                                        } else {
+                                            console.log("found text based data");
+
+                                            var responseSection = document.createElement("div");
+                                            responseSection.className = "responses text-center";
+                
+                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small></p>");  
+                
+                                            $.each(responsesArray, function(index, response) {
+                                                $(responseSection).append("<div class='resText text-left'>"+response+"</div>");      
+                                            });
+                
+                                            $( "#surveyResponses" ).append(responseSection);
+                                        }
                                     }
 
-                                    console.log("--------------------");
+                                    console.log("END OF EACH--------------------END OF EACH");
                                 });
 
                                 document.getElementById("error_message").style.display= 'none';
