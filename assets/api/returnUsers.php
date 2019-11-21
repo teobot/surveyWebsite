@@ -62,7 +62,7 @@ else
 
 
     // Create the query to get all the usernames from the user table
-    $userQuery = "SELECT username FROM `users` WHERE `username` != '$username'";
+    $userQuery = "SELECT username, accountType FROM `users` WHERE `username` != '$username'";
 
     // Send the query off to the mysql database using the connection details
     $resultQuery = mysqli_query($adminConnection, $userQuery);
