@@ -16,10 +16,7 @@ function selectValidation($stringToCheck, $datatype) {
 
 	elseif ($datatype == "number")
 	{
-		$intToCheck = (int)$stringToCheck;
-
-		return validateInt($intToCheck, 1, 999999999999999);
-		
+		return validateInt($stringToCheck, 1, 9999999);	
 	}
 		
 	return "";
@@ -159,16 +156,18 @@ function validateString($field, $minlength, $maxlength, $name)
 // if the data is valid return an empty string, if the data is invalid return a help message
 function validateInt($field, $min, $max) 
 { 
-	// see PHP manual for more info on the options: http://php.net/manual/en/function.filter-var.php
-	$options = array("options" => array("min_range"=>$min,"max_range"=>$max));
     
-	if (!filter_var($field, FILTER_VALIDATE_INT, $options)) 
+	if ( filter_var($int, FILTER_VALIDATE_INT, array("options" => array("min_range"=>$min, "max_range"=>$max))) ) 
     { 
+		// data was valid, return an empty string:
+		return ""; 
+	}
+	else 
+	{
 		// wasn't a valid integer, return a help message:
 		return "<div class='alert alert-danger' role='alert'>Not a valid number (must be whole and in the range: " . $min . " to " . $max . ")</div>";
-    }
-	// data was valid, return an empty string:
-    return ""; 
+	}
+
 }
 
 // all other validation functions should follow the same rule:
