@@ -24,6 +24,8 @@ if (!isset($_SESSION['loggedIn']))
 else
 {
 	// The user has to be a admin to view this page, If they are allow access
+
+	//NEED TO CHANGE THIS TO THE ACCOUNTTYPE = ADMIN
 	if ($_SESSION['username'] == "admin")
 	{
 	// Creating the table for all of the users information to be displayed in
@@ -63,16 +65,51 @@ _END;
 				});
 			});
 
+			$(document).on('change', '.changeAccountType', function(){
+				var accountType = $(this).val();
+				var usernameToChange = $(this).data('user');
+				$.post('assets/api/updateUserAccountType.php', {username: '$username', usernameToChange: usernameToChange, accountType: accountType })
+				.done(function(data) {
+					console.log(data);
+				}).fail(function(error) {
+					console.log(error.responseText);
+				});
+			});
+
 			function getUsers() {
 				$.post('assets/api/returnUsers.php', {username: '$username' })
 					.done(function(data) {
 						
 						// remove the old table rows:
 						$('.users').remove();
+
+						console.log(data);
 						
 						// loop through what we got and add it to the table (data is already a JavaScript object thanks to getJSON()):
 						$.each(data, function(index, value) {
-							$('#allUsersTable').append("<tr class='users'><td>" + value.username + "</td><td><button type='button' class='btn btn-warning'>Make admin</button></td><td><button type='button' data-username='"+value.username+"' class='deleteUser btn btn-danger'>Delete</button></td></tr>");
+							var rowMarkup = "";
+							rowMarkup += "<tr class='users'>";
+
+							rowMarkup += "<td>" + value.username + "</td>";
+
+							rowMarkup += "<td>";
+							rowMarkup += '<select data-user="'+value.username+'" class="changeAccountType custom-select custom-select-sm">';
+							if (value.accountType === "default") { 
+								rowMarkup += '<option value="default">Default</option>'; 
+								rowMarkup += '<option value="admin">Admin</option>'; 
+							}
+							if (value.accountType === "admin") {
+								rowMarkup += '<option value="admin">Admin</option>'; 
+								rowMarkup += '<option value="default">Default</option>'; 
+							}		
+							rowMarkup += '</select>';
+							rowMarkup += "</td>";
+
+							rowMarkup += "<td> <button type='button' data-username='" + value.username + "' class='deleteUser btn btn-danger'>Delete</button></td>";
+
+							rowMarkup += "</tr>";
+
+							$('#allUsersTable').append(rowMarkup);
 						});
 
 						document.getElementById("error_message").style.display= 'none';
@@ -91,7 +128,7 @@ _END;
 					});
 						
 					// call this function again after a brief pause:
-				setTimeout(getUsers, 1000);       
+				setTimeout(getUsers, 2000);       
 			}
 		</script>
 _END;
