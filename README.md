@@ -21,6 +21,17 @@ I created the different sections of relaying the information back but need to ge
 - - [ ] see all users, and view that users account information, update account info, create a user, del a user
 - [ ] maybe move the competitors to the same competitiors page
 
+# URGENT FIXES NEEDED
+- [x] When selecting number type you cannot submit
+- [x] Questions with the same title cause a error - surveyAnalysis.php
+- - This is caused as I get the question responses based on the title of the question
+- - linked this to the fact that each response is entered into the collect of responses with the same name
+- - Possible fix is if a question has no result dont show it
+- [ ] Finish the updateUserAccountType.php API
+- [ ] on the suvrey page when pressing enter it crashes.
+- [ ] Need to change the admin tools page, to look at the account type and not the username!
+
+
 ### Bugs and issues
 - SurveyCreator.php
 - - [ ] When removing all questions the footer gets pushed up
