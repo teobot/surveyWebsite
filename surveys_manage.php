@@ -29,6 +29,7 @@ else
 			<thead>
 				<tr>
 					<th>Survey ID</th>
+					<th>Creator</th>
 					<th>Survey Title</th>
 					<th>Survey Edit</th>
 					<th>Survey View</th>
@@ -71,10 +72,10 @@ _END;
 						
 						// loop through what we got and add it to the table (data is already a JavaScript object thanks to getJSON()):
 						$.each(data, function(index, value) {
-							$('#surveyTable').append("<tr class='surveys'> <td>"+value.survey_id+"</td> <td> "+ value.survey_title+" </td><td><a href='#'>Edit Survey</a></td> <td> <a href='survey_view.php?surveyID=" + value.survey_id + "'>View Survey</a> </td><td><a href='surveyAnalysis.php?surveyID="+value.survey_id+"'>View Analytics</a></td><td><div class='text-center'><span class='badge badge-primary badge-pill'>"+value.responseCount+"</span></div></td><th><button type='button' data-surveyid='"+value.survey_id+"' class='deleteSurvey btn btn-outline-danger btn-sm'>Delete Survey</button></th></tr>");
+							$('#surveyTable').append("<tr class='surveys'> <td>"+value.survey_id+"</td><td>"+value.creator+"</td> <td> "+ value.survey_title+" </td><td><a href='#'>Edit Survey</a></td> <td> <a href='survey_view.php?surveyID=" + value.survey_id + "'>View Survey</a> </td><td><a href='surveyAnalysis.php?surveyID="+value.survey_id+"'>View Analytics</a></td><td><div class='text-center'><span class='badge badge-primary badge-pill'>"+value.responseCount+"</span></div></td><th><button type='button' data-surveyid='"+value.survey_id+"' class='deleteSurvey btn btn-outline-danger btn-sm'>Delete Survey</button></th></tr>");
 						});
 
-						console.log("done");
+						console.log(data);
 					}).fail(function(jqXHR) {
 						// remove the old table rows:
 						$('.surveys').remove();
@@ -83,14 +84,7 @@ _END;
 				setTimeout(getSurveys, 2000);
 			}
 		</script>
-_END;
-    
-    // a little extra text that only the admin will see:
-	if ($_SESSION['username'] == "admin")
-	{
-		echo "[admin sees more!]<br>";
-	}
-    
+_END;   
 }
 
 // finish off the HTML for this page:
