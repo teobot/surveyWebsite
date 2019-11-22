@@ -1,7 +1,23 @@
 <?php
 // execute the header script:
 require_once "header.php";
+echo '<link rel="stylesheet" type="text/css" href="assets/style/surveyView.css">';
 
+
+if (!isset($_GET['surveyID']))
+{
+echo<<<_END
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Well, It seems you've visited a incorrect link!</h1>
+    <p class="lead">We suggest double checking to see if the link is correct! :)</p>
+  </div>
+</div>
+_END;
+
+}
+else 
+{
 $surveyID = $_GET['surveyID'];
 
 echo<<<_END
@@ -29,6 +45,8 @@ echo<<<_END
             $.post('assets/api/returnSurveyData.php', {surveyID: '$surveyID' })
                 .done(function(data) {
 
+                    console.log(data);
+
                     // remove the old table rows:
                     $('.questions').remove();
 
@@ -37,10 +55,34 @@ echo<<<_END
                     $('#surveyTitle').html(data.survey_title);
 
                     $.each(data.survey_JSON, function( key, value ) {
-                        $('#questionsContainer').append("<form class='card'> <div class='h6'>"+ value.title +"</div> <div><small>"+value.label+"</small></div> <div class='input'><input name='"+value.inputType+"' type='"+value.inputType+"'></input></div> </form><br>");
-                      });
+                        console.log(value);
 
-                      $('#questionsContainer').append("<div><button id='submitSurvey' type='button'>Submit</button><div>");
+                        var questionMarkup = "";
+                        questionMarkup += "<form class='card'>";
+                        questionMarkup += "<div><p class='lead'>"+value.title+"</p></div>";
+                        questionMarkup += "<div><small>"+value.label+"</small><hr></div>";
+
+                        if (value.inputType === "multipleChoice") 
+                        {             
+                            questionMarkup += '<div class="btn-group-toggle" data-toggle="buttons">';
+                            questionMarkup += '<label class="btn btn-outline-success btn-lg">';
+                            questionMarkup += '<input name="'+value.title+'" type="radio" value="'+value.choice1+'">' + value.choice1;
+                            questionMarkup += '</label>';
+                            questionMarkup += '<small> or </small>'
+                            questionMarkup += '<label class="btn btn-outline-success btn-lg">';
+                            questionMarkup += '<input maxlength="32" min="1" required name="'+value.title+'" type="radio" value="'+value.choice2+'">' + value.choice2;
+                            questionMarkup += '</label></div><br>';
+                        } 
+                        else 
+                        {
+                            questionMarkup += "<div class='input col-md-6 offset-md-3 text-center'><input class='form-control' maxlength='32' min='1' required name='"+value.inputType+"' type='"+value.inputType+"'></input></div><br>";                 
+                        }
+                        
+                        questionMarkup += "</form><br>";
+                        $('#questionsContainer').append(questionMarkup);
+                    });
+
+                      $('#questionsContainer').append("<div><button class='btn btn-lg btn-primary' id='submitSurvey' type='button'>Submit</button><div>");
 
                 })
                 .fail(function(jqXHR) {
@@ -82,6 +124,7 @@ echo<<<_END
   });
 </script>
 _END;
+}
 
 // finish off the HTML for this page:
 require_once "footer.php";
