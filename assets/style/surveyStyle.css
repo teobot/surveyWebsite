@@ -1,10 +1,10 @@
-.addQuestion {
-    background-color: lightblue;
+.questionButton {
+    margin: 1px;
+    width: 100%;
 }
 
 #questionControls {
     width: 10rem; 
-    z-index: 5; 
     position: fixed; 
     border-style: solid;
     border-width: 1px;
