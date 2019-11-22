@@ -46,35 +46,54 @@ else
 
     // Create the query to get all the usernames from the user table
     $username = $_POST['username'];
-    $userQuery = "SELECT * FROM surveys WHERE survey_creator = '$username'";
 
-    // Send the query off to the mysql database using the connection details
-    $resultQuery = mysqli_query($userConnection, $userQuery);
-
-    // Get the total number of rows from the results
-    $resultQueryRows = mysqli_num_rows($resultQuery);
-
-    // If nothing is returned, return error code 400 otherwise insert the db.data into the return.data
-    if ($resultQueryRows > 0) 
+    $sql = "SELECT * FROM `users` WHERE `username` = '$username' AND `accountType` = 'admin'";
+    $checkAccountType = mysqli_query($userConnection, $sql);
+    $checkAccountResult = mysqli_num_rows($checkAccountType);
+    
+    if (!empty($checkAccountResult)) 
     {
-        // For each of the usernames push them into the return array
-        while($row = $resultQuery->fetch_assoc()) {
-            
-            $responseCount = count(json_decode($row["survey_RESPONSE"]));
-
-            //CREATE ARRAY
-            $allUsersSurveys[] = (object) array('survey_id' => $row["survey_id"],'survey_title' => $row["survey_title"], 'responseCount' => $responseCount);
-        }
-    }  
-    else 
-    {
-        $userConnection->close();
-        // If nothing returned, set the error response code to 400 meaning 'bad request'
-        header("Content-Type: application/json", NULL, 401);
-        // Encode the empty array and return
-        echo json_encode($allUsersSurveys);
-        exit;   
+        //THEY ARE ADMIN SHOW ALL SURVEYS
+        $userQuery = "SELECT * FROM surveys";
     }
+    else
+    {
+        //AREN'T ADMIN SHOW JUST THERE SURVEYS
+        $userQuery = "SELECT * FROM surveys WHERE survey_creator = '$username'";
+    }
+
+        // Send the query off to the mysql database using the connection details
+        $resultQuery = mysqli_query($userConnection, $userQuery);
+
+        // Get the total number of rows from the results
+        $resultQueryRows = mysqli_num_rows($resultQuery);
+
+        // If nothing is returned, return error code 400 otherwise insert the db.data into the return.data
+        if ($resultQueryRows > 0) 
+        {
+            // For each of the usernames push them into the return array
+            while($row = $resultQuery->fetch_assoc()) {
+                
+                $responseCount = count(json_decode($row["survey_RESPONSE"]));
+
+                //CREATE ARRAY
+                $allUsersSurveys[] = (object) array(
+                    'survey_id' => $row["survey_id"],
+                    'survey_title' => $row["survey_title"], 
+                    'responseCount' => $responseCount,
+                    'creator' => $row['survey_creator']
+                );
+            }
+        }  
+        else 
+        {
+            $userConnection->close();
+            // If nothing returned, set the error response code to 400 meaning 'bad request'
+            header("Content-Type: application/json", NULL, 401);
+            // Encode the empty array and return
+            echo json_encode($allUsersSurveys);
+            exit;   
+        }
 
     // close the connection when finished getting data
     $userConnection->close();
