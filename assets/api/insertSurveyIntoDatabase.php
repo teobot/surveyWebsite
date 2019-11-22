@@ -11,7 +11,7 @@
 //                --
 
 // Create a empty return array to populate with all users usernames
-$allUsersSurveys = array();
+$SurveyQuestionData = array();
 
 // If the API call point has not specified a username value then return NULL
 if (!isset($_POST['username']))
@@ -19,7 +19,7 @@ if (!isset($_POST['username']))
     // Set the error response code to 400 meaning 'bad request'
     header("Content-Type: application/json", NULL, 400);
     // Encode the current empty array and return it
-    echo json_encode($allUsersSurveys);
+    echo json_encode($SurveyQuestionData);
     // Exit out of the API, to not run any other bits of code
     exit;
 }
@@ -38,7 +38,28 @@ else
     $json = json_encode( $json );
     $json = json_decode( $json );
 
+    //Survey Title
+    $survey_title = sanitiseStrip($json[0][0]->value, $connection);
+    $surveyErrors = validateString($survey_title, 1, 64, "title");
+    if ($surveyErrors != "") {
+        // Set the error response code to 400 meaning 'bad request'
+        header("Content-Type: application/json", NULL, 400);
+        // Encode the current empty array and return it
+        echo $surveyErrors;
+        // Exit out of the API, to not run any other bits of code
+        exit;     
+    }
+
     $questionCount = count($json);
+
+    if($questionCount <= 1) {
+        // Set the error response code to 400 meaning 'bad request'
+        header("Content-Type: application/json", NULL, 400);
+        // Encode the current empty array and return it
+        echo "<strong>Error!</strong> You must have a minimum of 1 question!";
+        // Exit out of the API, to not run any other bits of code
+        exit;     
+    }
 
     //CREATE A ARRAY OF ALL QUESTION TITLES
     $duplicateTitles = array();
@@ -50,8 +71,18 @@ else
         $questionLabel = sanitiseStrip($json[$x][1]->value, $connection);
         $questionType = sanitiseStrip($json[$x][2]->value, $connection);
 
+        $errors = "";
+        $errors .= validateString($questionTitle, 1, 64, "title"); 
+        $errors .= validateString($questionLabel, 1, 64, "label"); 
+        $errors .= validateString($questionType, 1, 64, "questionType"); 
 
-        $errors = validateString($questionTitle, 1, 64, "title") . validateString($questionLabel, 1, 64, "label") . validateString($questionType, 1, 64, "questionType");
+        if ($questionType === "multipleChoice")
+        {
+            $questionChoice1 = sanitiseStrip($json[$x][3]->value, $connection);
+            $questionChoice2 = sanitiseStrip($json[$x][4]->value, $connection);
+            $errors .= validateString($questionChoice1, 1, 64, "Choice 1");
+            $errors .= validateString($questionChoice2, 1, 64, "Choice 2"); 
+        }
 
         if ($errors != "") 
         {
@@ -73,17 +104,29 @@ else
             array_push($duplicateTitles, $questionTitle);
         }
 
-        $allUsersSurveys[] = (object) array(
-            'title' => $questionTitle,
-            'label' => $questionLabel,
-            'inputType' => $questionType
-        );
+        if ($questionType === "multipleChoice")
+        {
+            $SurveyQuestionData[] = (object) array(
+                'title' => $questionTitle,
+                'label' => $questionLabel,
+                'inputType' => $questionType,
+                'choice1' => $questionChoice1,
+                'choice2' => $questionChoice2
+            );
+        }
+        else
+        {
+            $SurveyQuestionData[] = (object) array(
+                'title' => $questionTitle,
+                'label' => $questionLabel,
+                'inputType' => $questionType
+            );
+        }
+
     }
 
-    //Survey Title
-    $survey_title = sanitiseStrip($json[0][0]->value, $connection);
     //Survey Questions
-    $insertJSON = json_encode($allUsersSurveys);
+    $insertJSON = json_encode($SurveyQuestionData);
     //Survey Creator 
     $creator = $_POST['username'];
 
