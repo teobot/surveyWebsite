@@ -23,14 +23,34 @@ if (!isset($_SESSION['loggedIn']))
 // The user is logged in so can view the page if them are a admin
 else
 {
-	// The user has to be a admin to view this page, If they are allow access
+	$isUserAdmin = false;
 
-	//NEED TO CHANGE THIS TO THE ACCOUNTTYPE = ADMIN
-	if ($_SESSION['username'] == "admin")
+	// The user has to be a admin to view this page, If they are allow access
+	$username = $_SESSION['username'];
+
+	//Check if the user is a admin
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}	
+	$sql = "SELECT accountType FROM `users` WHERE `username` = '$username'";
+	$result = $conn->query($sql);
+	$row = $result->fetch_assoc();
+
+	if($row['accountType'] === "admin") 
 	{
-	// Creating the table for all of the users information to be displayed in
-	echo<<<_END
-	<div id="error_message" style="display: none;" class="alert alert-danger" role="alert"></div>
+		$isUserAdmin = true;
+	}
+	
+	$conn->close();
+	//----------------------------
+
+	if ($isUserAdmin)
+	{
+		// Creating the table for all of the users information to be displayed in
+		echo<<<_END
+		<div id="error_message" style="display: none;" class="alert alert-danger" role="alert"></div>
+		
 		<div class="table-responsive">
 			<table id="allUsersTable" class="table table-hover table-sm text-center" id="surveyTable">
 				<thead>
@@ -46,7 +66,6 @@ _END;
 
 	// Making a API call to the returnUsers.php API, asking for all the usernames in the database,
 	// And also posting the current username of the logged in user to make sure they're a admin.
-	$username = $_SESSION['username'];
 	echo<<<_END
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script>
