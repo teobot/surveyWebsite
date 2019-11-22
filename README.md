@@ -22,39 +22,55 @@ I created the different sections of relaying the information back but need to ge
 - [ ] maybe move the competitors to the same competitiors page
 
 # URGENT FIXES NEEDED
+## FIXES
+
+
+## DONE
 - [x] When selecting number type you cannot submit
 - [x] Questions with the same title cause a error - surveyAnalysis.php
-- - This is caused as I get the question responses based on the title of the question
-- - linked this to the fact that each response is entered into the collect of responses with the same name
-- - Possible fix is if a question has no result dont show it
-- [ ] Finish the updateUserAccountType.php API
-- [ ] on the suvrey page when pressing enter it crashes.
-- [ ] Need to change the admin tools page, to look at the account type and not the username!
+- [x] Finish the updateUserAccountType.php API
+- [x] Need to change the admin tools page, to look at the account type and not the username!
+- [x] User can submit a survey with no questions and no title.
+- [x] Check all data inserted in the same sizes
+- - [x] username 16
+- - [x] password 16
+- - [x] firstname 32
+- - [x] surname 64
+- - [x] email 64
+- - [x] dob
+- - [x] telephone number 11
+- [x] Check all surveys titles are the same max size - 32
+- [x] check all surveys questions, labels and choice inputs have a max size - 32
+- [x] add client side validation to these pages
+- - [x] signin.php
+- - [x] suvreyCreator.php
+- - [x] accountPage.php
+- - [x] signUp.php
+- - [x] surveyView.php
+- [x] on the suvrey page when pressing enter it crashes.
 
 
 ### Bugs and issues
 - SurveyCreator.php
 - - [ ] When removing all questions the footer gets pushed up
-- [ ] Go though and add client side validation to addedQuestions on survey creator
-- [ ] Misspelt internal for a response code
+- [x] Go though and add client side validation to addedQuestions on survey creator
 > User reponses are now inserted into the database
-- [ ] Users responses now need to be analizied
-- [ ] Inserted new questions need new data types
+- [x] Users responses now need to be analyzed
+- [x] Inserted new questions need new data types
 - [x] make sure the data is inserted into the responses correctly, removed inserting as a object
 - SurveyAnalysis.php
 - [x] the function to update causes the numOfResponses to append not replace, fixed
 - SurveyView.php
-- [ ] When pressing enter in a input box it throws a error
+- [x] When pressing enter in a input box it throws a error
 
 ### Features to add / Things to do
 - [ ] Make sure that all the images on the competitors pages are correct to the section
 - [ ] Similar validation on the sign in page, sign up page is mostly done
-- [ ] Check over both server side and client side validation
 - Complete the competition evaluation for:
     - - [x] Google Forms, 
     - - [ ] CheckBox,
     - - [ ] Survey Monkey
-- [ ] Go back to the analysis page and do something with the different input types
+- [x] Go back to the analysis page and do something with the different input types
 
 ### Features done
 - [x] Added new validation to the sign_up page, so that data is both client side and server validated
