@@ -8,6 +8,11 @@ I created the different sections of relaying the information back but need to ge
 > changed some styling
 > user can now edit all their information on the accounts page
 
+### THINGS TO TRY TO DO
+- [ ] survey editor
+- [ ] Fix so that admins can view any survey
+- [ ] check that admin can look at analysis's 
+- [ ] finish competitors page and add a conclusion.
 
 ### Things to think about after reading through specification
 - [x] Sign Up using  a unique username, I think I may have added a user ID (maybe remove)
@@ -23,7 +28,6 @@ I created the different sections of relaying the information back but need to ge
 
 # URGENT FIXES NEEDED
 ## FIXES
-
 
 ## DONE
 - [x] When selecting number type you cannot submit
