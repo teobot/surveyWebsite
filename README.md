@@ -10,7 +10,7 @@ I created the different sections of relaying the information back but need to ge
 
 ### THINGS TO TRY TO DO
 - [ ] survey editor
-- [ ] Fix so that admins can view any survey
+- [x] Fix so that admins can view any survey
 - [ ] check that admin can look at analysis's 
 - [ ] finish competitors page and add a conclusion.
 
