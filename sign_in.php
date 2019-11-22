@@ -36,7 +36,7 @@ if (isset($_SESSION['loggedIn']))
 	echo "<div class='col-md-6 offset-md-3 text-center'><div class='alert alert-success' role='alert'>You are already logged in, please log out first.</div></div>";
 }
 
-elseif (isset($_POST['username']))
+elseif ( (isset($_POST['username'])) && (isset($_POST['password'])) )
 {
 	// user has just tried to log in:
 	
@@ -75,23 +75,10 @@ elseif (isset($_POST['username']))
     	$result = mysqli_query($connection, $query);
 
 	    // how many rows came back? (can only be 1 or 0 because usernames are the primary key in our table):
-	    $n = mysqli_num_rows($result);
-		
-		// currently only barryg, mandyb, or timmy can sign in... each with ANY password
-		// you need to replace this code with code that checks the username and password against the relevant database table...
-		if ($n > 0)
-		{
-			// fake a match with the database table:
-			$n = 1;	
-		}
-
-		else
-		{
-			$n = 0;
-		}
+	    $userReturns = mysqli_num_rows($result);
 			
 		// if there was a match then set the session variables and display a success message:
-		if ($n > 0)
+		if ($userReturns > 0)
 		{
 			// set a session variable to record that this user has successfully logged in:
 			$_SESSION['loggedIn'] = true;
