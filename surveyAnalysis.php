@@ -70,8 +70,7 @@ _END;
                                     if(typeof responsesArray != 'undefined') 
                                     {
                                     
-                                        if (value.inputType == "number") {
-                                            console.log("found number");
+                                        if (value.inputType == "multipleChoice") {
 
                                             var responseSection = document.createElement("div");
                                             responseSection.className = "responses text-center";
@@ -82,16 +81,24 @@ _END;
                                             google.charts.load('current', {'packages':['corechart']});
                                             google.charts.setOnLoadCallback(drawChart);
 
+                                            var choice1Count = 0;
+                                            var choice2Count = 0;
+
+                                            for (i = 0; i < responseNum; i++) {
+                                                if (responsesArray[i] === value.choice1) {
+                                                    choice1Count++;
+                                                } else if (responsesArray[i] === value.choice2) {
+                                                    choice2Count++;
+                                                }
+                                            }
+
                                             function drawChart() {
 
                                                 // Create the data table.
                                                 var data = google.visualization.arrayToDataTable([
-                                                    ['Task', 'Hours per Day'],
-                                                    ['Work',     11],
-                                                    ['Eat',      2],
-                                                    ['Commute',  2],
-                                                    ['Watch TV', 2],
-                                                    ['Sleep',    7]
+                                                    [value.title, 'Count'],
+                                                    [value.choice1, choice1Count],
+                                                    [value.choice2, choice2Count]
                                                 ]);
                                         
                                                 // Set chart options
@@ -154,7 +161,7 @@ _END;
                         document.getElementById("error_message").style.display= 'block';
                         document.getElementById('error_message').innerHTML = jqXHR.responseJSON[0];
                     });
-				//setTimeout(getResponses, 1000);
+				setTimeout(getResponses, 2000);
             }
         </script>
 _END;
