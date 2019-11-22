@@ -78,8 +78,8 @@ elseif ( isset($_POST['username']) )
 	// errors messages are saved to each variableName_err:
 	$username_err = validateUsername($username_val, 1, 16, $connection, "Username");
 	$password_err = validateString($password_val, 1, 16, "Password");
-	$firstname_err = validateString($firstname_val, 1, 64, "Firstname");
-	$surname_err = validateString($surname_val, 1, 32, "Surname");
+	$firstname_err = validateString($firstname_val, 1, 32, "Firstname");
+	$surname_err = validateString($surname_val, 1, 64, "Surname");
 	$dob_err = validateDate($dob_val);
 	$telephoneNumber_err = validateTelephoneNumber($telephoneNumber_val, 9);
 	$email_err = validateEmail($email_val, 1, 64, "Email");
