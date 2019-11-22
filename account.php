@@ -66,8 +66,8 @@ elseif ( (isset($_POST['password'])) || (isset($_POST['firstname'])) || (isset($
 	// SERVER-SIDE VALIDATION CODE MISSING:
     // ...
 	$password_err = validateString($password, 1, 16, "Password");
-	$firstname_err = validateString($firstname, 1, 64, "Firstname");
-	$surname_err = validateString($surname, 1, 32, "Surname");
+	$firstname_err = validateString($firstname, 1, 32, "Firstname");
+	$surname_err = validateString($surname, 1, 64, "Surname");
 	$telephoneNumber_err = validateTelephoneNumber($telephoneNumber, 9);
 	$dateOfBirth_err = validateDate($dateOfBirth);
 	$email_err = validateEmail($email, 1, 64, "Email");
@@ -186,17 +186,17 @@ echo<<<_END
 				</div>
 				<div class="col">
 					<label><p class="h6">Password:</p></label>
-					<input type="text" name="password" class="form-control" value="$password">
+					<input maxlength="16" min="1" type="text" required name="password" class="form-control" value="$password">
 				</div>
 			</div><hr>
 			<div class="row">
 				<div class="col">
 					<label><p class="h6">Firstname:</p></label>
-					<input type="text" name="firstname" class="form-control" value="$firstname">
+					<input maxlength="32" min="1" type="text" required name="firstname" class="form-control" value="$firstname">
 				</div>
 				<div class="col">
 					<label><p class="h6">Surname:</p></label>
-					<input type="text" name="surname" class="form-control" value="$surname">
+					<input maxlength="64" min="1" type="text" required name="surname" class="form-control" value="$surname">
 				</div>
 			</div><br>
 			<div class="row">
@@ -206,18 +206,18 @@ echo<<<_END
 						<div class="input-group-prepend">
 							<div class="input-group-text">07</div>
 						</div>
-						<input type="text" name="telephoneNumber" class="form-control" value="$telephoneNumber">
+						<input maxlength="9" min="9" type="text" required name="telephoneNumber" class="form-control" value="$telephoneNumber">
 					</div>		
 				</div>
 				<div class="col">
 					<label><p class="h6">Date of birth:</p></label>
-					<input type="date" name="dateOfBirth" class="form-control" value="$dateOfBirth">
+					<input type="date" max="2019-01-01" min="1919-01-01" name="dateOfBirth" class="form-control" value="$dateOfBirth">
 				</div>
 			</div><br>
 			<div class="row">
 				<div class="col">
 					<label><p class="h6">Email:</p></label>
-					<input type="email" name="email" class="form-control" value="$email">
+					<input maxlength="64" min="7" type="email" name="email" class="form-control" value="$email">
 				</div>
 			</div>
 
