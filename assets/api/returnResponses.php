@@ -27,6 +27,7 @@ else
 {
     $surveyID = $_POST['surveyID'];
     $username = $_POST['username'];
+    $userIsAdmin = false;
 
     //CHECK IF THE SURVEY CREATOR IS THE POSTED USERNAME
 
@@ -45,15 +46,26 @@ else
         exit; 
     }
 
-    $checkSurveyCreator = "SELECT `survey_creator` FROM surveys WHERE `survey_id` = '$surveyID' AND `survey_creator` = '$username';";
+    $sql = "SELECT * FROM `users` WHERE `username` = '$username' AND `accountType` = 'admin'";
+    $checkAccountType = $connection->query($sql);
+    $checkAccountResult = mysqli_num_rows($checkAccountType);
+
+    if (!empty($checkAccountResult))
+    {
+        $checkSurveyCreator = "SELECT `survey_creator` FROM surveys WHERE `survey_id` = '$surveyID'";
+        $getResponses = "SELECT `survey_RESPONSE`, `survey_JSON` FROM surveys WHERE `survey_id` = '$surveyID'";
+    }
+    else
+    {
+        $checkSurveyCreator = "SELECT `survey_creator` FROM surveys WHERE `survey_id` = '$surveyID' AND `survey_creator` = '$username';";
+        $getResponses = "SELECT `survey_RESPONSE`, `survey_JSON` FROM surveys WHERE `survey_id` = '$surveyID' AND `survey_creator` = '$username';";
+    }
 
     $result = $connection->query($checkSurveyCreator);
     
-    if ($result->num_rows > 0) 
+    if ($result->num_rows > 0 ) 
     {
         //USER HAS CREATED THE SURVEY AND WANTS TO VIEW THE INFORMATION ////////////////////////////////
-
-            $getResponses = "SELECT `survey_RESPONSE`, `survey_JSON` FROM surveys WHERE `survey_id` = '$surveyID' AND `survey_creator` = '$username';";
 
             $result = $connection->query($getResponses);
 
