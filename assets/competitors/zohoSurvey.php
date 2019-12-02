@@ -6,8 +6,8 @@
 //        Notes - ||
 //         		  ||
 //                --
-//SECTION 1 - [] TextDone - [] Images Done
-//SECTION 2 - [] TextDone - [] Images Done
+//SECTION 1 - [x] TextDone - [x] Images Done
+//SECTION 2 - [x] TextDone - [x] Images Done
 //SECTION 3 - [] TextDone - [] Images Done
 //SECTION 4 - [] TextDone - [] Images Done
 //SECTION 5 - [] TextDone - [] Images Done
@@ -23,14 +23,17 @@
         <div class="col">
             <h4>1. Layout/presentation of surveys</h4>
             <p class="text-center">
-                The layout of the form is clean, with each section question and title being in a "card" section, the background color and theme
-                can be changed. The whole page is responsive and adjustable on all devices with little effort.
+		The layout of the presentation is very clean, They center nicely when moving from different platforms and device sizes. 
+			Each question is separated by a line br, instead of the usual different "card" section type.
+
+		Some of the question types include different animation for selecting and dropdowns, 
+		    these are very responsive and make the website feel smooth and responsive.
             </p>  
         </div>
     </div>
     <div class="row">
         <div class="text-center">
-                <img src="assets/img/googleFormsLayoutPres.PNG" class="rounded img-fluid" alt="Responsive image">
+                <img src="assets/img/ZohoSurveyFormLayout.PNG" class="rounded img-fluid" alt="Responsive image">
         </div>
     </div>
     <br>
@@ -38,17 +41,17 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">Required questions have a asterisk, this makes it really easy to view which questions are required.</li>
-                <li class="list-group-item">The card or sectioned display, having questions and titles separated makes them a lot easier to read.</li>
-                <li class="list-group-item">The cards have a theme, having a matching coloured tab across the top of the section title makes it more stylish.</li>
-                <li class="list-group-item">The background color can be set, which I think is very stylish.</li>
+                <li class="list-group-item">Font Type is very clear and adaptive.</li>
+                <li class="list-group-item">Elements have responsive animations.</li>
+                <li class="list-group-item">Very clean question break.</li>
+                <li class="list-group-item">Different colour themes can change the style of the survey.</li>
             </ul>
         </div>
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">There are terms and conditions at the bottom of the page, Even though I think these are needed they could be made simpler.</li>
-                <li class="list-group-item">I don't like how the submit button is on the left, I would move it to the right instead.</li>
+                <li class="list-group-item">The survey links have many different characters and can be easily miscopied.</li>
+                <li class="list-group-item">All the text is aligned on the left, while some questions are aligned in the center.</li>
             </ul>
         </div>
     </div>
@@ -64,16 +67,19 @@
         <div class="col">
             <h4>2. Ease of Use</h4>
             <p class="text-center">
-                Creating the forms is really easy, Here you can see that by clicking the "+" button adds a new 
-                question and from there you can change the question type and title. You can also embed youtube videos and images 
-                and change the font size and type. You can also set the question to required meaning that the user won't be able 
-                to submit the form without filling it out. You can also create different sections with separate titles and question types. 
-            </p>  
+		Creating forms can at first be slightly confusing, There are many different types of questions, 
+		    Zoho has the most unique question types I've seen. Creating a new survey from scratch is really easy, 
+		    They have numerous survey templates to use and get started covering a huge range of topics.  <br>
+		Editing and setting up questions at first can be slightly confusing with many different options to tweak and change, 
+		    However, they have really easy to follow tutorials to follow and start learning with. <br>
+		    You set the survey title and type, You can also change the header and footer and even add a logo to each survey 
+		    which both other evaluated surveys creators currently don't have.
+		</p>  
         </div>
     </div>
     <div class="row">
         <div class="text-center">
-                <img src="assets/img/googleFormsLayout.PNG" class="rounded img-fluid" alt="Responsive image">
+                <img src="assets/img/ZohoSurveyCreator.PNG" class="rounded img-fluid" alt="Responsive image">
         </div>
     </div>
     <br>
@@ -81,17 +87,21 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">Really easy to add a new questions.</li>
-                <li class="list-group-item">Can easily add multiple question types.</li>
-                <li class="list-group-item">Embed images and youtube videos.</li>
-                <li class="list-group-item">Able to create complete sections that have their own title and questions.</li> 
-                <li class="list-group-item">Can easily make a question as required.</li>  
+                <li class="list-group-item">Very easy to get started with a wide range of templates.</li>
+                <li class="list-group-item">Highly customizable, including logos, header and footer settings.</li>
+                <li class="list-group-item">Change settings with the submit button.</li>
+                <li class="list-group-item">Change Survey language.</li>
+	   	<li class="list-group-item">Can add progress bars.</li> 
+	    	<li class="list-group-item">A massive list of question types, for all purposes.</li> 
+                <li class="list-group-item">Can set the "Submitted survey" page or error page.</li>  
             </ul>
         </div>
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">You can not drag a question on top of the first question, You have to drag all questions down until the question gets pushed to top.</li>         
+                <li class="list-group-item">It can be overwhelming when trying to get started from scratch.</li>
+	    	<li class="list-group-item">Costs a lot more than other products.</li> 
+	    	<li class="list-group-item">Can't drag and drop to add new questions.</li> 
             </ul>
         </div>
     </div>
