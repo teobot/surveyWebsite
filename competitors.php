@@ -15,7 +15,7 @@ require_once "header.php";
 
 $loadCompetitor = "googleForms";
 $googleFormClass = "nav-link";
-$checkBox = "nav-link";
+$zoho = "nav-link";
 $surveyMonkey = "nav-link";
 
 // checks the session variable named 'loggedIn'
@@ -35,10 +35,10 @@ if ( (empty($_GET["competitors"])) || (($_GET['competitors'] == "googleForms")) 
 	$loadCompetitor = "googleForms.php";
 	$googleFormClass = "nav-link active";
 } 
-elseif (($_GET['competitors'] == "checkBox"))
+elseif (($_GET['competitors'] == "zoho"))
 {
-	$loadCompetitor = "checkBox.php";
-	$checkBox = "nav-link active";
+	$loadCompetitor = "zohoSurvey.php";
+	$zoho = "nav-link active";
 }
 elseif (($_GET['competitors'] == "surveyMonkey"))
 {
@@ -54,7 +54,7 @@ echo <<<_END
 					<a class="{$googleFormClass}" href="competitors.php?competitors=googleForms">Google Forms</a>
 				</li>
 				<li class="nav-item">
-					<a class="{$checkBox}" href="competitors.php?competitors=checkBox">Check Box</a>
+					<a class="{$zoho}" href="competitors.php?competitors=zoho">Zoho Survey</a>
 				</li>
 				<li class="nav-item">
 					<a class="{$surveyMonkey}" href="competitors.php?competitors=surveyMonkey">Survey Monkey</a>
