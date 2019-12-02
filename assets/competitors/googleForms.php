@@ -6,6 +6,11 @@
 //        Notes - ||
 //         		  ||
 //                --
+//SECTION 1 - [x] TextDone - [x] Images Done
+//SECTION 2 - [x] TextDone - [x] Images Done
+//SECTION 3 - [x] TextDone - [x] Images Done
+//SECTION 4 - [x] TextDone - [x] Images Done
+//SECTION 5 - [x] TextDone - [x] Images Done
 ?>
 <h2 class="text-center">
     Google Forms
@@ -101,13 +106,11 @@
         <div class="col">
             <h4>3. User account set-up/login process</h4>
             <p class="text-center">
-                To create a Google Form, The user must first create a google account, 
-                this is very easy and the user can use their own email account. They would 
-                need to give there firstname, lastname, current email address/create a new one, password and on
-                some accounts need a phone number to be linked. <br> To submit a response to the form a user doesn't have to  
-                a have a account unless the form creator selects "Can only submit 1 response" in which the user is asked to login 
-                before submitting.
-
+		To create a Google Form, The user must first create a google account, this is very easy and the user can use 
+		their own email account. They would need to give there first name, Lastname, current email 
+		address/create a new one, password and on some accounts need a phone number to be linked. <br> 
+		To submit a response to the form a user doesn't have to a have an account unless the form 
+		creator selects "Can only submit 1 response" in which the user is asked to log in before submitting.
             </p>  
         </div>
     </div>
@@ -200,7 +203,7 @@
     </div>
     <div class="row">
         <div class="text-center">
-                <img src="assets/img/googleFormsLayout.PNG" class="rounded img-fluid" alt="Responsive image">
+                <img src="assets/img/googleFormsAnalysis.PNG" class="rounded img-fluid" alt="Responsive image">
         </div>
     </div>
     <br>
@@ -212,9 +215,9 @@
                 <li class="list-group-item">The presented data is incredibly clean and efficient in showing the form data.</li>
                 <li class="list-group-item">Date and time data are grouped to reduce wasted space/spam.</li>
                 <li class="list-group-item">Text/text area data is placed into a table and coloured so its easy to read.</li>
-				<li class="list-group-item">Each chart and data set can be copied and exported relatively easily.</li>
-				<li class="list-group-item">The analyzed data colors match the theme of the form.</li>
-				<li class="list-group-item">Above each represented question shows the number of submitted data for that question.</li> 
+		<li class="list-group-item">Each chart and data set can be copied and exported relatively easily.</li>
+		<li class="list-group-item">The analyzed data colors match the theme of the form.</li>
+		<li class="list-group-item">Above each represented question shows the number of submitted data for that question.</li> 
             </ul>
         </div>
         <div class="col">
@@ -229,86 +232,3 @@
     <hr>
 </div>
 <?php // END Analysis tools section Card END ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!---
-
-<?php // PLACEHOLDER section Card ?>
-<div class="container" style="background-color: paleturquoise; border-left: 6px solid mediumturquoise;">    
-    <br>
-    <div class="row">
-        <div class="col">
-            <h4>PLACEHOLDERTITLE</h4>
-            <p class="text-center">
-                PLACEHOLDERTEXT
-            </p>  
-        </div>
-    </div>
-    <div class="row">
-        <div class="text-center">
-                <img src="assets/img/googleFormsLayout.PNG" class="rounded img-fluid" alt="Responsive image">
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col">
-            <ul class="list-group">
-                <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>  
-            </ul>
-        </div>
-        <div class="col">
-            <ul class="list-group">
-                <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li> 
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>             
-            </ul>
-        </div>
-    </div>
-    <hr>
-</div>
-<?php // END PLACEHOLDER section Card END ?>
-
--->
