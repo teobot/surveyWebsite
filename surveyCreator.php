@@ -22,7 +22,7 @@ echo "<div class='text-center'>";
 echo<<<_END
 <div class="container">
 
-  <div class="offset-md-3 col-md-6"
+  <div class="offset-md-3 col-md-6">
     <form class="text-center">
       <h3>Enter a survey Title</h3>
       <input class="form-control" min="1" maxlength="32" name="surveyTitle" type="text"></input>
