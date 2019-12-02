@@ -8,7 +8,7 @@
 - [x] Finished Google Forms
 - - [x] Added Images
 - - [x] Completed Text
-- [ ] Finished CheckBox Forms
+- [ ] Finished ZohoSurvey Forms
 - - [ ] Added Images
 - - [ ] Completed Text
 - [ ] Finished Survey Monkey Forms
