@@ -5,15 +5,16 @@
 ### TO DO BY RELEASE
 - [ ] survey editor
 - [ ] Admin edit user information
-- [ ] Finished Google Forms
-- - [ ] Added Images
-- - [ ] Completed Text
+- [x] Finished Google Forms
+- - [x] Added Images
+- - [x] Completed Text
 - [ ] Finished CheckBox Forms
 - - [ ] Added Images
 - - [ ] Completed Text
 - [ ] Finished Survey Monkey Forms
 - - [ ] Added Images
 - - [ ] Completed Text
+- [ ] Finish a conclusion page
 - [ ] Comment all code
 
 ### Bugs and issues
