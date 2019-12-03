@@ -3,8 +3,8 @@
 ### Student id: 18055445
 
 ### TO DO BY RELEASE
-- [ ] survey editor
-- [ ] Admin edit user information
+- [x] survey editor
+- [x] Admin edit user information
 - [x] Finished Google Forms
 - - [x] Added Images
 - - [x] Completed Text
