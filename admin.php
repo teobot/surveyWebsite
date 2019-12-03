@@ -57,6 +57,7 @@ else
 					<tr>
 						<th>username</th>
 						<th>Account Type</th>
+						<th>Edit Account Information</th>
 						<th>Delete User</th>
 					</tr>
 				</thead>
@@ -124,6 +125,8 @@ _END;
 							rowMarkup += '</select>';
 							rowMarkup += "</td>";
 
+							rowMarkup += '<td><a class="btn btn-primary" href="admin_Account_edit.php?username='+value.username+'" >Edit Account Info</a></td>';
+
 							rowMarkup += "<td> <button type='button' data-username='" + value.username + "' class='deleteUser btn btn-danger'>Delete</button></td>";
 
 							rowMarkup += "</tr>";
@@ -147,7 +150,7 @@ _END;
 					});
 						
 					// call this function again after a brief pause:
-				setTimeout(getUsers, 2000);       
+				setTimeout(getUsers, 5000);       
 			}
 		</script>
 _END;
