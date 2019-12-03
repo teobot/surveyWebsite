@@ -14,7 +14,7 @@
 $SurveyQuestionData = array();
 
 // If the API call point has not specified a username value then return NULL
-if (!isset($_POST['username']))
+if (!isset($_POST['username']) && !isset($_POST['survey_JSON']) && !isset($_POST['action']) && !isset($_POST['surveyID']))
 {
     // Set the error response code to 400 meaning 'bad request'
     header("Content-Type: application/json", NULL, 400);
@@ -33,6 +33,7 @@ else
     $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
     $json = $_POST['survey_JSON'];
+    $action = $_POST['action'];
     
     //CANT EXPLAIN THIS ASK FOR HELP!
     $json = json_encode( $json );
@@ -129,6 +130,7 @@ else
     $insertJSON = json_encode($SurveyQuestionData);
     //Survey Creator 
     $creator = $_POST['username'];
+    $surveyID = $_POST['surveyID'];
 
     // exit the script with a useful message if there was an error:
     if (!$connection)
@@ -136,7 +138,22 @@ else
         die("Connection failed: " . $mysqli_connect_error);
     }
 
-	$sql = "INSERT INTO `surveys` (`survey_id`, `survey_creator`, `survey_title`, `survey_JSON`, `survey_RESPONSE`) VALUES (NULL, '$creator', '$survey_title', '$insertJSON', '[]' )";
+    if ($action === "insert")
+    {
+        $sql = "INSERT INTO `surveys` (`survey_id`, `survey_creator`, `survey_title`, `survey_JSON`, `survey_RESPONSE`) VALUES (NULL, '$creator', '$survey_title', '$insertJSON', '[]' )";
+    }
+    elseif ($action === "update" && $surveyID != "noneSet")
+    {
+        $sql = "UPDATE surveys SET survey_title='$survey_title', survey_JSON='$insertJSON' WHERE survey_id='$surveyID'";
+    }
+    else
+    {
+        header("Content-Type: application/json", NULL, 400);
+        // Encode the current empty array and return it
+        echo $surveyErrors;
+        // Exit out of the API, to not run any other bits of code
+        exit;
+    }
 	
     if ($connection->query($sql) === TRUE) {
 		echo "success";
