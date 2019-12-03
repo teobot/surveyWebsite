@@ -17,6 +17,7 @@ $loadCompetitor = "googleForms";
 $googleFormClass = "nav-link";
 $zoho = "nav-link";
 $surveyMonkey = "nav-link";
+$conclusion = "nav-link";
 
 // checks the session variable named 'loggedIn'
 // take note that of the '!' (NOT operator) that precedes the 'isset' function
@@ -45,6 +46,11 @@ elseif (($_GET['competitors'] == "surveyMonkey"))
 	$loadCompetitor = "surveyMonkey.php";
 	$surveyMonkey = "nav-link active";
 }
+elseif (($_GET['competitors'] == "conclusion"))
+{
+	$loadCompetitor = "conclusion.php";
+	$conclusion = "nav-link active";
+}
 echo <<<_END
 	<div class="container">
 		<div class="card text-center">
@@ -58,6 +64,9 @@ echo <<<_END
 				</li>
 				<li class="nav-item">
 					<a class="{$surveyMonkey}" href="competitors.php?competitors=surveyMonkey">Survey Monkey</a>
+				</li>
+				<li class="nav-item">
+					<a class="{$conclusion}" href="competitors.php?competitors=conclusion">Conclusion</a>
 				</li>
 			</ul>
 			</div>
