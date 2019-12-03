@@ -72,7 +72,19 @@ _END;
 						
 						// loop through what we got and add it to the table (data is already a JavaScript object thanks to getJSON()):
 						$.each(data, function(index, value) {
-							$('#surveyTable').append("<tr class='surveys'> <td>"+value.survey_id+"</td><td>"+value.creator+"</td> <td> "+ value.survey_title+" </td><td><a href='#'>Edit Survey</a></td> <td> <a href='survey_view.php?surveyID=" + value.survey_id + "'>View Survey</a> </td><td><a href='surveyAnalysis.php?surveyID="+value.survey_id+"'>View Analytics</a></td><td><div class='text-center'><span class='badge badge-primary badge-pill'>"+value.responseCount+"</span></div></td><th><button type='button' data-surveyid='"+value.survey_id+"' class='deleteSurvey btn btn-outline-danger btn-sm'>Delete Survey</button></th></tr>");
+							var insideHTML = "";
+							insideHTML += "<tr class='surveys'>";
+							insideHTML += "<td>"+value.survey_id+"</td>";
+							insideHTML += "<td>"+value.creator+"</td>";
+							insideHTML += "<td>"+value.survey_title+"</td>";
+							insideHTML += "<td><a href='surveyCreator.php?surveyID="+value.survey_id+"'>Edit Survey<a></td>";
+							insideHTML += "<td><a href='survey_view.php?surveyID=" + value.survey_id + "'>View Survey</a></td>";
+							insideHTML += "<td><a href='surveyAnalysis.php?surveyID="+value.survey_id+"'>View Analytics</a></td>";
+							insideHTML += "<td><div class='text-center'><span class='badge badge-primary badge-pill'>"+value.responseCount+"</span></div></td>";
+							insideHTML += "<th><button type='button' data-surveyid='"+value.survey_id+"' class='deleteSurvey btn btn-outline-danger btn-sm'>Delete Survey</button></th>";
+							insideHTML += "</td>";
+							
+							$('#surveyTable').append(insideHTML);
 						});
 
 						console.log(data);
