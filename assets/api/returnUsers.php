@@ -80,7 +80,6 @@ else
         {
             array_push($allUsers, mysqli_fetch_assoc($resultQuery) );
         }
-        // If nothing returned, set the error response code to 400 meaning 'bad request'
         header("Content-Type: application/json", NULL, 201);     
         echo json_encode($allUsers);
         exit;
