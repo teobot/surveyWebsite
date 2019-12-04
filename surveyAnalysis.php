@@ -185,7 +185,7 @@ _END;
                                             average = (total/num_of_resp).toFixed(2);
                                             range  = highest - lowest;
 
-                                            $(responseSection).append("<div id='"+surveyArray.title+"' class='resText text-left'></div>");
+                                            $(responseSection).append("<div id='"+surveyArray.title+"' class='text-center'></div>");
 
                                             google.charts.load('current', {'packages':['bar']});
                                             google.charts.setOnLoadCallback(drawStuff);
@@ -203,6 +203,11 @@ _END;
 
                                                 var options = {
                                                     title: 'Chess opening moves',
+                                                    width: '100%',
+                                                    chartArea: {
+                                                        // leave room for y-axis labels
+                                                        width: '94%'
+                                                      },
                                                     legend: { position: 'none' },
                                                     bars: 'horizontal',
                                                     axes: {
