@@ -3,6 +3,7 @@
 ### Student id: 18055445
 
 ### TO DO BY RELEASE
+- [x] User can download survey responses
 - [x] survey editor
 - [x] Admin edit user information
 - [x] Finished Google Forms
