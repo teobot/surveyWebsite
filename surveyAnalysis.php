@@ -25,11 +25,31 @@ _END;
 	echo<<<_END
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="assets/javascript/convertJSONToCsv.js"></script>
 		<script>
 			$(document).ready(function() {	
 				// start checking for updates:
-                getResponses();	
-			});
+                getResponses();
+                restUpdateCounter();	
+            });
+            
+            function restUpdateCounter() {
+                var counter = 15;
+
+                timer();
+
+                function timer() {
+                    if(counter == 0) {
+                        counter = 15;
+                    }
+
+                    $('#timeToNextUpdate').text("Updating in : " + counter);
+                    counter--;
+                    setTimeout(timer, 1000);
+                }
+
+                
+            }
 
             function getResponses() {
 
@@ -41,29 +61,32 @@ _END;
 
                                 $('.responses').remove();
 
-                                var responseNum = responseData[Object.keys(responseData)[0]].length
+                                var responseNum = responseData[Object.keys(responseData)[0]].length;
 
-                                console.log(surveyData);
-                                console.log("END---------^survey data^---------END");
-                                console.log(responseData);
-                                console.log("END---------^responseData^---------END");                               
+                                itemForExport = [];
+
+                                $.each(responseData, function(index, value) {
+
+                                    itemForExport.push({
+                                        title: index,
+                                        responses: value
+                                    });
+
+                                });
                                 
                                 $('#responseNum').remove();
-                                $('#surveyResponses').append("<div id='responseNum' style='display: block;' class='text-left'><div class='display-4' id='responseNumText'>"+responseNum + " responses </div><small class='form-text text-muted'>Title : "+surveyData.survey_title+"</small></div>");
+                                var responses = "";
+                                responses += "<div id='responseNum' style='display: block;' class='text-left'>";
+                                responses += "<div class='display-4' id='responseNumText'>"+responseNum + " responses </div>";
+                                responses += "<small class='form-text text-muted'>Title : "+surveyData.survey_title+" | <button class='btn btn-sm btn-outline-info' onclick='exportCSVFile(itemForExport)'>Download Data</button> | <small id='timeToNextUpdate'>Updating in : 15</small></small>";
+                                responses += "</div>";
+                                $('#surveyResponses').append(responses);
 
                                 var counter = 0;
                                 $.each(surveyData.survey_JSON, function(index, value) {
 
-                                    console.log("START---------------START");
                                     surveyArray = value;
                                     responsesArray = responseData[Object.keys(responseData)[counter]];
-
-                                    console.log(surveyArray);
-                                    console.log("^surveyarray - value^");
-                                    console.log(responsesArray);
-                                    console.log("^responsesarray^");
-                                    console.log(counter);
-                                    console.log("^counter - value^");
 
                                     counter++;
 
@@ -112,13 +135,14 @@ _END;
                                 
                                             }                                        
 
-                                        } else if (value.inputType == "text") { 
-                                            console.log("found text");
+                                        } else if (value.inputType == "text") {
 
                                             var responseSection = document.createElement("div");
                                             responseSection.className = "responses text-center";
+
+                                            var responsesCount = responseData[Object.keys(responseData)[0]].length;
                 
-                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small></p>");  
+                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small><small style='font-size: 60%;' class='form-text text-muted'> Total Responses : "+responsesCount+"</small></p>");  
                 
                                             $.each(responsesArray, function(index, response) {
                                                 $(responseSection).append("<div class='resText text-left'>"+response+"</div>");      
@@ -126,13 +150,85 @@ _END;
                 
                                             $( "#surveyResponses" ).append(responseSection);    
     
-                                        } else {
-                                            console.log("found text based data");
+                                        } else if (value.inputType == "number") {
 
                                             var responseSection = document.createElement("div");
                                             responseSection.className = "responses text-center";
+
+                                            var responsesCount = responseData[Object.keys(responseData)[0]].length;
                 
-                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small></p>");  
+                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small><small style='font-size: 60%;' class='form-text text-muted'> Total Responses : "+responsesCount+"</small></p>");
+
+                                            var average = 0;
+                                            var range = 0;
+                                            var total = 0;
+                                            var num_of_resp = 0;
+                                            var highest = 0;
+                                            var lowest = 99999999999;
+
+                                            $.each(responsesArray, function(index, response) {
+                                                each_number = parseInt(response);
+
+                                                if (each_number > highest) {
+                                                    highest = each_number;
+                                                }
+
+                                                if (each_number < lowest) {
+                                                    lowest = each_number;
+                                                }
+
+                                                total += each_number;
+                                                num_of_resp++;
+                                            });
+
+
+                                            average = (total/num_of_resp).toFixed(2);
+                                            range  = highest - lowest;
+
+                                            $(responseSection).append("<div id='"+surveyArray.title+"' class='resText text-left'></div>");
+
+                                            google.charts.load('current', {'packages':['bar']});
+                                            google.charts.setOnLoadCallback(drawStuff);
+
+                                            function drawStuff() {
+                                                var data = new google.visualization.arrayToDataTable([
+                                                    ['Statistics', 'Value'],
+                                                    ["lowest", lowest],
+                                                    ["Average", average],
+                                                    ["Range", range],
+                                                    ["total", total],
+                                                    ["highest", highest]
+                                                  
+                                                ]);
+
+                                                var options = {
+                                                    title: 'Chess opening moves',
+                                                    legend: { position: 'none' },
+                                                    bars: 'horizontal',
+                                                    axes: {
+                                                      x: {
+                                                        0: { side: 'top', label: 'Value'}
+                                                      }
+                                                    },
+                                                  };
+                                          
+                                                  var chart = new google.charts.Bar(document.getElementById(surveyArray.title));
+                                                  chart.draw(data, options);
+                                            };
+
+                                            $.each(responsesArray, function(index, response) {
+                                                $(responseSection).append("<div class='resText text-left'>"+response+"</div>");      
+                                            });
+                
+                                            $( "#surveyResponses" ).append(responseSection);
+
+                                        } else {
+                                            var responseSection = document.createElement("div");
+                                            responseSection.className = "responses text-center";
+
+                                            var responsesCount = responseData[Object.keys(responseData)[0]].length;
+                
+                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small><small style='font-size: 60%;' class='form-text text-muted'> Total Responses : "+responsesCount+"</small></p>");  
                 
                                             $.each(responsesArray, function(index, response) {
                                                 $(responseSection).append("<div class='resText text-left'>"+response+"</div>");      
@@ -141,27 +237,23 @@ _END;
                                             $( "#surveyResponses" ).append(responseSection);
                                         }
                                     }
-
-                                    console.log("END OF EACH--------------------END OF EACH");
                                 });
 
                                 document.getElementById("error_message").style.display= 'none';
                                 document.getElementById("surveyResponses").style.display= 'block';
 
-                                console.log("FINISHED");
-
-                        })
-                        .fail(function(jqXHR) {
-                            document.getElementById("error_message").style.display= 'block';
-                            document.getElementById('error_message').innerHTML = jqXHR.responseJSON[0];
-                        });
+                            })
+                            .fail(function(jqXHR) {
+                                document.getElementById("error_message").style.display= 'block';
+                                document.getElementById('error_message').innerHTML = jqXHR.responseJSON[0];
+                            });
                             
 					})
 					.fail(function(jqXHR) {
                         document.getElementById("error_message").style.display= 'block';
                         document.getElementById('error_message').innerHTML = jqXHR.responseJSON[0];
                     });
-				setTimeout(getResponses, 2000);
+				setTimeout(getResponses, 15000);
             }
         </script>
 _END;
