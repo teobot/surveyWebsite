@@ -106,14 +106,19 @@ _END;
 
                                             var choice1Count = 0;
                                             var choice2Count = 0;
+                                            var num_of_resp = 0;
 
-                                            for (i = 0; i < responseNum; i++) {
-                                                if (responsesArray[i] === value.choice1) {
-                                                    choice1Count++;
-                                                } else if (responsesArray[i] === value.choice2) {
-                                                    choice2Count++;
-                                                }
-                                            }
+                                            $.each(responsesArray, function(index, response) {
+                                                if(response !== "null")
+                                                {
+                                                    if (response === value.choice1) {
+                                                        choice1Count++;
+                                                    } else if (response === value.choice2) {
+                                                        choice2Count++;
+                                                    }
+                                                    num_of_resp++;
+                                                }         
+                                            });
 
                                             function drawChart() {
 
@@ -126,7 +131,7 @@ _END;
                                         
                                                 // Set chart options
                                                 var options = {
-                                                    'title':value.title,
+                                                    'title':value.title + " | Total Respondents : " + num_of_resp,
                                                 };
                                         
                                                 // Instantiate and draw our chart, passing in some options.
@@ -137,15 +142,26 @@ _END;
 
                                         } else if (value.inputType == "text") {
 
+                                            var num_of_resp = 0;
+                                            $.each(responsesArray, function(index, response) {
+                                                if(response !== "null") 
+                                                {
+                                                    num_of_resp++;
+                                                }
+                                            });
+
                                             var responseSection = document.createElement("div");
                                             responseSection.className = "responses text-center";
 
                                             var responsesCount = responseData[Object.keys(responseData)[0]].length;
                 
-                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small><small style='font-size: 60%;' class='form-text text-muted'> Total Responses : "+responsesCount+"</small></p>");  
+                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small><small style='font-size: 60%;' class='form-text text-muted'> Total Respondents : "+num_of_resp+"</small></p>");  
                 
                                             $.each(responsesArray, function(index, response) {
-                                                $(responseSection).append("<div class='resText text-left'>"+response+"</div>");      
+                                                if(response !== "null")
+                                                {
+                                                    $(responseSection).append("<div class='resText text-left'>"+response+"</div>"); 
+                                                }                
                                             });
                 
                                             $( "#surveyResponses" ).append(responseSection);    
@@ -155,10 +171,6 @@ _END;
                                             var responseSection = document.createElement("div");
                                             responseSection.className = "responses text-center";
 
-                                            var responsesCount = responseData[Object.keys(responseData)[0]].length;
-                
-                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small><small style='font-size: 60%;' class='form-text text-muted'> Total Responses : "+responsesCount+"</small></p>");
-
                                             var average = 0;
                                             var range = 0;
                                             var total = 0;
@@ -167,25 +179,30 @@ _END;
                                             var lowest = 99999999999;
 
                                             $.each(responsesArray, function(index, response) {
-                                                each_number = parseInt(response);
+                                                if(response !== "null") 
+                                                {
+                                                    
+                                                    each_number = parseInt(response);
 
-                                                if (each_number > highest) {
-                                                    highest = each_number;
+                                                    if (each_number > highest) {
+                                                        highest = each_number;
+                                                    }
+
+                                                    if (each_number < lowest) {
+                                                        lowest = each_number;
+                                                    }
+
+                                                    total += each_number;
+                                                    num_of_resp++;
                                                 }
-
-                                                if (each_number < lowest) {
-                                                    lowest = each_number;
-                                                }
-
-                                                total += each_number;
-                                                num_of_resp++;
                                             });
 
 
                                             average = (total/num_of_resp).toFixed(2);
                                             range  = highest - lowest;
 
-                                            $(responseSection).append("<div id='"+surveyArray.title+"' class='text-center'></div>");
+                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small><small style='font-size: 60%;' class='form-text text-muted'> Total Respondents : "+num_of_resp+"</small></p>");
+                                            $(responseSection).append("<div class='text-center' id='"+ value.title +"'></div>");
 
                                             google.charts.load('current', {'packages':['bar']});
                                             google.charts.setOnLoadCallback(drawStuff);
@@ -217,24 +234,54 @@ _END;
                                                     },
                                                   };
                                           
-                                                  var chart = new google.charts.Bar(document.getElementById(surveyArray.title));
+                                                  var chart = new google.charts.Bar(document.getElementById(value.title));
                                                   chart.draw(data, options);
                                             };
 
                                             $.each(responsesArray, function(index, response) {
-                                                $(responseSection).append("<div class='resText text-left'>"+response+"</div>");      
+                                                if(response !== "null")
+                                                {
+                                                    $(responseSection).append("<div class='resText text-left'>"+response+"</div>"); 
+                                                }                
                                             });
                 
                                             $( "#surveyResponses" ).append(responseSection);
 
+                                        } else if (value.inputType == "date") {
+                                            var responseSection = document.createElement("div");
+                                            responseSection.className = "responses text-center";
+
+                                            var num_of_resp = 0;
+                                            $.each(responsesArray, function(index, response) {
+                                                if(response !== "null") 
+                                                {
+                                                    num_of_resp++;
+                                                }
+                                            });
+                
+                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small><small style='font-size: 60%;' class='form-text text-muted'> Total Respondents : "+num_of_resp+"</small></p>");  
+                
+                                            $.each(responsesArray, function(index, response) {
+                                                var date = response.substring(0, 4) + "-" + response.substring(4, 6) + "-" + response.substring(6, 8);
+
+                                                $(responseSection).append("<div class='resText text-left'>"+date+"</div>");      
+                                            });
+                
+                                            $( "#surveyResponses" ).append(responseSection);
                                         } else {
                                             var responseSection = document.createElement("div");
                                             responseSection.className = "responses text-center";
 
-                                            var responsesCount = responseData[Object.keys(responseData)[0]].length;
+                                            var num_of_resp = 0;
+                                            $.each(responsesArray, function(index, response) {
+                                                if(response !== "null") 
+                                                {
+                                                    num_of_resp++;
+                                                }
+                                            });
                 
-                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small><small style='font-size: 60%;' class='form-text text-muted'> Total Responses : "+responsesCount+"</small></p>");  
-                
+                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small><small style='font-size: 60%;' class='form-text text-muted'> Total Respondents : "+num_of_resp+"</small></p>");  
+                               
                                             $.each(responsesArray, function(index, response) {
                                                 $(responseSection).append("<div class='resText text-left'>"+response+"</div>");      
                                             });
@@ -258,7 +305,7 @@ _END;
                         document.getElementById("error_message").style.display= 'block';
                         document.getElementById('error_message').innerHTML = jqXHR.responseJSON[0];
                     });
-				setTimeout(getResponses, 15000);
+				//setTimeout(getResponses, 15000);
             }
         </script>
 _END;
