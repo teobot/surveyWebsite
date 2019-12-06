@@ -1,16 +1,32 @@
 function convertToCSV(objArray) {
     var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+
+    console.log(array);
+    
     var str = '';
+    
+    var line = '';
+    for (var i = 0; i < array.length; i++) 
+    {
+        
+        line += array[i]["title"] + ",";
+    }
 
-    for (var i = 0; i < array.length; i++) {
+    str += line + "\n";
+
+    
+    for (var i = 0; i < array[0]["responses"].length; i++) 
+    {
+        
         var line = '';
-        for (var index in array[i]) {
-            if (line != '') line += ','
 
-            line += array[i][index];
+        for (var b = 0; b < array.length; b++) 
+        {
+            line += array[b]["responses"][i] + ",";
         }
 
-        str += line + '\r\n';
+        str += line + "\n";
+
     }
 
     return str;
@@ -40,4 +56,5 @@ function exportCSVFile(items) {
             document.body.removeChild(link);
         }
     }
+
 }
