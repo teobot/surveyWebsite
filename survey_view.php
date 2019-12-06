@@ -38,14 +38,14 @@ echo<<<_END
     <script>
         $(document).ready(function() {	
             // start checking for updates:
-            getSurveys();	
+            getSurveys();
+            
+            var numberOfQuestions = 0;
         });
 
         function getSurveys() {
             $.post('assets/api/returnSurveyData.php', {surveyID: '$surveyID' })
                 .done(function(data) {
-
-                    console.log(data);
 
                     // remove the old table rows:
                     $('.questions').remove();
@@ -53,6 +53,8 @@ echo<<<_END
                     $('#questionsContainer').empty();
                     
                     $('#surveyTitle').html(data.survey_title);
+
+                    numberOfQuestions = data.survey_JSON.length;
 
                     $.each(data.survey_JSON, function( key, value ) {
                         console.log(value);
@@ -66,11 +68,11 @@ echo<<<_END
                         {             
                             questionMarkup += '<div class="btn-group-toggle" data-toggle="buttons">';
                             questionMarkup += '<label class="btn btn-outline-success btn-lg">';
-                            questionMarkup += '<input name="'+value.title+'" type="radio" value="'+value.choice1+'">' + value.choice1;
+                            questionMarkup += '<input name="'+value.title+'" type="radio" value="'+value.choice1+'" required>' + value.choice1;
                             questionMarkup += '</label>';
                             questionMarkup += '<small> or </small>'
                             questionMarkup += '<label class="btn btn-outline-success btn-lg">';
-                            questionMarkup += '<input maxlength="32" min="1" required name="'+value.title+'" type="radio" value="'+value.choice2+'">' + value.choice2;
+                            questionMarkup += '<input name="'+value.title+'" type="radio" value="'+value.choice2+'" required>' + value.choice2;
                             questionMarkup += '</label></div><br>';
                         } 
                         else 
@@ -107,6 +109,17 @@ echo<<<_END
             });
 
         //Now we post this array to a API that looks to see if the data is valid
+
+
+        var allDataPresent = true;
+        $.each(surveyData, function( index, value ) {
+            if(value.length === 0) {
+                allDataPresent = false;
+            }
+        });
+
+        if(allDataPresent)
+        {
             $.post('assets/api/insertResponse.php', {survey_RESPONSE: surveyData, surveyID: $surveyID})
             .done(function(data) {
                 document.getElementById("errorMessage").style.display= 'none';
@@ -118,7 +131,15 @@ echo<<<_END
               $.each(error.responseJSON, function( key, reason ) {
                     $('#errorMessage').append("<div class='errors'><hr>"+reason+"</div>");
                 });
-            })        
+            })
+        }
+        else
+        {
+            document.getElementById("errorMessage").style.display= 'block';
+            $('.errors').remove();
+            $('#errorMessage').append("<div class='errors'><strong>Multiple Choice Not Selected!</strong> Make sure all questions are answered!</div>");            
+        }
+
     });
 
   });
