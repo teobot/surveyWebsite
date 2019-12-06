@@ -17,6 +17,7 @@
 - - [ ] Completed Text
 - [ ] Finish a conclusion page
 - [ ] Comment all code
+- [x] Updated questions to not show responses
 
 ### Bugs and issues
 - SurveyCreator.php
