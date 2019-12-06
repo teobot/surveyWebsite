@@ -59,7 +59,7 @@ else
     else
     {
         //AREN'T ADMIN SHOW JUST THERE SURVEYS
-        $userQuery = "SELECT * FROM surveys WHERE survey_creator = '$username'";
+        $userQuery = "SELECT * FROM surveys WHERE survey_creator = '$username' OR survey_creator = 'everyone' ";
     }
 
         // Send the query off to the mysql database using the connection details
