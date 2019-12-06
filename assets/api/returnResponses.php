@@ -87,20 +87,31 @@ else
                 exit; 
             }
 
-            $numberOfResponses = count($surveyData);
-            $numberOfQuestions = count($surveyData[0]);
+            $numberOfResponses = intval(count($surveyData));
+            $numberOfQuestions = count($surveyData[$numberOfResponses-1]);
 
+
+            
+            error_reporting(0);
             for($k = 0; $k < $numberOfQuestions; $k++)
             {
                 $questionResponses = array();
                 
                 for($i = 0; $i < $numberOfResponses; $i++)
                 {
-                    $questionResponses[] = $surveyData[$i][$k];          
+                    if(is_null($surveyData[$i][$k]))
+                    {
+                        $questionResponses[] = "null";
+                    }
+                    else {
+                        $questionResponses[] = $surveyData[$i][$k];    
+                    }
+                        
                 }
 
                 $surveyResponses[$surveyQuestionTitles[$k]->title] = $questionResponses;
             }
+            error_reporting(1);
 
         //END USER HAS CREATED THE SURVEY AND WANTS TO VIEW THE INFORMATION END ////////////////////////////////
     } else {
