@@ -6,7 +6,7 @@
     questionDiv += '<div class="col"><h6>Question Title:</h6> <input class="form-control" maxlength="32" min="1" type="text" required name="questionTitle" value="'+questionTitle+'"></input> <small class="form-text text-muted" >e.g. Enter you favorite animal?</small> </div>';
     questionDiv += '<div class="col"><h6>Question Description:</h6> <input value="'+questionDesc+'" class="form-control" name="questionLabel"></input maxlength="32" min="1" type="text" required><small class="form-text text-muted" >e.g. Please enter your first favorite animal!</small> </div>';
     questionDiv += '</div><hr><div class="row">';
-    questionDiv += '<div class="col"><h6>Select a dataType:</h6><select class="custom-select" name="questionDataType"><option value="text">text</option><option value="email">email</option><option value="password">password</option><option value="number">number</option><option value="tel">tel</option>';
+    questionDiv += '<div class="col"><h6>Select a dataType:</h6><select class="custom-select" name="questionDataType"><option value="text">text</option><option value="email">email</option><option value="password">password</option><option value="number">number</option><option value="date">date</option>';
     if (dataType != "") {
       questionDiv += '<option value="'+dataType+'" selected>'+dataType+'</option>';
     }
