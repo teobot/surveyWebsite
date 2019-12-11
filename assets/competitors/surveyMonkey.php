@@ -1,3 +1,17 @@
+<?php
+//    Page Name - || googleForms.php
+//                --
+// Page Purpose - || This displays the competition research about the Google Form webpage.
+//                --
+//        Notes - ||
+//         		  ||
+//                --
+//SECTION 1 - [x] TextDone - [x] Images Done
+//SECTION 2 - [x] TextDone - [x] Images Done
+//SECTION 3 - [x] TextDone - [x] Images Done
+//SECTION 4 - [x] TextDone - [x] Images Done
+//SECTION 5 - [x] TextDone - [x] Images Done
+?>
 <h2 class="text-center">
 	Survey Monkey
 </h2>
@@ -9,8 +23,7 @@
         <div class="col">
             <h4>1. Layout/presentation of surveys</h4>
             <p class="text-center">
-		The layout of the survey is sleek and simple, It includes a progress bar at the 
-		bottom so that users can see how much is left or how far they have come. The page layout 
+		    The layout of the survey is sleek and simple. The page layout 
 	    	however isn't centered, and they is no way of aligning the questions to one side. Themes are not 
 	    	free like google forms, meaning the green theme is default. There is also a 'powered by' footer 
 	    	which can't be removed without paying.
@@ -19,7 +32,7 @@
     </div>
     <div class="row">
         <div class="text-center">
-                <img src="assets/img/googleFormsLayout.PNG" class="rounded img-fluid" alt="Responsive image">
+                <img src="assets/img/surveyMonkeyLayout.PNG" class="rounded img-fluid" alt="Responsive image">
         </div>
     </div>
     <br>
@@ -27,9 +40,9 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">Progress bar shows the users how far through they are.</li>
                 <li class="list-group-item">Design is very smooth and simple.</li>
-                <li class="list-group-item">Font is clear and recognisable.</li>
+                <li class="list-group-item">Font is clear and recognizable.</li>
+                <li class="list-group-item">Hover and select animation is responsive.</li>
             </ul>
         </div>
         <div class="col">
@@ -37,7 +50,9 @@
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
                 <li class="list-group-item">All the questions are aligned left but buttons are centered.</li>
                 <li class="list-group-item">Without paying the survey has a medium sized 'powered by' at the bottom.</li> 
-                <li class="list-group-item">Without paying you cannot change the theme colour.</li>           
+                <li class="list-group-item">Without paying you cannot change the theme colour.</li>
+                <li class="list-group-item">All the questions and inputs are aligned differently to the footer and submit button.</li>    
+                <li class="list-group-item">Lots of paid features.</li>     
             </ul>
         </div>
     </div>
@@ -46,27 +61,23 @@
 <?php // END Layout/presentation of surveys section Card END ?>
 
 <?php // 2. Ease of Use of surveys section Card ?>
-<div class="container" style="background-color: paleturquoise; border-left: 6px solid mediumturquoise;">    
+<div class="container" style="background-color: moccasin; border-left: 6px solid goldenrod;"> 
     <br>
     <div class="row">
         <div class="col">
             <h4>2. Ease of Use</h4>
             <p class="text-center">
-                The survey once finished is very easy to use, However I've found with a comment box, there is a confusing 
-	    	'OK' box that appears when the user enters text into the area, This button doesn't appear to be needed as clicking 
-	    	'DONE' submits the users response anyway, but the 'OK' button appears to save the users current input. I believe this will confuse 
-	    	the form taker. The creation of surveys is slightly confusing to a first user with a steep learning curve, however 
-	    	the website deploys mulitple methods such as tutorials and introductions aswell as different survey creation methods 
-	    	such as pre-made surveys, question examples and a simplified survey creation where the website does it for you after 
-	    	the users answers some simple questions. The websites also includes many 'microtransaction landmines' where clicking on 
-	    	a feature will add addititional cost if the user wants to publish the survey, the user must then go back through the 
-	    	survey and removed all these features if they want it to be free.
+            The creation of surveys is slightly confusing to a first time user with a steep learning curve, 
+            however, the website deploys multiple methods such as tutorials and introductions as well as different survey creation methods such as pre-made surveys, 
+            question examples and a simplified survey creation where the website does it for you after the users answers some simple questions. 
+            The websites also include many 'microtransaction landmines' where clicking on a feature will add additional cost if the user wants to publish the survey, 
+            the user must then go back through the survey and removed all these features if they want it to be free.
             </p>  
         </div>
     </div>
     <div class="row">
         <div class="text-center">
-                <img src="assets/img/googleFormsLayout.PNG" class="rounded img-fluid" alt="Responsive image">
+                <img src="assets/img/surveyMonkeyEase.PNG" class="rounded img-fluid" alt="Responsive image">
         </div>
     </div>
     <br>
@@ -77,6 +88,8 @@
                 <li class="list-group-item">Pre-made questions.</li>
                 <li class="list-group-item">Website will create a survey based on users answers to questions.</li>
                 <li class="list-group-item">Tutorials and introductions.</li>
+                <li class="list-group-item">Pre-made Template surveys.</li>
+                <li class="list-group-item">Lots of features to ensure survey completion.</li>
             </ul>
         </div>
         <div class="col">
@@ -99,16 +112,16 @@
         <div class="col">
             <h4>3. User account set-up/login process</h4>
             <p class="text-center">
-                The user doesn't have to login to complete and submit a form, To create a form however the user
-	   	has to provide the basic amount of information, including a username, password and email address. 
-	    	Creating a account is very easy and once complete the user can create free surveys. Logginning in 
-	    	is also very quick and easy.
+            The user doesn't have to login to complete and submit a form, To create a form however the user
+	   	    has to provide the basic amount of information, including a username, password and email address. 
+	    	Creating a account is very easy and once complete the user can create free surveys. Logging in 
+	    	is also very quick and easy. You can also sign in using a google,facebook,linkedin and office account.
             </p>  
         </div>
     </div>
     <div class="row">
         <div class="text-center">
-                <img src="assets/img/googleFormsLayout.PNG" class="rounded img-fluid" alt="Responsive image">
+                <img src="assets/img/surveyMonkeyAccount.PNG" class="rounded img-fluid" alt="Responsive image">
         </div>
     </div>
     <br>
@@ -124,7 +137,8 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">If the user has to create a account before submitting they will most likely leave.</li>           
+                <li class="list-group-item">If the user has to create a account before submitting they will most likely leave.</li>
+                <li class="list-group-item">Sometimes on survey submission, targeted ads will appear.</li>           
             </ul>
         </div>
     </div>
@@ -132,61 +146,29 @@
 </div>
 <?php // END User account set-up/login process section Card END ?>
 
-<?php // PLACEHOLDER section Card ?>
-<div class="container" style="background-color: paleturquoise; border-left: 6px solid mediumturquoise;">    
+<?php // 4. Question types section Card ?>
+<div class="container" style="background-color: moccasin; border-left: 6px solid goldenrod;">    
     <br>
     <div class="row">
         <div class="col">
-            <h4>PLACEHOLDERTITLE</h4>
+            <h4>4. Question types</h4>
             <p class="text-center">
-                PLACEHOLDERTEXT
-            </p>  
-        </div>
-    </div>
-    <div class="row">
-        <div class="text-center">
-                <img src="assets/img/googleFormsLayout.PNG" class="rounded img-fluid" alt="Responsive image">
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col">
-            <ul class="list-group">
-                <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>  
-            </ul>
-        </div>
-        <div class="col">
-            <ul class="list-group">
-                <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li> 
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>             
-            </ul>
-        </div>
-    </div>
-    <hr>
-</div>
-<?php // END PLACEHOLDER section Card END ?>
+                The user can select a list of 19 different question types:
+                <br> • Multiple Choice • Checkboxes • Star Rating • DropDown • Matrix
+                <br> • Ranking • Net Score • Image Choice • Comment Box • Single Tickbox
+                <br> • Slider • Multiple Textboxes • Date / Time • Contact Information • Text
+                <br> • Image • Intro Page • New Page • Page Break
 
-<?php // PLACEHOLDER section Card ?>
-<div class="container" style="background-color: paleturquoise; border-left: 6px solid mediumturquoise;">    
-    <br>
-    <div class="row">
-        <div class="col">
-            <h4>PLACEHOLDERTITLE</h4>
-            <p class="text-center">
-                PLACEHOLDERTEXT
+                <br> And 5 paid for features.
+                <br> • File Upload • Payment • Matrix of dropdowns • Text A/B Test • Image A/B Test
+                <br>
+                This covers all the users possible input, in terms of question types and content types.
             </p>  
         </div>
     </div>
     <div class="row">
         <div class="text-center">
-                <img src="assets/img/googleFormsLayout.PNG" class="rounded img-fluid" alt="Responsive image">
+                <img src="assets/img/surveyMonkeyQuestions.PNG" class="rounded img-fluid" alt="Responsive image">
         </div>
     </div>
     <br>
@@ -194,40 +176,39 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>  
+                <li class="list-group-item">Wide range of question types covering nearly everything someone would want.</li>
+                <li class="list-group-item">Way more features than most other survey creators.</li>  
             </ul>
         </div>
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li> 
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>             
+                <li class="list-group-item">Some useful features are paid for, google forms has a free file upload.</li>
             </ul>
         </div>
     </div>
     <hr>
 </div>
-<?php // END PLACEHOLDER section Card END ?>
+<?php // END Question types section Card END ?>
 
-<?php // PLACEHOLDER section Card ?>
+<?php // 5. Analysis tools section Card ?>
 <div class="container" style="background-color: paleturquoise; border-left: 6px solid mediumturquoise;">    
     <br>
     <div class="row">
         <div class="col">
-            <h4>PLACEHOLDERTITLE</h4>
+            <h4>5. Analysis tools</h4>
             <p class="text-center">
-                PLACEHOLDERTEXT
+                The analysis section is much larger than most other survey websites. 
+                Each question has a default graph or view for the total data. But unlike other websites, 
+                you can customize the view of the data, from changing the graph types to formating which responses are shown. 
+                You can also easily change colours and graph labels. Each question has the number of responses and also the number of users that skipped the question. 
+                You can also view all the data from a specific user straight from the analysis page meaning its easy to view the data on a specific case. 
             </p>  
         </div>
     </div>
     <div class="row">
         <div class="text-center">
-                <img src="assets/img/googleFormsLayout.PNG" class="rounded img-fluid" alt="Responsive image">
+                <img src="assets/img/surveyMonkeyAnalysis.PNG" class="rounded img-fluid" alt="Responsive image">
         </div>
     </div>
     <br>
@@ -235,22 +216,25 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>  
+                <li class="list-group-item">Each question has a default graph to show the data.</li>
+                <li class="list-group-item">Graphs can be changed to better show data.</li>
+                <li class="list-group-item">Data shown is clean and simple.</li>
+                <li class="list-group-item">Can view each response by person.</li>
+                <li class="list-group-item">Can export the data to a range of formats.</li>
+                <li class="list-group-item">Shows the number of times users skipped a question.</li>
+                <li class="list-group-item">Shows the total number of responses and total survey responses.</li>
+                <li class="list-group-item">Can filter through the data.</li>
             </ul>
         </div>
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li> 
-                <li class="list-group-item">PLACEHOLDER</li>
-                <li class="list-group-item">PLACEHOLDER</li>             
+                <li class="list-group-item">The layout of the website means that with long forms it could take sometime to go through the data.</li> 
+                <li class="list-group-item">You have to pay to export the data into certain formats.</li>
+                <li class="list-group-item">Lots of options, so can be very confusing.</li>
             </ul>
         </div>
     </div>
     <hr>
 </div>
-<?php // END PLACEHOLDER section Card END ?>
+<?php // END Analysis tools section Card END ?>

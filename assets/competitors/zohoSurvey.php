@@ -8,9 +8,9 @@
 //                --
 //SECTION 1 - [x] TextDone - [x] Images Done
 //SECTION 2 - [x] TextDone - [x] Images Done
-//SECTION 3 - [] TextDone - [] Images Done
-//SECTION 4 - [] TextDone - [] Images Done
-//SECTION 5 - [] TextDone - [] Images Done
+//SECTION 3 - [x] TextDone - [x] Images Done
+//SECTION 4 - [x] TextDone - [x] Images Done
+//SECTION 5 - [] TextDone - [x] Images Done
 ?>
 <h2 class="text-center">
 	Zoho Survey
@@ -23,10 +23,10 @@
         <div class="col">
             <h4>1. Layout/presentation of surveys</h4>
             <p class="text-center">
-		The layout of the presentation is very clean, They center nicely when moving from different platforms and device sizes. 
+		    The layout of the presentation is very clean, They center nicely when moving from different platforms and device sizes. 
 			Each question is separated by a line br, instead of the usual different "card" section type.
 
-		Some of the question types include different animation for selecting and dropdowns, 
+		    Some of the question types include different animation for selecting and dropdowns, 
 		    these are very responsive and make the website feel smooth and responsive.
             </p>  
         </div>
@@ -67,10 +67,10 @@
         <div class="col">
             <h4>2. Ease of Use</h4>
             <p class="text-center">
-		Creating forms can at first be slightly confusing, There are many different types of questions, 
+		    Creating forms can at first be slightly confusing, There are many different types of questions, 
 		    Zoho has the most unique question types I've seen. Creating a new survey from scratch is really easy, 
 		    They have numerous survey templates to use and get started covering a huge range of topics.  <br>
-		Editing and setting up questions at first can be slightly confusing with many different options to tweak and change, 
+		    Editing and setting up questions at first can be slightly confusing with many different options to tweak and change, 
 		    However, they have really easy to follow tutorials to follow and start learning with. <br>
 		    You set the survey title and type, You can also change the header and footer and even add a logo to each survey 
 		    which both other evaluated surveys creators currently don't have.
@@ -116,17 +116,17 @@
         <div class="col">
             <h4>3. User account set-up/login process</h4>
             <p class="text-center">
-		To create a Google Form, The user must first create a google account, this is very easy and the user can use 
-		their own email account. They would need to give there first name, Lastname, current email 
-		address/create a new one, password and on some accounts need a phone number to be linked. <br> 
-		To submit a response to the form a user doesn't have to a have an account unless the form 
-		creator selects "Can only submit 1 response" in which the user is asked to log in before submitting.
+                To create a Zoho form, you must first give an email, password and telephone number. You get an enterprise trial for 7 days. 
+                Any survey has a response limit of 100, any responses over that are hidden. 
+                Once that trial is over some features are disabled and your account is restricted unless you pay around £20 for the plus addition.
+                This means that using this website for free is very difficult, 
+                you will most likely find that unless you pay there is no point in using the free edition unless the potential responses are very small.
             </p>  
         </div>
     </div>
     <div class="row">
         <div class="text-center">
-                <img src="assets/img/googleFormsAcc.PNG" class="rounded img-fluid" alt="Responsive image">
+                <img src="assets/img/zohoAccount.PNG" class="rounded img-fluid" alt="Responsive image">
         </div>
     </div>
     <br>
@@ -134,15 +134,15 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">The user can limit the number of responses to avoid spamming.</li>
+                <li class="list-group-item">Free to sign up and create limited surveys.</li>
                 <li class="list-group-item">User doesn't have to have a account to submit a response.</li>
             </ul>
         </div>
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">There aren't any methods in place to reduce each user submission apart from signing in.</li>
-                <li class="list-group-item">If the user has to make a account to submit the form they will most likely leave.</li>         
+                <li class="list-group-item">Your account gets restricted after 7 days unless you pay.</li>
+                <li class="list-group-item">The limit on responses are 100.</li>         
             </ul>
         </div>
     </div>
@@ -157,9 +157,11 @@
         <div class="col">
             <h4>4. Question types</h4>
             <p class="text-center">
-                The user can select a list of 11 different question types:
-                <br> • Short answer, • Paragraph, • Multiple choice, • Drop-down, • File upload,
-                <br> • Linear scale, • Multiple-choice grid, • Tick box grid, • Date, • Time,
+                The user can select a list of 20 different question types:
+                <br> • Multiple Choice • Dropdown • Image Type • Rating Scale • Star Rating
+                <br> • NPS • Slide Scale • Ranking • Matrix Choice • Matrix Dropdown
+                <br> • Single Line • Multiple Lines • Numeric • Email • Full Name
+                <br> • Contact Information • Calendar • Signature • File Upload • Text Field
                 <br>
                 This covers all the users possible input, in terms of question types and content types.
             </p>  
@@ -167,7 +169,7 @@
     </div>
     <div class="row">
         <div class="text-center">
-                <img src="assets/img/googleFormsQuestionType.PNG" class="rounded img-fluid" alt="Responsive image">
+                <img src="assets/img/zohoQuestions.PNG" class="rounded img-fluid" alt="Responsive image">
         </div>
     </div>
     <br>
@@ -175,13 +177,15 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">Wide range of question types covering nearly everything someone would want.</li>  
+                <li class="list-group-item">All questions are customizable.</li> 
+                <li class="list-group-item">Wide range of question types covering nearly everything someone would want.</li>
+                <li class="list-group-item">Easy to add new questions.</li>  
             </ul>
         </div>
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">Doesn't have a Number question type.</li>             
+                <li class="list-group-item">Not as many question types as Survey Monkey, such as image multiple choice.</li>             
             </ul>
         </div>
     </div>
@@ -196,24 +200,19 @@
         <div class="col">
             <h4>5. Analysis tools</h4>
             <p class="text-center">
-                Google forms has a response section where all the submitted form data gets analyzed and displayed. <br>
-                
-                The user can select between the "summary" section which collects all the data submitted and shows graphs based on the question type. <br>
-                
-                The other section the user can select is the "individual" section where the user can see all the individual forms that the users have submitted, 
-                this would be good for applications where the user need to view each candidate e.g. a job application. 
-
-                For a text/text area answer, Google has opted for a list of all the responses. 
-                Multiple choice gets a pie chart, checkboxes get a line chart, and dropdown questions also get a pie chart. 
-                Linear scales question types get a line chart, and so do multiple choice grid and checkbox questions. 
-                Date questions get grouped by month and year, having the individual days within those months displayed next to it. 
-                Time responses are similar to the date display method, with same hour answers getting grouped with the complete time displayed next to it.
+                Zoho Analysis section includes different graph and formats to display the information, 
+                unlike google forms and survey Monkey,  the text input doesn't display all the information straight away, 
+                meaning that a large number of responses don't make the webpage incredibly long. 
+                Smartly you have to view the responses per question by digging into another link. 
+                However, it is hard to compare data together from other questions. Each question also has the number of responses and the number of users that skipped it. 
+                You can customize the graph that the data is shown in but it is limited compared to survey Monkey but greater than google forms. 
+                Each question can also be exported.
             </p>  
         </div>
     </div>
     <div class="row">
         <div class="text-center">
-                <img src="assets/img/googleFormsAnalysis.PNG" class="rounded img-fluid" alt="Responsive image">
+                <img src="assets/img/zohoAnalysis.PNG" class="rounded img-fluid" alt="Responsive image">
         </div>
     </div>
     <br>
@@ -221,21 +220,23 @@
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Positives</h5></li>
-                <li class="list-group-item">Each question type has a purposely selected graph/method to accurately show the data.</li>
-                <li class="list-group-item">The presented data is incredibly clean and efficient in showing the form data.</li>
-                <li class="list-group-item">Date and time data are grouped to reduce wasted space/spam.</li>
-                <li class="list-group-item">Text/text area data is placed into a table and coloured so its easy to read.</li>
-		<li class="list-group-item">Each chart and data set can be copied and exported relatively easily.</li>
-		<li class="list-group-item">The analyzed data colors match the theme of the form.</li>
-		<li class="list-group-item">Above each represented question shows the number of submitted data for that question.</li> 
+                <li class="list-group-item">Each question has a default graph to show the data.</li>
+                <li class="list-group-item">Graphs can be changed to better show data.</li>
+                <li class="list-group-item">Data shown is clean and simple.</li>
+                <li class="list-group-item">Can view each response by person.</li>
+                <li class="list-group-item">Can export the data to a range of formats.</li>
+                <li class="list-group-item">Shows the number of times users skipped a question.</li>
+                <li class="list-group-item">Shows the total number of responses and total survey responses.</li>
+                <li class="list-group-item">Can filter through the data.</li>
+                <li class="list-group-item">Each question can be exported individually.</li>
             </ul>
         </div>
         <div class="col">
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
-                <li class="list-group-item">If the user doesn't agree with the presented form the user doesn't have a choice to change it apart from downloading the raw data and graphing it themselves.</li>
-                <li class="list-group-item">The layout of the website means that with long forms it could take sometime to go through the data.</li> 
-                <li class="list-group-item">The website doesn't show how many users missed or didn't fill in a question.</li>
+                <li class="list-group-item">You can to click on show responses to view data, making it hard to compare question data.</li>
+                <li class="list-group-item">Response on graphs animation is slightly slow.</li>
+                <li class="list-group-item">No tutorials explaining how to operate the analysis page which is confusing.</li>
             </ul>
         </div>
     </div>
