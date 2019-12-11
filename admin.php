@@ -53,22 +53,23 @@ else
 
 
 		<p>
-			<button class="btn btn-success btn-lg" style="float:right;" type="button" data-toggle="collapse" data-target="#create_new_user_form">
+			<button class="btn btn-success btn-lg" type="button" data-toggle="collapse" data-target="#create_new_user_form">
 				Create New User Here
 	  		</button>
-		</p><br>
+		</p>
 
-		<div class="collapse container"  style="border-right: 5px solid lightgreen;" id="create_new_user_form"><br>
+		<div class="collapse container"  style="border-left: 5px solid lightgreen;" id="create_new_user_form"><br>
 _END;
 		require_once("assets\PHPcomponents\admin_create_user_form.php");
 
 		echo<<<_END
-		<script>
-
-		</script>
-
 		</div>
-		<hr>
+		
+		<hr><form class="form-inline">
+			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	 	</form><hr>
+
 		<div class="table-responsive">
 			<table id="allUsersTable" class="table table-hover table-sm text-center" id="surveyTable">
 				<thead>
