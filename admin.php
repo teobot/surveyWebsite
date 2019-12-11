@@ -65,10 +65,9 @@ _END;
 		echo<<<_END
 		</div>
 		
-		<hr><form class="form-inline">
-			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-	 	</form><hr>
+		<hr><div class="form-inline">
+			<input class="form-control mr-sm-2" type="search" placeholder="Search By Username" aria-label="Search">
+	 	</div><hr>
 
 		<div class="table-responsive">
 			<table id="allUsersTable" class="table table-hover table-sm text-center" id="surveyTable">
