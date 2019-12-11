@@ -279,21 +279,21 @@ _END;
 	}
 
 	$allUsersSurveys[] = (object) array(
-		'title' => 'Favorite color?',
-		'label' => 'Please enter your favorite color!',
-		'inputType' => 'text',
-	);
-
-	$allUsersSurveys[] = (object) array(
-		'title' => 'Favorite animal?',
-		'label' => 'Please enter your favorite animal!',
+		'title' => 'Fullname?',
+		'label' => 'Please enter your full name!',
 		'inputType' => 'text',
 	);
 
 	$allUsersSurveys[] = (object) array(
 		'title' => 'Personal Email?',
-		'label' => 'Please enter your personal email!',
+		'label' => 'Please enter your email address!',
 		'inputType' => 'email',
+	);
+
+	$allUsersSurveys[] = (object) array(
+		'title' => 'Age?',
+		'label' => 'Please enter your personal age!',
+		'inputType' => 'number',
 	);
 
 	$allUsersSurveys[] = (object) array(
@@ -302,15 +302,24 @@ _END;
 		'inputType' => 'date',
 	);
 
+	$allUsersSurveys[] = (object) array(
+		'title' => 'Fanta or Coke?',
+		'label' => 'Pick a drink!',
+		'inputType' => 'multipleChoice',
+		'choice1' => 'Fanta',
+		'choice2' => 'Coke'
+	);
+
 	$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 	// Check connection
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
 	
-    $json = json_encode($allUsersSurveys);
-	$creator = "bonfire";
-	$sql = "INSERT INTO `surveys` (`survey_id`, `survey_creator`, `survey_title`, `survey_JSON`, `survey_RESPONSE`) VALUES (NULL, '$creator', 'First Test Form', '$json', '[]')";
+	$json = json_encode($allUsersSurveys);
+	$responsestring = '[["Theo Flappery","theoflappery@gmail.com","21","19980206","Coke"],["Flow Dry","flowdry@gmail.com","23","19991114","Fanta"],["Sillie Floucher","silfloucher@gmail.com","20","19990114","Coke"],["Jerky Tastier","jerkytastier@gmail.com","27","19900505","Coke"],["Richard Folerton","richfolderton@gmail.com","40","19710125","Coke"]]';
+	$creator = "everyone";
+	$sql = "INSERT INTO `surveys` (`survey_id`, `survey_creator`, `survey_title`, `survey_JSON`, `survey_RESPONSE`) VALUES (NULL, '$creator', 'First Survey', '$json', '$responsestring')";
     if ($conn->query($sql) === TRUE) {
 		echo <<<_END
 			<tr>
