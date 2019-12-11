@@ -97,11 +97,11 @@ function validateTelephoneNumber($field, $length)
 	// Check if the length of the 'number' is valid
 	if (strlen($field)<$length)
 	{
-		return "Phone Number to short";
+		return "<div class='alert alert-danger' role='alert'>Phone Number to short!</div>";
 	} 
 	elseif (strlen($field)>$length)
 	{
-		return "Phone Number to long";
+		return "<div class='alert alert-danger' role='alert'>Phone Number to long!</div>";
 	} 
 	// The length is valid now to check if its actually a number
 	else 
@@ -118,7 +118,7 @@ function validateTelephoneNumber($field, $length)
 			// to differentiate the pattern from its container.
 			if ( preg_match("/\D/", $field) )
 			{		
-				return "Phone Number must be a number only";
+				return "<div class='alert alert-danger' role='alert'>Phone Number must be a number only!</div>";
 			} 
 			else 
 			{
@@ -128,7 +128,7 @@ function validateTelephoneNumber($field, $length)
 		} 
 		else 
 		{
-			return "Phone Number is not numeric";
+			return "<div class='alert alert-danger' role='alert'>Phone Number is not numeric!</div>";
 		}
 	}
 }
