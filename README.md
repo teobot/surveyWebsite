@@ -18,6 +18,7 @@
 - [ ] Finish a conclusion page
 - [ ] Comment all code
 - [x] Updated questions to not show responses
+- [x] Admins can now create new accounts
 
 ### Bugs and issues
 - SurveyCreator.php
