@@ -215,9 +215,9 @@
                 <li class="list-group-item">The presented data is incredibly clean and efficient in showing the form data.</li>
                 <li class="list-group-item">Date and time data are grouped to reduce wasted space/spam.</li>
                 <li class="list-group-item">Text/text area data is placed into a table and coloured so its easy to read.</li>
-		<li class="list-group-item">Each chart and data set can be copied and exported relatively easily.</li>
-		<li class="list-group-item">The analyzed data colors match the theme of the form.</li>
-		<li class="list-group-item">Above each represented question shows the number of submitted data for that question.</li> 
+                <li class="list-group-item">Each chart and data set can be copied and exported relatively easily.</li>
+                <li class="list-group-item">The analyzed data colors match the theme of the form.</li>
+                <li class="list-group-item">Above each represented question shows the number of submitted data for that question.</li> 
             </ul>
         </div>
         <div class="col">
