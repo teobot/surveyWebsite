@@ -65,9 +65,16 @@ _END;
 		echo<<<_END
 		</div>
 		
-		<hr><div class="form-inline">
-			<input class="form-control mr-sm-2" type="search" placeholder="Search By Username" aria-label="Search">
-	 	</div><hr>
+		<hr>
+
+		<div style="border-left: 5px solid lightblue;" class="container">
+			<input id="searchForUser" class="form-control mr-sm-2" type="search" placeholder="Search By Username"><br>
+			<div id="displaySearchedUser">
+				<div class="alert alert-info" role="alert">
+					Start Searching For Users...
+				</div>	
+			</div>
+		</div>
 
 		<div class="table-responsive">
 			<table id="allUsersTable" class="table table-hover table-sm text-center" id="surveyTable">
@@ -90,7 +97,41 @@ _END;
 		<script>
 			$(document).ready(function() {	
 				// start checking for updates:
+				var users = [];
 				getUsers();
+			});
+
+			$('#searchForUser').on('input', function() {
+				var userToFind = $(this).val();
+
+				$.each(users, function(index, value) {
+
+					if(userToFind === value['username']) {
+
+						var selectMarkup = "";
+						selectMarkup += "<td>";
+						selectMarkup += '<select data-user="'+value.username+'" class="changeAccountType custom-select custom-select-sm">';
+						if (value.accountType === "default") { 
+							selectMarkup += '<option value="default">Default</option>'; 
+							selectMarkup += '<option value="admin">Admin</option>'; 
+						}
+						if (value.accountType === "admin") {
+							selectMarkup += '<option value="admin">Admin</option>'; 
+							selectMarkup += '<option value="default">Default</option>'; 
+						}		
+						selectMarkup += '</select>';
+						selectMarkup += "</td>";
+
+						document.getElementById("displaySearchedUser").innerHTML = '<div class="table-responsive table-sm"><table class="table table-hover table-sm text-center"><thead><tr><th>username</th><th>Account Type</th><th>Edit Account Information</th><th>Delete User</th></tr></thead><tbody><tr><td>'+value.username+'</td>'+selectMarkup+'<td><a class="btn btn-primary" href="admin_Account_edit.php?username='+value.username+'" >Edit Account Info</a></td><td><button type="button" data-username="' + value.username + '" class="deleteUser btn btn-danger">Delete</button></td></tr></tbody></table></div>'
+						return false;
+					} else if (userToFind === "") {
+						document.getElementById("displaySearchedUser").innerHTML = '<div class="alert alert-info" role="alert">Start Searching For Users...</div>';
+					} else {
+						document.getElementById("displaySearchedUser").innerHTML = '<div class="alert alert-warning" role="alert">Searched User Does Not Exist!</div>';
+					}
+
+				});
+
 			});
 
 			$(document).on('click', '#adminCreateNewAccount', function(){
@@ -136,6 +177,7 @@ _END;
 						$('.users').remove();
 
 						console.log(data);
+						users = data;
 						
 						// loop through what we got and add it to the table (data is already a JavaScript object thanks to getJSON()):
 						$.each(data, function(index, value) {
