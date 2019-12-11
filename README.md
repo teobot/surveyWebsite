@@ -9,12 +9,12 @@
 - [x] Finished Google Forms
 - - [x] Added Images
 - - [x] Completed Text
-- [ ] Finished ZohoSurvey Forms
-- - [ ] Added Images
-- - [ ] Completed Text
-- [ ] Finished Survey Monkey Forms
-- - [ ] Added Images
-- - [ ] Completed Text
+- [x] Finished ZohoSurvey Forms
+- - [x] Added Images
+- - [x] Completed Text
+- [x] Finished Survey Monkey Forms
+- - [x] Added Images
+- - [x] Completed Text
 - [ ] Finish a conclusion page
 - [ ] Comment all code
 - [x] Updated questions to not show responses
