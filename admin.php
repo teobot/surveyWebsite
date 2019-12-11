@@ -50,7 +50,25 @@ else
 		// Creating the table for all of the users information to be displayed in
 		echo<<<_END
 		<div id="error_message" style="display: none;" class="alert alert-danger" role="alert"></div>
-		
+
+
+		<p>
+			<button class="btn btn-success btn-lg" style="float:right;" type="button" data-toggle="collapse" data-target="#create_new_user_form">
+				Create New User Here
+	  		</button>
+		</p><br>
+
+		<div class="collapse container"  style="border-right: 5px solid lightgreen;" id="create_new_user_form"><br>
+_END;
+		require_once("assets\PHPcomponents\admin_create_user_form.php");
+
+		echo<<<_END
+		<script>
+
+		</script>
+
+		</div>
+		<hr>
 		<div class="table-responsive">
 			<table id="allUsersTable" class="table table-hover table-sm text-center" id="surveyTable">
 				<thead>
@@ -73,6 +91,20 @@ _END;
 			$(document).ready(function() {	
 				// start checking for updates:
 				getUsers();
+			});
+
+			$(document).on('click', '#adminCreateNewAccount', function(){
+				event.preventDefault();
+				console.log( $( this ).closest("form").serializeArray() );
+		
+				$.post('assets/api/insertNewAccount.php', {username: '$username', accountInfoArray: $( this ).closest("form").serializeArray() })
+				.done(function(data) {
+					document.getElementById("adminCreateUserForm").reset();
+					document.getElementById("accountCreationError").innerHTML = data;
+				})
+				.fail(function(error) {
+					document.getElementById("accountCreationError").innerHTML = error.responseText;
+				});
 			});
 
 			$(document).on('click', '.deleteUser', function(){
@@ -142,11 +174,7 @@ _END;
 						{
 							document.getElementById("error_message").style.display= 'block';
 							document.getElementById("error_message").innerHTML = "There are no Users!";
-						} else 
-						{
-							
-						}
-						
+						}		
 					});
 						
 					// call this function again after a brief pause:

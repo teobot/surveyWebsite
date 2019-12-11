@@ -42,14 +42,12 @@ $show_signup_form = false;
 // This displays the signUp message if the user has signed Up successfully or has failed:
 $signUpMessage = "";
 
-
 // Checks if the user is already logged into a account:
 if (isset($_SESSION['loggedIn']))
 {
 	// User is already logged in, just display a message:
 	echo "<div class='col-md-6 offset-md-3 text-center'><div class='alert alert-success' role='alert'>You are already logged in, please log out first.</div></div>";
 }
-
 // Checks if the user has tried to input data into the signUp form:
 elseif ( isset($_POST['username']) )
 {
