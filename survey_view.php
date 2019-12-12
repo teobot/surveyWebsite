@@ -28,6 +28,7 @@ _END;
 echo '<div class="text-center">';
 
 echo '<div><h1 id="surveyTitle">Loading...</h1></div>';
+echo '<div><small id="surveyCreator">Loading...</small></div>';
 
 echo '<div id="questionsContainer" class="col-md-8 offset-md-2" >Loading...</div>';
 
@@ -53,12 +54,11 @@ echo<<<_END
                     $('#questionsContainer').empty();
                     
                     $('#surveyTitle').html(data.survey_title);
+                    $('#surveyCreator').html("Survey Created By: " + data.survey_creator + "<hr>");
 
                     numberOfQuestions = data.survey_JSON.length;
 
                     $.each(data.survey_JSON, function( key, value ) {
-                        console.log(value);
-
                         var questionMarkup = "";
                         questionMarkup += "<form class='card'>";
                         questionMarkup += "<div><p class='lead'>"+value.title+"</p></div>";
