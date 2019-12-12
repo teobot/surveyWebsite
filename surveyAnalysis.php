@@ -78,7 +78,7 @@ _END;
                                 var responses = "";
                                 responses += "<div id='responseNum' style='display: block;' class='text-left'>";
                                 responses += "<div class='display-4' id='responseNumText'>"+responseNum + " responses </div>";
-                                responses += "<small class='form-text text-muted'>Title : "+surveyData.survey_title+" | <button class='btn btn-sm btn-outline-info' onclick='exportCSVFile(itemForExport)'>Download Data</button> | <small id='timeToNextUpdate'>Updating in : 15</small></small>";
+                                responses += "<small class='form-text text-muted'>Title : "+surveyData.survey_title+" | Created By: "+surveyData.survey_creator+"  | <button class='btn btn-sm btn-outline-info' onclick='exportCSVFile(itemForExport)'>Download Data</button> | <small id='timeToNextUpdate'>Updating in : 15</small></small>";
                                 responses += "</div>";
                                 $('#surveyResponses').append(responses);
 
