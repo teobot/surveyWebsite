@@ -142,7 +142,7 @@
             <ul class="list-group">
                 <li class="list-group-item"><h5 class="mb-1">Negatives</h5></li>
                 <li class="list-group-item">Your account gets restricted after 7 days unless you pay.</li>
-                <li class="list-group-item">The limit on responses are 100.</li>         
+                <li class="list-group-item">The limit on responses are 100 unless you pay.</li>         
             </ul>
         </div>
     </div>
