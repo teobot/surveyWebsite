@@ -26,7 +26,7 @@ else
 
 //CREATE DATABASE CONNECTION
 // Get the database connection details
-include_once "../../credentials.php";
+require_once("../../credentials.php");
 
 // Create a new connection to database
 $checkDetails = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
