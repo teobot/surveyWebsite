@@ -4,7 +4,7 @@
 // The main job of this script is to execute a SELECT statement to find the user's profile information (then display it)
 
 // execute the header script:
-require_once "header.php";
+require_once("header.php");
 
 $password = "";
 $firstname = "";
@@ -271,5 +271,5 @@ _END;
 }
 
 // finish off the HTML for this page:
-require_once "footer.php";
+require_once("footer.php");
 ?>

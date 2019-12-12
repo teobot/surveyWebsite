@@ -4,8 +4,8 @@
 // Consider it the 'welcome' page for your survey web site
 
 // execute the header script:
-require_once "header.php";
-require_once "credentials.php";
+require_once("header.php");
+require_once("credentials.php");
 
 echo<<<_END
 <div class="jumbotron jumbotron-fluid">
@@ -50,6 +50,6 @@ _END;
 
     mysqli_close($connection);
 
-require_once "footer.php";
+require_once("footer.php");
 
 ?>

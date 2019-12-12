@@ -1,6 +1,6 @@
 <?php
 // execute the header script:
-require_once "header.php";
+require_once("header.php");
 echo '<link rel="stylesheet" type="text/css" href="assets/style/surveyView.css">';
 
 
@@ -148,5 +148,5 @@ _END;
 }
 
 // finish off the HTML for this page:
-require_once "footer.php";
+require_once("footer.php");
 ?>

@@ -15,7 +15,7 @@
 // if validation of any field fails then we display the help messages (see previous) when re-displaying the form
 
 // execute the header script:
-require_once "header.php";
+require_once("header.php");
 
 // default values we show in the form:
 $username = "";
@@ -140,5 +140,5 @@ _END;
 }
 
 // finish off the HTML for this page:
-require_once "footer.php";
+require_once("footer.php");
 ?>

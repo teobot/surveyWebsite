@@ -11,7 +11,7 @@
 // For example, using tables, bullet point lists, images, hyperlinking to relevant materials, etc.
 
 // execute the header script:
-require_once "header.php";
+require_once("header.php");
 
 $loadCompetitor = "googleForms";
 $googleFormClass = "nav-link";
@@ -72,11 +72,11 @@ echo <<<_END
 			</div>
 _END;
 
-require_once "assets/competitors/{$loadCompetitor}";
+require_once("assets/competitors/{$loadCompetitor}");
 
 echo "</div></div>";
 }
 
 // finish off the HTML for this page:
-require_once "footer.php";
+require_once("footer.php");
 ?>

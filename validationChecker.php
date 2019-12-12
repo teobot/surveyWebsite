@@ -1,5 +1,5 @@
 <?php
-require_once "credentials.php";
+require_once("credentials.php");
 // Things to notice:
 // This script holds the sanitisation function that we pass all our user data to
 // This script holds the validation functions that double-check our user data is valid

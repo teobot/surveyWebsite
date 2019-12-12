@@ -12,7 +12,7 @@
 //                --
 
 // Inserts the header into the webpage
-require_once "header.php";
+require_once("header.php");
 
 // Check if the user is logged in, if not then tell them to sign in
 if (!isset($_SESSION['loggedIn']))
@@ -60,7 +60,7 @@ else
 
 		<div class="collapse container"  style="border-left: 5px solid lightgreen;" id="create_new_user_form"><br>
 _END;
-		require_once("assets\PHPcomponents\admin_create_user_form.php");
+		require_once("assets/PHPcomponents/admin_create_user_form.php");
 
 		echo<<<_END
 		</div>
@@ -236,5 +236,5 @@ _END;
 
 
 // Inserting the footer into the bottom of the webpage
-require_once "footer.php";
+require_once("footer.php");
 ?>

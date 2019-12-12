@@ -1,5 +1,5 @@
 <?php
-require_once "header.php";
+require_once("header.php");
 
 echo <<<_END
 	<table class="table table-hover">
@@ -22,7 +22,7 @@ _END;
 // NOTE: this last one is VERY IMPORTANT - you need to include test data that enables the markers to test all of your site's functionality
 
 // read in the details of our MySQL server:
-require_once "credentials.php";
+require_once("credentials.php");
 
 // We'll use the procedural (rather than object oriented) mysqli calls
 

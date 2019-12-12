@@ -10,7 +10,7 @@
 //                --
 
 // Execute the header script:
-require_once "header.php";
+require_once("header.php");
 
 
 // Default values for the user input, this way if the $_POST fails
@@ -214,6 +214,6 @@ _END;
 echo $signUpMessage;
 
 // finish off the HTML for this page:
-require_once "footer.php";
+require_once("footer.php");
 
 ?>

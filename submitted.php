@@ -1,5 +1,5 @@
 <?php
-require_once "header.php";
+require_once("header.php");
 echo '<link rel="stylesheet" type="text/css" href="assets/style/submittedStyle.css">';
 
 
@@ -13,5 +13,5 @@ echo<<<_END
 </div>
 _END;
 
-require_once "footer.php";
+require_once("footer.php");
 ?>

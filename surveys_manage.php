@@ -9,7 +9,7 @@
 // REMEMBER: Your admin will want a slightly different view of this page so they can MANAGE all of the users' surveys
 
 // execute the header script:
-require_once "header.php";
+require_once("header.php");
 
 // checks the session variable named 'loggedIn'
 // take note that of the '!' (NOT operator) that precedes the 'isset' function
@@ -100,6 +100,6 @@ _END;
 }
 
 // finish off the HTML for this page:
-require_once "footer.php";
+require_once("footer.php");
 
 ?>
