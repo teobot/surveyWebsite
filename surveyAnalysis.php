@@ -113,10 +113,11 @@ _END;
                                                 {
                                                     if (response === value.choice1) {
                                                         choice1Count++;
+                                                        num_of_resp++;
                                                     } else if (response === value.choice2) {
                                                         choice2Count++;
-                                                    }
-                                                    num_of_resp++;
+                                                        num_of_resp++;
+                                                    }      
                                                 }         
                                             });
 
