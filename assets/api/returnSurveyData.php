@@ -46,7 +46,7 @@ else
 
     // Create the query to get all the surveyIDs from the user table
     $surveyID = $_POST['surveyID'];
-    $surveyQuery = "SELECT survey_id, survey_title, survey_JSON FROM surveys WHERE survey_id = '$surveyID'";
+    $surveyQuery = "SELECT survey_id, survey_title, survey_creator, survey_JSON FROM surveys WHERE survey_id = '$surveyID'";
 
     // Send the query off to the mysql database using the connection details
     $resultQuery = mysqli_query($userConnection, $surveyQuery);
@@ -63,6 +63,7 @@ else
             //Insert return objects into the return array
             $surveyData['survey_id'] = $row["survey_id"];
             $surveyData['survey_title'] = $row["survey_title"];
+            $surveyData['survey_creator'] = $row["survey_creator"];
             $surveyData['survey_JSON'] = json_decode($row["survey_JSON"]);
         }
     } 
