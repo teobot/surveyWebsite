@@ -10,8 +10,6 @@
 //         		  ||
 //                --
 
-// Create a empty return array to populate with all users usernames
-
 // If the API call point has not specified a username value then return NULL
 if (!isset($_POST['username']))
 {
