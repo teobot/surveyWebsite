@@ -33,6 +33,8 @@ _END;
     $result = mysqli_query($connection, $query);
 
     $n = mysqli_num_rows($result);
+    
+    mysqli_close($connection);
 
     if ($n > 0) {
         echo <<<_END
@@ -48,7 +50,7 @@ _END;
 _END;
     }
 
-    mysqli_close($connection);
+    
 
 require_once("footer.php");
 
