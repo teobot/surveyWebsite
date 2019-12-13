@@ -88,11 +88,7 @@ _END;
 				</thead>
 			</table>
 		</div>
-_END;
 
-	// Making a API call to the returnUsers.php API, asking for all the usernames in the database,
-	// And also posting the current username of the logged in user to make sure they're a admin.
-	echo<<<_END
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script>
 			$(document).ready(function() {	
