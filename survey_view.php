@@ -21,21 +21,15 @@ else
 $surveyID = $_GET['surveyID'];
 
 echo<<<_END
-    <div class="alert alert-danger" id="errorMessage" style="display: none;">
+    <div class="alert alert-danger" id="errorMessage" style="display: none;"></div>
+
+    <div class="text-center">
+        <div><h1 id="surveyTitle">Loading...</h1></div>
+        <div><small id="surveyCreator">Loading...</small></div>
+        <div id="questionsContainer" class="col-md-8 offset-md-2" >Loading...</div>
     </div>
-_END;
 
-echo '<div class="text-center">';
-
-echo '<div><h1 id="surveyTitle">Loading...</h1></div>';
-echo '<div><small id="surveyCreator">Loading...</small></div>';
-
-echo '<div id="questionsContainer" class="col-md-8 offset-md-2" >Loading...</div>';
-
-echo '</div>';
-
-echo<<<_END
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>
         $(document).ready(function() {	
             // start checking for updates:
