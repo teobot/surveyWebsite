@@ -24,7 +24,7 @@ if(isset($_GET['surveyID']))
   <script src="assets/javascript/questionCreation.js"></script>
   <script>
     $(document).ready(function(){
-      $.post('assets/api/checkSurvey_Creator.php', {surveyID: '$surveyID', username: '$username' })
+      $.post('assets/api/checkSurveyCreator.php', {surveyID: '$surveyID', username: '$username' })
         .done(function(data) {
         
           $.post('assets/api/returnSurveyData.php', {surveyID: '$surveyID' })
