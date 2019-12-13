@@ -1,8 +1,13 @@
 <?php 
-//INPUTS
-// username
-// array of account data
+//    Page Name - || insertNewAccount.php
+//                --
+// Page Purpose - || This checks if the user is a admin, then checks if the new account data is valid before inserting
+//                --
+//        Notes - || wants:
+//         		  || username, a array of new account information
+//                --
 
+// Set starting boolean variables
 $isDataValid = false;
 $isDataLongEnough = false;
 $isUserAdmin = false;
@@ -69,6 +74,7 @@ else
     }
 
     try {
+        // Sanitize all the data
         $username_val = sanitiseStrip($accountData[0]->value, $conn);
         $password_val = sanitiseStrip($accountData[1]->value, $conn);
         $firstname_val = sanitiseStrip($accountData[2]->value, $conn);
@@ -85,7 +91,9 @@ else
         $dob_err = validateDate($dob_val);
         $telephoneNumber_err = validateTelephoneNumber($telephoneNumber_val, 9);
         $email_err = validateEmail($email_val, 1, 64, "Email");
+        // ... 
 
+        // check for errors
         $errors = $username_err . $password_err . $email_err . $firstname_err . $surname_err . $dob_err . $telephoneNumber_err;
 	
         if ($errors == "")

@@ -1,4 +1,12 @@
 <?php
+//    Page Name - || updateUserAccountType.php
+//                --
+// Page Purpose - || This checks if the user is a admin, and that the target user exists as well as if the account type is valid.
+//                || If so then the account type is changed.
+//                --
+//        Notes - || wants:
+//         		  || target username, users username and acccountType (admin or default)
+//                --
 $isUserAdmin = false;
 $doesVariablesExist = false;
 $isUserChangeExist = false;

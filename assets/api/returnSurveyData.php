@@ -1,13 +1,10 @@
 <?php
-//    Page Name - || returnUsers.php
+//    Page Name - || returnSurveyData.php
 //                --
-// Page Purpose - || When the admin goes to the admin tools page, a javascript function will request all the current users
-//                || usernames from this API, if a username is specified and the username is the admin then it will
-//         		  || connect to the database, retrieve all the usernames of the users and encode them in JSON format before 
-//         		  || returning it back to the API call point. Otherwise, it will return nothing.
+// Page Purpose - || This returns the question and survey data from the given surveyID
 //                --
-//        Notes - || This is a API to retrieve all the user usernames from the database
-//         		  || NEED TO POST A SURVEYID
+//        Notes - || wants:
+//         		  || surveyID
 //                --
 
 // Create a empty return array to populate with all users usernames
