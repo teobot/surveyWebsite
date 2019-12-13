@@ -23,9 +23,9 @@ $surveyID = $_GET['surveyID'];
 echo<<<_END
     <div class="alert alert-danger" id="errorMessage" style="display: none;"></div>
 
-    <div class="text-center">
+    <div id="surveyDisplay" class="text-center">
         <div><h1 id="surveyTitle">Loading...</h1></div>
-        <div><small id="surveyCreator">Loading...</small></div>
+        <div id="SurveyCreatorSmall"><small id="surveyCreator">Loading...</small></div>
         <div id="questionsContainer" class="col-md-8 offset-md-2" >Loading...</div>
     </div>
 
@@ -83,6 +83,14 @@ echo<<<_END
                 })
                 .fail(function(jqXHR) {
                     // debug message to help during development:
+                    if (jqXHR.status === 400) 
+                    {
+                        $('#surveyTitle').remove();
+                        $('#SurveyCreatorSmall').remove();
+                        $('#questionsContainer').remove();
+
+                        $('#surveyDisplay').append('<div class="jumbotron jumbotron-fluid"><div class="container"><h1 class="display-4">This Survey Does not Exist!</h1><p class="lead">Make sure the survey ID is correct!</p></div></div>');
+                    }
                     console.log('request returned failure, HTTP status code ' + jqXHR.status);
                 })   
         }
