@@ -14,15 +14,14 @@ if (!isset($_SESSION['loggedIn']))
 // the user must be signed-in, show them suitable page content
 else
 {
-    echo '<div id="error_message" style="display: none;" class="alert alert-danger" role="alert"></div>';
-    echo<<<_END
-    <div id='surveyResponses' class='col-md-8 offset-md-2'>
-    </div>
-_END;
-
     $username = $_SESSION['username'];
     $surveyID = $_GET['surveyID'];
-	echo<<<_END
+
+    echo<<<_END
+    <div id="error_message" style="display: none;" class="alert alert-danger" role="alert"></div>
+
+    <div id='surveyResponses' class='col-md-8 offset-md-2'></div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="assets/javascript/convertJSONToCsv.js"></script>
@@ -39,16 +38,14 @@ _END;
                 timer();
 
                 function timer() {
-                    if(counter == 0) {
+                    if(counter == 0) 
+                    {
                         counter = 15;
                     }
-
                     $('#timeToNextUpdate').text("Updating in : " + counter);
                     counter--;
                     setTimeout(timer, 1000);
-                }
-
-                
+                }    
             }
 
             function getResponses() {
@@ -138,7 +135,6 @@ _END;
                                                 // Instantiate and draw our chart, passing in some options.
                                                 var chart = new google.visualization.PieChart(document.getElementById(divLocation));
                                                 chart.draw(data, options);
-                                
                                             }                                        
 
                                         } else if (value.inputType == "text") {
@@ -306,7 +302,7 @@ _END;
                         document.getElementById("error_message").style.display= 'block';
                         document.getElementById('error_message').innerHTML = jqXHR.responseJSON[0];
                     });
-				//setTimeout(getResponses, 15000);
+				setTimeout(getResponses, 15000);
             }
         </script>
 _END;
