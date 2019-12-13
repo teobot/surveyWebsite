@@ -21,6 +21,9 @@ echo<<<_END
 
         Its made primarily from PHP, <br>
         It also uses HTML, CSS, Javascript, Bootstrap and JQuery.
+        
+        <br><br>
+        To get started make sure the database exists by using the <a href="create_data.php">Link!</a>
     </p>
   </div>
 </div>
@@ -52,7 +55,7 @@ _END;
     {
         echo <<<_END
         <div class="alert alert-success" role="alert">
-            Database and data exist, Welcome! You can reset <a href="create_data.php">Here</a>
+            Database and data exist, You can reset <a href="create_data.php">Here</a>
         </div>    
 _END;
     }
