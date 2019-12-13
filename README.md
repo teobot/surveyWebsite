@@ -2,6 +2,71 @@
 ## Created by Theo Jed Barber Clapperton
 ### Student id: 18055445
 
+## My Website
+> Welcome! This is my Survey Creating website, Unlike other websites this one,
+
+> Allows the user to create surveys with as MANY questions as they like,
+
+> I do this by inserting the data from a survey into a JSON array of objects and insert that into a database column that has the data type "JSON" or "LongText" (Both are the same), 
+> which doesn't need a maximum length.
+
+> This allows me to insert an array of questions that I can iterate over displaying every question the users creates. I do similar with the responses, meaning the survey can have 1 response or 1000+ responses.
+
+> 
+
+## Setup
+> Once the website is loaded on the index/landing page, use the create data button to insert the data,
+> The bar at the Index page will warn you if it can't find the database, It will turn green when it can see the db.
+
+## Documentation On Each Page
+### account.php - [ ] Commented and Checked?
+>
+### admin_Account_Edit.php - [ ] Commented and Checked?
+>
+### Admin.php - [ ] Commented and Checked?
+>
+### competitors.php - [ ] Commented and Checked?
+>
+### create_data.php - [ ] Commented and Checked?
+>
+### credentials.php - [ ] Commented and Checked?
+>
+### footer.php - [ ] Commented and Checked?
+>
+### header.php - [ ] Commented and Checked?
+>
+### index.php - [ ] Commented and Checked?
+>
+### sign_in.php - [ ] Commented and Checked?
+>
+### sign_out.php - [ ] Commented and Checked?
+>
+### sign_up.php - [ ] Commented and Checked?
+>
+### submitted.php - [ ] Commented and Checked?
+>
+### survey_view.php - [ ] Commented and Checked?
+>
+### survey_Analysis.php - [ ] Commented and Checked?
+>
+### survey_Creator.php - [ ] Commented and Checked?
+>
+### surveys_Manage.php - [ ] Commented and Checked?
+>
+### validation_Checker.php - [ ] Commented and Checked?
+>
+
+
+You should include a README.txt file as part of your submission. This should include details on how to set
+up your submission (e.g., “run create_data.php”, “navigate to login.php”, a username/password to log in
+with, etc.) and documentation for how your site works. The documentation doesn’t need to be very long,
+but it does need to clearly explain what your site can do, covering all its individual pages.
+
+A useful tip is to break the documentation up into sections for each of the features in the mark scheme
+(User Accounts, Design and Analysis, Survey Management, Survey Results) and briefly describe how each
+feature works. Once you have completed the documentation for each feature you have addressed, you
+should naturally find you have described all of the pages in your site.
+
 ### TO DO BY RELEASE
 - [x] User can download survey responses
 - [x] survey editor
@@ -15,7 +80,7 @@
 - [x] Finished Survey Monkey Forms
 - - [x] Added Images
 - - [x] Completed Text
-- [ ] Finish a conclusion page
+- [x] Finish a conclusion page
 - [ ] Comment all code
 - [x] Updated questions to not show responses
 - [x] Admins can now create new accounts
@@ -79,10 +144,3 @@
 - - [x] signUp.php
 - - [x] surveyView.php
 - [x] on the suvrey page when pressing enter it crashes.
-
-SETUP:
-...
-
-
-DOCUMENTATION:
-...
