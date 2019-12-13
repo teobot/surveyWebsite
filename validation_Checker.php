@@ -73,6 +73,10 @@ function validateUsername($field, $minlength, $maxlength, $connection, $name) {
 
 	if ( validateString($field, $minlength, $maxlength, $name) == "" ) 
 	{
+		if ($field === "everyone")
+		{
+			return "<div class='alert alert-danger' role='alert'>Username not available!</div>";
+		}
 		$query = "SELECT * FROM users WHERE username = '$field' ";
 		$result = $connection->query($query);
 
