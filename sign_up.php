@@ -90,7 +90,7 @@ elseif ( isset($_POST['username']) )
 	// Check if there are any validation messages and if validation passed with no errors then insert into database:
 	if ($errors == "")
 	{
-		
+		$password_val = sha1($password_val);
 		// Create the query string to insert the user data into the users table:
 		$query = "INSERT INTO users (username, password, firstname, surname, email, dob, telephoneNumber) VALUES ('$username_val', '$password_val', '$firstname_val', '$surname_val', '$email_val', '$dob_val', '07$telephoneNumber_val');";
 

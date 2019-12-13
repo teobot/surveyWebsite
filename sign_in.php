@@ -21,8 +21,8 @@ require_once("header.php");
 $username = "";
 $password = "";
 // strings to hold any validation error messages:
-$username_val = "";
-$password_val = "";
+$username_err = "";
+$password_err = "";
 
 // should we show the signin form:
 $show_signin_form = false;
@@ -59,17 +59,18 @@ elseif ( (isset($_POST['username'])) && (isset($_POST['password'])) )
 	
 	// now validate the data (both strings must be between 1 and 16 characters long):
 	// (reasons: we don't want empty credentials, and we used VARCHAR(16) in the database table)
-	$username_val = validateString($username, 1, 16, "Username");
-	$password_val = validateString($password, 1, 16, "Password");
+	$username_err = validateString($username, 1, 16, "Username");
+	$password_err = validateString($password, 1, 16, "Password");
 	
 	// concatenate all the validation results together ($errors will only be empty if ALL the data is valid):
-	$errors = $username_val . $password_val;
+	$errors = $username_err . $password_err;
 	
 	// check that all the validation tests passed before going to the database:
 	if ($errors == "")
 	{
 
-		$query = "SELECT * FROM `users` WHERE `username` LIKE '$username' AND `password` LIKE '$password'";
+		$password = sha1($password);
+		$query = "SELECT username, password FROM `users` WHERE `username` LIKE '$username' AND `password` LIKE '$password'";
 
 		// this query can return data ($result is an identifier):
     	$result = mysqli_query($connection, $query);
@@ -127,11 +128,11 @@ echo <<<_END
 	<form class="form container" action="sign_in.php" method="post">
 		<div class="form-group">
 			<label for="usernameInput">Username:</label>
-			<input class="form-control" type="text" name="username" maxlength="16" min="1" value="$username" required> $username_val
+			<input class="form-control" type="text" name="username" maxlength="16" min="1" value="$username" required> $username_err
 		</div>
 		<div class="form-group">
 			<label for="InputPassword">Password:</label>
-			<input class="form-control" type="password" name="password" maxlength="16" value="$password" required> $password_val
+			<input class="form-control" type="password" name="password" maxlength="16" required> $password_err
 		</div>
 		<button type="submit" value="Submit" class="btn btn-primary">Submit</button>
 	</form>

@@ -81,8 +81,7 @@ elseif ( (isset($_POST['password'])) || (isset($_POST['firstname'])) || (isset($
 		// read their username from the session:
 		$username = $_SESSION["username"];
 		
-		// check to see if this user already had a favourite:
-		$query = "SELECT `username`, `password`, `firstname`, `surname`, `email`, `dob`, `telephoneNumber` FROM `users` WHERE username='$username'";
+		$query = "SELECT `username` FROM `users` WHERE username='$username'";
 		
 		// this query can return data ($result is an identifier):
 		$result = mysqli_query($connection, $query);
@@ -94,6 +93,7 @@ elseif ( (isset($_POST['password'])) || (isset($_POST['firstname'])) || (isset($
 		if ($n > 0)
 		{
 			// we need an UPDATE:
+			$password = sha1($password);
 			$query = "UPDATE `users` SET `password` = '$password', `firstname` = '$firstname', `surname` = '$surname', `email` = '$email', `dob` = '$dateOfBirth', `telephoneNumber` = '07$telephoneNumber' WHERE `users`.`username` = '$username'";
 			$result = mysqli_query($connection, $query);		
 		}
@@ -137,8 +137,7 @@ else
 		die("Connection failed: " . $mysqli_connect_error);
 	}
 	
-	// check for a row in our profiles table with a matching username:
-	$query = "SELECT `username`, `password`, `firstname`, `surname`, `email`, `dob`, `telephoneNumber` FROM `users` WHERE username='$username'";
+	$query = "SELECT `username`, `firstname`, `surname`, `email`, `dob`, `telephoneNumber` FROM `users` WHERE username='$username'";
 	
 	// this query can return data ($result is an identifier):
 	$result = mysqli_query($connection, $query);
@@ -151,7 +150,6 @@ else
 		// use the identifier to fetch one row as an associative array (elements named after columns):
 		$row = mysqli_fetch_assoc($result);
 		// extract their profile data for use in the HTML:
-		$password = $row['password'];
 		$firstname = $row['firstname'];
 		$surname = $row['surname'];
 		$telephoneNumber = substr($row['telephoneNumber'], 2);
@@ -186,7 +184,7 @@ echo<<<_END
 				</div>
 				<div class="col">
 					<label><p class="h6">Password:</p></label>
-					<input maxlength="16" min="1" type="text" required name="password" class="form-control" value="$password">
+					<input maxlength="16" min="1" type="text" required name="password" class="form-control">
 				</div>
 			</div><hr>
 			<div class="row">

@@ -123,7 +123,7 @@ $sql = "
 	CREATE TABLE users 
 		(
 			username VARCHAR(16), 
-			password VARCHAR(16), 
+			password VARCHAR(40), 
 			firstname VARCHAR(32), 
 			surname VARCHAR(64), 
 			email VARCHAR(64),
@@ -154,7 +154,7 @@ else
 // put some data in our table:
 // create an array variable for each field in the DB that we want to populate
 $usernames[] = 'barrym'; 
-	$passwords[] = 'letmein'; 
+	$passwords[] = 'b7a875fc1ea228b9061041b7cec4bd3c52ab3ce3'; 
 	$firstnames[] = 'Barry'; 
 	$surnames[] = 'Misstop'; 
 	$emails[] = 'barry@m-domain.com'; 
@@ -163,7 +163,7 @@ $usernames[] = 'barrym';
 	$accountType[] = "default";
 
 $usernames[] = 'mandyb'; 
-	$passwords[] = 'abc123'; 
+	$passwords[] = '6367c48dd193d56ea7b0baad25b19455e529f5ee'; 
 	$firstnames[] = 'Mandy'; 
 	$surnames[] = 'Bless'; 
 	$emails[] = 'webmaster@mandy-g.co.uk'; 
@@ -172,7 +172,7 @@ $usernames[] = 'mandyb';
 	$accountType[] = "default";
 
 $usernames[] = 'timmy'; 
-	$passwords[] = 'secret95'; 
+	$passwords[] = '6012303c7834d8c34d4183e8bec279e25fa2a421'; 
 	$firstnames[] = 'Timmy'; 
 	$surnames[] = 'Stoke'; 
 	$emails[] = 'timmy@lassie.com'; 
@@ -181,7 +181,7 @@ $usernames[] = 'timmy';
 	$accountType[] = "default";
 
 $usernames[] = 'admin'; 
-	$passwords[] = 'secret'; 
+	$passwords[] = 'e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4'; 
 	$firstnames[] = 'Theo'; 
 	$surnames[] = 'Clapperton'; 
 	$emails[] = 'totallyRealEmail@real.com'; 
@@ -190,7 +190,7 @@ $usernames[] = 'admin';
 	$accountType[] = "admin";
 
 $usernames[] = 'bonfire'; 
-	$passwords[] = 'getout1'; 
+	$passwords[] = 'ace40b39d09f50e370c71abb292183bbf73ddceb'; 
 	$firstnames[] = 'Joe'; 
 	$surnames[] = 'Dover'; 
 	$emails[] = 'johnMarsden@red.com'; 
