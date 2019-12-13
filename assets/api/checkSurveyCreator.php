@@ -47,9 +47,10 @@ else
 
     $userCreator = false;
     $userAdmin = false;
+    $surveyForEveryone = false;
 
     //CHECK IF THE USER IS THE SURVEY CREATOR
-        $sql = "SELECT `survey_creator` FROM `surveys` WHERE `survey_id` = $surveyId AND `survey_creator` = '$username'";
+        $sql = "SELECT `survey_creator` FROM `surveys` WHERE `survey_id` = $surveyId AND `survey_creator` IN ('$username', 'everyone')";
         $checkSurveyCreator = mysqli_query($CheckerConnection, $sql);
 
         if (!empty($checkSurveyCreator))
@@ -74,7 +75,7 @@ else
     //---------------------------------------
     
     //DELETE THE SURVEY
-    if ($userCreator || $userAdmin) {
+    if ($userCreator || $userAdmin || $surveyForEveryone) {
         // Set the error response code to 500 meaning 'Interal Server Error'
         header("Content-Type: application/json", NULL, 201);
         // Encode the current empty array and return it
