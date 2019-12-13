@@ -55,7 +55,7 @@ else
     $resultQueryRows = mysqli_num_rows($resultQuery);
 
     // If nothing is returned, return error code 400 otherwise insert the db.data into the return.data
-    if ($resultQueryRows > 0) 
+    if (!empty($resultQueryRows)) 
     {
         // For each of the usernames push them into the return array
         while($row = $resultQuery->fetch_assoc()) 
@@ -66,14 +66,15 @@ else
             $surveyData['survey_creator'] = $row["survey_creator"];
             $surveyData['survey_JSON'] = json_decode($row["survey_JSON"]);
         }
-    } 
-    
+    }  
     else 
     {
         // If nothing returned, set the error response code to 400 meaning 'bad request'
         header("Content-Type: application/json", NULL, 400);
         // Encode the empty array and return
-        echo json_encode($return);           
+        $userConnection->close();
+        echo "survey does not exist!";
+        exit;          
     }
 
     // close the connection when finished getting data
