@@ -1,13 +1,16 @@
 <?php
+//    Page Name - || footer.php
+//                --
+// Page Purpose - || This is the footer of the html page
+//                --
+//        Notes - ||
+//                --
 
-// Things to notice:
-// This script is called by every other script (via require_once)
-// It finishes outputting the HTML for this page:
-// don't forget to add your own name and student number to the footer
-
+// Create variables for my id and name
 $student_name = "Theo Jed Barber Clapperton";
 $student_id = "18055445";
 
+// Insert the end of the webpage into the website
 echo <<<_END
     <br>
 		&copy;6G5Z2107 - Created By: $student_name - StudentNumber: $student_id - 2019/20

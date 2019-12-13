@@ -1,13 +1,14 @@
 <?php
+//    Page Name - || validation_checker.php
+//                --
+// Page Purpose - || This is the validation functions to check through inputted data
+//                --
+//        Notes - || This page is where all the functions to validate data are stored.
+//                --
+
 require_once("credentials.php");
-// Things to notice:
-// This script holds the sanitisation function that we pass all our user data to
-// This script holds the validation functions that double-check our user data is valid
-// You can add new PHP functions to validate different kinds of user data (e.g., emails, dates) by following the same convention:
-// if the data is valid return an empty string, if the data is invalid return a help message
-// You are encouraged to create/add your own PHP functions here to make frequently used code easier to handle
 
-
+// This decides what validation the string should be checked against
 function selectValidation($stringToCheck, $datatype) {
 	if ($datatype == "text")
 	{
@@ -18,10 +19,20 @@ function selectValidation($stringToCheck, $datatype) {
 	{
 		return validateInt($stringToCheck, 1, 9999999);	
 	}
+
+	elseif ($datatype == "date")
+	{
+		return validateDate($stringToCheck);	
+	}
+
+	elseif ($datatype == "email")
+	{
+		return validateEmail($stringToCheck, 0, 64, $stringToCheck);	
+	}
 		
 	return "";
 }
-// function to sanitise (clean) user data:
+// function to sanitize (clean) user data:
 function sanitise($str, $connection)
 {
 	if (get_magic_quotes_gpc())
@@ -38,7 +49,7 @@ function sanitise($str, $connection)
 	return $str;
 }
 
-// function to sanitise (clean) user data:
+// function to both remove certain characters and sanitize
 function sanitiseStrip($str, $connection)
 {
 	$str = preg_replace("/[^a-zA-Z0-9!?#@.,\s]/", "", $str);
@@ -47,6 +58,7 @@ function sanitiseStrip($str, $connection)
 	return $str;
 }
 
+// function to check if a email is valid
 function validateEmail($field, $minlength, $maxlength, $name) {
     if (strlen($field)<$minlength) 
     {
@@ -69,6 +81,7 @@ function validateEmail($field, $minlength, $maxlength, $name) {
     return ""; 
 }
 
+// This checks if the user name is both valid and not already taken
 function validateUsername($field, $minlength, $maxlength, $connection, $name) {
 
 	if ( validateString($field, $minlength, $maxlength, $name) == "" ) 

@@ -1,6 +1,16 @@
 <?php
+//    Page Name - || create_data.php
+//                --
+// Page Purpose - || This is the page that creates the database and insert the data
+//                --
+//        Notes - || For each section I run the query and output the success
+//         		  ||
+//                --
+
+//Insert the header
 require_once("header.php");
 
+//Create a table
 echo <<<_END
 	<table class="table table-hover">
 	<thead>
@@ -12,14 +22,6 @@ echo <<<_END
 	</thead>
 	<tbody>
 _END;
-
-// Things to notice:
-// This file is the first one we will run when we mark your submission
-// Its job is to: 
-// Create your database (currently called "skeleton", see credentials.php)... 
-// Create all the tables you will need inside your database (currently it makes a simple "users" table, you will probably need more and will want to expand fields in the users table to meet the assignment specification)... 
-// Create suitable test data for each of those tables 
-// NOTE: this last one is VERY IMPORTANT - you need to include test data that enables the markers to test all of your site's functionality
 
 // read in the details of our MySQL server:
 require_once("credentials.php");
@@ -278,6 +280,7 @@ _END;
 		die("Error creating table: " . mysqli_error($connection));
 	}
 
+	//Create my question objects to be inserted
 	$allUsersSurveys[] = (object) array(
 		'title' => 'Fullname?',
 		'label' => 'Please enter your full name!',
@@ -316,6 +319,7 @@ _END;
 		die("Connection failed: " . $conn->connect_error);
 	}
 	
+	// Encode the question data nad insert that and the responses into the database
 	$json = json_encode($allUsersSurveys);
 	$responsestring = '[["Theo Flappery","theoflappery@gmail.com","21","19980206","Coke"],["Flow Dry","flowdry@gmail.com","23","19991114","Fanta"],["Sillie Floucher","silfloucher@gmail.com","20","19990114","Coke"],["Jerky Tastier","jerkytastier@gmail.com","27","19900505","Coke"],["Richard Folerton","richfolderton@gmail.com","40","19710125","Coke"]]';
 	$creator = "everyone";

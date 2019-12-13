@@ -1,7 +1,15 @@
 <?php
+//    Page Name - || survey_Analysis.php
+//                --
+// Page Purpose - || This collects the response data from a form and displays it for the users
+//                --
+//        Notes - ||
+//         		  ||
+//                --
 
 // execute the header script:
 require_once("header.php");
+// Import custom styling
 echo '<link rel="stylesheet" type="text/css" href="assets/style/analysisStyle.css">';
 
 // checks the session variable named 'loggedIn'
@@ -17,6 +25,9 @@ else
     $username = $_SESSION['username'];
     $surveyID = $_GET['surveyID'];
 
+    //Here The data from the response is collected using APIS,
+    // I use javascript to create graphs and section cards, based on the question type
+    // e.g. a number question type will return a graph showing different stats as well as the raw information
     echo<<<_END
     <div id="error_message" style="display: none;" class="alert alert-danger" role="alert"></div>
 
@@ -92,13 +103,17 @@ else
                                     
                                         if (value.inputType == "multipleChoice") {
 
+                                            var divLocation = value.title;
+
                                             var responseSection = document.createElement("div");
                                             responseSection.className = "responses text-center";
-                                            var divLocation = value.title;
-                                            $(responseSection).append('<div class="d-flex justify-content-center" id="'+divLocation+'"></div>');
+                                            responseSection.id = "dashboard_" + divLocation;
+                                            
+                                            $(responseSection).append('<div class="d-flex justify-content-center" id="filter_'+divLocation+'"></div>');
+                                            $(responseSection).append('<div class="d-flex justify-content-center" id="chart_'+divLocation+'"></div>');
                                             $( "#surveyResponses" ).append(responseSection); 
 
-                                            google.charts.load('current', {'packages':['corechart']});
+                                            google.charts.load('current', {'packages':['corechart', 'controls']});
                                             google.charts.setOnLoadCallback(drawChart);
 
                                             var choice1Count = 0;
@@ -133,8 +148,26 @@ else
                                                 };
                                         
                                                 // Instantiate and draw our chart, passing in some options.
-                                                var chart = new google.visualization.PieChart(document.getElementById(divLocation));
+                                                var chart = new google.visualization.PieChart(document.getElementById("chart_" + divLocation));
                                                 chart.draw(data, options);
+
+                                                var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_' + divLocation));
+
+                                                var slider = new google.visualization.ControlWrapper({
+                                                    'controlType': 'NumberRangeFilter',
+                                                    'containerId': 'filter_' + divLocation,
+                                                    'options': {
+                                                        'filterColumnLabel': 'Count'
+                                                    }
+                                                });
+
+                                                var pieChart = new google.visualization.ChartWrapper({
+                                                    'chartType': 'PieChart',
+                                                    'containerId': 'chart_' + divLocation,
+                                                }); 
+
+                                                dashboard.bind(slider, pieChart);
+                                                dashboard.draw(data);
                                             }                                        
 
                                         } else if (value.inputType == "text") {
@@ -164,9 +197,6 @@ else
                                             $( "#surveyResponses" ).append(responseSection);    
     
                                         } else if (value.inputType == "number") {
-
-                                            var responseSection = document.createElement("div");
-                                            responseSection.className = "responses text-center";
 
                                             var average = 0;
                                             var range = 0;
@@ -198,13 +228,20 @@ else
                                             average = (total/num_of_resp).toFixed(2);
                                             range  = highest - lowest;
 
-                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small><small style='font-size: 60%;' class='form-text text-muted'> Total Respondents : "+num_of_resp+"</small></p>");
-                                            $(responseSection).append("<div class='text-center' id='"+ value.title +"'></div>");
+                                            var responseSection = document.createElement("div");
+                                            responseSection.className = "responses text-center";
+                                            responseSection.id = "dashboard_"+ value.title;
 
-                                            google.charts.load('current', {'packages':['bar']});
+                                            $(responseSection).append("<div><p class='lead text-left'>"+surveyArray.title+" : <small>"+surveyArray.label+"</small><small style='font-size: 60%;' class='form-text text-muted'> Total Respondents : "+num_of_resp+"</small></p>");
+                                            $(responseSection).append("<div class='text-center' id='filter_" + value.title +"'></div>");
+                                            $(responseSection).append("<div class='text-center' id='chart_" + value.title +"'></div>");
+                                            
+
+                                            google.charts.load('current', {'packages':['corechart', 'controls']});
                                             google.charts.setOnLoadCallback(drawStuff);
 
                                             function drawStuff() {
+
                                                 var data = new google.visualization.arrayToDataTable([
                                                     ['Statistics', 'Value'],
                                                     ["lowest", lowest],
@@ -216,12 +253,8 @@ else
                                                 ]);
 
                                                 var options = {
-                                                    title: 'Chess opening moves',
+                                                    title: 'Question Statistics',
                                                     width: '100%',
-                                                    chartArea: {
-                                                        // leave room for y-axis labels
-                                                        width: '94%'
-                                                      },
                                                     legend: { position: 'none' },
                                                     bars: 'horizontal',
                                                     axes: {
@@ -231,8 +264,27 @@ else
                                                     },
                                                   };
                                           
-                                                  var chart = new google.charts.Bar(document.getElementById(value.title));
-                                                  chart.draw(data, options);
+                                                var chart = new google.visualization.BarChart(document.getElementById("chart_" + value.title));
+                                                chart.draw(data, options);
+
+                                                var dashboard = new google.visualization.Dashboard(document.getElementById("dashboard_" + value.title));
+
+                                                var slider = new google.visualization.ControlWrapper({
+                                                    'controlType': 'NumberRangeFilter',
+                                                    'containerId': 'filter_' + value.title,
+                                                    'options': {
+                                                    'filterColumnLabel': 'Value'
+                                                    }
+                                                });
+
+                                                var BarChart = new google.visualization.ChartWrapper({
+                                                    'chartType': 'BarChart',
+                                                    'containerId': 'chart_' + value.title,
+                                             }); 
+
+                                                dashboard.bind(slider, BarChart);
+                                                dashboard.draw(data);
+                                              
                                             };
 
                                             $.each(responsesArray, function(index, response) {

@@ -1,4 +1,13 @@
 <?php
+////    Page Name - || header.php
+//                --
+// Page Purpose - || This is the start of the website,
+//                --
+//        Notes - || My nav bar is inserted here
+//         		  ||
+//                --
+
+// Start the website html tag
 echo<<<_END
 <!DOCTYPE html>
 <html>
@@ -9,13 +18,6 @@ echo<<<_END
 	</head>
 		<div class="container-fluid">
 _END;
-
-// Things to notice:
-// This script is called by every other script (via require_once)
-// It begins the HTML output, with the customary tags, that will produce each of the pages on the web site
-// It starts the session and displays a different set of menu links depending on whether the user is logged in or not...
-// ... And, if they are logged in, whether or not they are the admin
-// It also reads in the credentials for our database connection from credentials.php
 
 // database connection details:
 require_once("credentials.php");
@@ -61,17 +63,20 @@ _END;
 
     $username = $_SESSION['username'];
     
-    //IF THE USER IS NOT A ADMIN THEN EXIT
+    // create a new query checking if the user is a admin and return the results
     $sql = "SELECT * FROM `users` WHERE `username` = '$username' AND `accountType` = 'admin'";
     $checkAccountType = mysqli_query($checkAdmin, $sql);
 	$checkAccountResult = mysqli_num_rows($checkAccountType);
 	$checkAdmin->close();
+	// ...
 
+	// If not empty the user must be a admin so display the admin tools bar
     if (!empty($checkAccountResult))
 	{
 		echo '<li class="nav-item"><a class="nav-link" href="admin.php">Admin Tools</a></li>';
 	}
 	
+	//Display the sign out feature last
 echo<<<_END
 		<li class="nav-item">
 			<a class="nav-link" href="sign_out.php">Sign Out ({$_SESSION['username']})</a>
@@ -102,6 +107,7 @@ echo <<<_END
 _END;
 }
 
+// Insert a container and header to the website
 echo <<<_END
 </div>
 	<body>

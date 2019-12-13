@@ -1,9 +1,19 @@
 <?php
+//    Page Name - || submitted.php
+//                --
+// Page Purpose - || This is just a success message if the user correctly submits a form
+//                --
+//        Notes - ||
+//         		    ||
+//                --
+
+
 require_once("header.php");
-echo '<link rel="stylesheet" type="text/css" href="assets/style/submittedStyle.css">';
 
-
+// Insert a success message into the webpage
 echo<<<_END
+<link rel="stylesheet" type="text/css" href="assets/style/submittedStyle.css">
+
 <div class="jumbotron" id="successSubmit">
   <h1 class="display-4">Submitted Successfully!</h1>
   <p class="lead">We received your data successfully! Please follow the link below to return to the Homepage!</p>

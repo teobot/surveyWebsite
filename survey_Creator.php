@@ -1,8 +1,16 @@
 <?php
+//    Page Name - || survey_creator.php
+//                --
+// Page Purpose - || This is the survey creator 
+//                --
+//        Notes - || This page also acts like a editor, if the user submits a surveyID with the page.
+//         		    || It will check if the user can edit that page and pre-populate the page with the existing questions
+//                --
 
 // execute the header script:
 require_once("header.php");
 
+// import custom styling
 echo '<link rel="stylesheet" type="text/css" href="assets/style/surveyStyle.css">';
 
 // finish off the HTML for this page:
@@ -16,6 +24,8 @@ else
 
 $surveyID = "noneSet";
 
+// If the survey ID is set in the GET then the user wants to edit the data,
+// Its send to a API that returns the questions from the survey for editing
 if(isset($_GET['surveyID']))
 {
   $surveyID = $_GET['surveyID'];
@@ -35,7 +45,6 @@ if(isset($_GET['surveyID']))
               $('#submitSurvey').data('process',"update");
               
               $.each(data.survey_JSON, function( key, value ) {
-                console.log(value);
                 if(value.inputType === "multipleChoice")
                 {
                   $( "#currentQuestions" ).append(createMultipleChoiceQuestion(value.title,value.label,value.choice1,value.choice2));
@@ -60,6 +69,11 @@ if(isset($_GET['surveyID']))
 _END;
 }
 
+$username = $_SESSION['username'];
+// The users wants to create a new survey
+// The user can insert new questions using the buttons,
+// once the submit button is clicked the questions are converted to a json array, 
+// This is sent to another API that checks if its valid. if so its inserted
 echo<<<_END
 <div class='text-center'>
   <div class="container">
@@ -101,10 +115,7 @@ echo<<<_END
   </div>
 
 </div>
-_END;
 
-$username = $_SESSION['username'];
-echo<<<_END
 <script src="assets/javascript/questionCreation.js"></script>
 <script>
   $(document).ready(function(){

@@ -1,9 +1,17 @@
 <?php
+//    Page Name - || survey_view.php
+//                --
+// Page Purpose - || This is where the user can view a survey and fill it out and submit their data
+//                --
+//        Notes - ||
+//         		  ||
+//                --
+
 // execute the header script:
 require_once("header.php");
 echo '<link rel="stylesheet" type="text/css" href="assets/style/surveyView.css">';
 
-
+// Check if the surveyID is set
 if (!isset($_GET['surveyID']))
 {
 echo<<<_END
@@ -14,12 +22,16 @@ echo<<<_END
   </div>
 </div>
 _END;
-
 }
+//If the survey id is set then display the survey
 else 
 {
+//Get the survey ID
 $surveyID = $_GET['surveyID'];
 
+// Here post the survey ID to a API and return all the questions, I then display these
+// questions based on the input type and when the user clicks submit the data is sent to another
+// API that checks if its valid and if its correct it sends the response into the db and tells the user it was successful
 echo<<<_END
     <div class="alert alert-danger" id="errorMessage" style="display: none;"></div>
 

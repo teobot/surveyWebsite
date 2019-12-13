@@ -14,40 +14,51 @@
 // Inserts the header into the webpage
 require_once("header.php");
 
-// Check if the user is logged in, if not then tell them to sign in
+// Check if the user is logged in from the session variable
 if (!isset($_SESSION['loggedIn']))
 {
-	// The user is not logged in, Tell them to go sign in
+	// Display the message as the user is not logged in
 	echo "<div class='col-md-6 offset-md-3 text-center'><div class='alert alert-success' role='alert'>You are already logged in, please log out first.</div></div>";
 }
 // The user is logged in so can view the page if them are a admin
 else
 {
+	// The user has to be a admin to view this page, If they are allow access
 	$isUserAdmin = false;
 
-	// The user has to be a admin to view this page, If they are allow access
+	// Get the username from the session
 	$username = $_SESSION['username'];
 
-	//Check if the user is a admin
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+	//Make a new connection to the database
+	$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+	// If the connection fails then display the error
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
-	}	
+	}
+	// Create a query to get the account type of the user
 	$sql = "SELECT accountType FROM `users` WHERE `username` = '$username'";
+	// send the query to the database and save the return
 	$result = $conn->query($sql);
+	// Get the first and only row back from the result
 	$row = $result->fetch_assoc();
 
+	// If the user is a admin then changed the boolean variable to true
 	if($row['accountType'] === "admin") 
 	{
 		$isUserAdmin = true;
 	}
 	
+	// Close the connection
 	$conn->close();
 	//----------------------------
 
+	// If the user is a admin then they need to view the webpage,
+	// This consists of a form to create a new user,
+	// a search feature
+	// and a table to get all the users information
 	if ($isUserAdmin)
 	{
-		// Creating the table for all of the users information to be displayed in
+		//Here I create the new user button and insert the form into a collapsable area
 		echo<<<_END
 		<div id="error_message" style="display: none;" class="alert alert-danger" role="alert"></div>
 
@@ -60,8 +71,10 @@ else
 
 		<div class="collapse container"  style="border-left: 5px solid lightgreen;" id="create_new_user_form"><br>
 _END;
+
 		require_once("assets/PHPcomponents/admin_create_user_form.php");
 
+		//This displays the search feature and the data table,
 		echo<<<_END
 		</div>
 		
@@ -98,6 +111,9 @@ _END;
 			});
 
 			$('#searchForUser').on('input', function() {
+
+				//This is my search for user function
+
 				var userToFind = $(this).val();
 
 				$.each(users, function(index, value) {
@@ -131,8 +147,9 @@ _END;
 			});
 
 			$(document).on('click', '#adminCreateNewAccount', function(){
+				// this is my create new account function
+
 				event.preventDefault();
-				console.log( $( this ).closest("form").serializeArray() );
 		
 				$.post('assets/api/insertNewAccount.php', {username: '$username', accountInfoArray: $( this ).closest("form").serializeArray() })
 				.done(function(data) {
@@ -145,6 +162,7 @@ _END;
 			});
 
 			$(document).on('click', '.deleteUser', function(){
+				// This is my delete user function
 				var usernameToDel = $(this).data('username');
 				$.post('assets/api/deleteUserAccount.php', {toDeleteUsername: usernameToDel, username: '$username' })
 				.done(function(data) {
@@ -155,6 +173,7 @@ _END;
 			});
 
 			$(document).on('change', '.changeAccountType', function(){
+				//This is my change the account type function
 				var accountType = $(this).val();
 				var usernameToChange = $(this).data('user');
 				$.post('assets/api/updateUserAccountType.php', {username: '$username', usernameToChange: usernameToChange, accountType: accountType })
@@ -166,13 +185,13 @@ _END;
 			});
 
 			function getUsers() {
+				//Here I send my user to the API which returns all the users in a JSON array,
+				//And then I insert these into the table with some extra functions.
 				$.post('assets/api/returnUsers.php', {username: '$username' })
 					.done(function(data) {
 						
-						// remove the old table rows:
 						$('.users').remove();
 
-						console.log(data);
 						users = data;
 						
 						// loop through what we got and add it to the table (data is already a JavaScript object thanks to getJSON()):
@@ -225,11 +244,9 @@ _END;
 	else
 	{
 		// Telling the user that they do not have the correct user account
-		echo "You don't have permission to view this page...<br>";
+		echo "<div class='col-md-6 offset-md-3 text-center'><div class='alert alert-warning' role='alert'>You're not a admin!</div></div>";
 	}
 }
-
-
 
 // Inserting the footer into the bottom of the webpage
 require_once("footer.php");

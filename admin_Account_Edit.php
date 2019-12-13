@@ -1,11 +1,15 @@
 <?php
+//    Page Name - || admin_Account_edit.php
+//                --
+// Page Purpose - || This page lets the admin edit a users account information
+//                --
+//        Notes - ||
+//                --
 
-// Things to notice:
-// The main job of this script is to execute a SELECT statement to find the user's profile information (then display it)
-
-// execute the header script:
+// Insert the header
 require_once("header.php");
 
+// Create my variables to be inserted into the form
 $password = "";
 $firstname = "";
 $surname = "";
@@ -13,6 +17,7 @@ $telephoneNumber = "";
 $dateOfBirth = "";
 $email = "";
 
+// Create my error variables so any errors with the variables are shown
 $password_err = "";
 $firstname_err = "";
 $surname_err = "";
@@ -20,64 +25,80 @@ $telephoneNumber_err = "";
 $dateOfBirth_err = "";
 $email_err = "";
 
+// Combined error message variable
 $message_err = "";
 
+//If this is true, then the form for inputting data is shown
 $show_account_form = false;
 
-// checks the session variable named 'loggedIn'
-// take note that of the '!' (NOT operator) that precedes the 'isset' function
+// Check if the user is logged in from the session variable
 if (!isset($_SESSION['loggedIn']))
 {
-	// user isn't logged in, display a message saying they must be:
+	// Display the message as the user is not logged in
 	echo "<div class='col-md-6 offset-md-3 text-center'><div class='alert alert-success' role='alert'>You are already logged in, please log out first.</div></div>";
 }
+// If the user is logged in we then check if they are a admin
 else
 {
 
+// If set to true then the user is a admin
 $isUserAdmin = false;
 
+// Create a new database connection
 $returnAccountInfo = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-if ($returnAccountInfo->connect_error) {
+// If the database connection fails then let the user know
+if ($returnAccountInfo->connect_error) 
+{
 	die("Connection failed: " . $returnAccountInfo->connect_error);
 }
 
+// Create the query to get the account type of the user
 $checkIfAdminSQL = "SELECT `accountType` FROM `users` WHERE `username` = '$username'";
+// Send the query to the database and return the result
 $checkIfAdminResult = mysqli_query($returnAccountInfo, $checkIfAdminSQL);
 
+// If the return result exists check if its equal to admin
 if (!empty($checkIfAdminResult))
 {
+	// Get the first and only row in the database
 	$userAccountType = $checkIfAdminResult->fetch_assoc();
 
+	// If the account type is a admin then change the boolean variable to true
 	if ($userAccountType['accountType'] == "admin")
 	{
 		$isUserAdmin = true;
 	}	
 }
 
+// Close the database connection
 $returnAccountInfo->close();
 
+// If the user is not a admin, return a error messages
 if (!$isUserAdmin)
 {
 	echo "<div class='col-md-6 offset-md-3 text-center'><div class='alert alert-warning' role='alert'>You're not a admin!</div></div>";
 }
+// If the user is a admin, check if they want to update a account
 else 
 {
 
+// Check if any of the account details are wanting to be set
 if ( (isset($_POST['password'])) || (isset($_POST['firstname'])) || (isset($_POST['surname'])) || (isset($_POST['telephoneNumber'])) || (isset($_POST['dateOfBirth'])) || (isset($_POST['email'])) )
 {
 	// user just tried to update their profile
 	$username = $_GET["username"];
 	
-	// connect directly to our database (notice 4th argument) we need the connection for sanitisation:
+	// Make a new connection to the database
 	$connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 	
-	// if the connection fails, we need to know, so allow this exit:
+	// If the database connection fails then let the user know
 	if (!$connection)
 	{
 		die("Connection failed: " . $mysqli_connect_error);
 	}
 
+	// Get the posted variables and save them
 	$password = $_POST['password'];
 	$firstname = $_POST['firstname'];
 	$surname = $_POST['surname'];
@@ -85,8 +106,7 @@ if ( (isset($_POST['password'])) || (isset($_POST['firstname'])) || (isset($_POS
 	$dateOfBirth = $_POST['dateOfBirth'];
 	$email = $_POST['email'];
 
-	// SANITISATION CODE MISSING:
-    // ...
+	// Sanitize the user inputted data
 	$password = sanitise($password, $connection);
 	$firstname = sanitise($firstname, $connection);
 	$surname = sanitise($surname, $connection);
@@ -95,8 +115,7 @@ if ( (isset($_POST['password'])) || (isset($_POST['firstname'])) || (isset($_POS
 	$email = sanitise($email, $connection);
 	// ...
 	
-	// SERVER-SIDE VALIDATION CODE MISSING:
-    // ...
+	// Check if the sanitized data is valid to be inserted into the db
 	$password_err = validateString($password, 1, 16, "Password");
 	$firstname_err = validateString($firstname, 1, 32, "Firstname");
 	$surname_err = validateString($surname, 1, 64, "Surname");
@@ -105,48 +124,49 @@ if ( (isset($_POST['password'])) || (isset($_POST['firstname'])) || (isset($_POS
 	$email_err = validateEmail($email, 1, 64, "Email");
     // ...
 	
+	// Combine all the error messages
 	$message_err = $password_err . $firstname_err . $surname_err . $telephoneNumber_err . $dateOfBirth_err . $email_err;
 	
-	// check that all the validation tests passed before going to the database:
+	// If there are no errors then insert the data
 	if ($message_err == "")
 	{		
 		// read their username from the session:
 		$username = $_GET["username"];
 		
-		// check to see if this user already had a favourite:
-		$query = "SELECT `username`, `firstname`, `surname`, `email`, `dob`, `telephoneNumber` FROM `users` WHERE username='$username'";
+		//Create my sql query to see if the user exists
+		$query = "SELECT `username` FROM `users` WHERE username='$username'";
 		
-		// this query can return data ($result is an identifier):
+		// This executes the sql query and returns the result to $result
 		$result = mysqli_query($connection, $query);
 		
-		// how many rows came back? (can only be 1 or 0 because username is the primary key in our table):
-		$n = mysqli_num_rows($result);
+		// This returns the number of rows back, telling me if the user exists
+		$numberOfRows = mysqli_num_rows($result);
 			
-		// if there was a match then UPDATE their profile data, otherwise INSERT it:
-		if ($n > 0)
+		// The user exists so update the information
+		if ($numberOfRows > 0)
 		{
-			// we need an UPDATE:
+			// Encrypt the password
 			$password = sha1($password);
+			// Create the update query
 			$query = "UPDATE `users` SET `password` = '$password', `firstname` = '$firstname', `surname` = '$surname', `email` = '$email', `dob` = '$dateOfBirth', `telephoneNumber` = '07$telephoneNumber' WHERE `users`.`username` = '$username'";
-			$result = mysqli_query($connection, $query);		
+			// Execute the update query to the database
+			$result = mysqli_query($connection, $query);	
 		}
-	
-
-		// no data returned, we just test for true(success)/false(failure):
+		// If the Update is successful then tell the user it worked, otherwise tell the user it failed
 		if ($result) 
 		{
 			// show a successful update message:
-			$message_err = '<div class="alert alert-success" role="alert"><h4 class="alert-heading">Account Information Updated!</h4><p>You have successfully update your account, Go back to the <a href="admin.php">account!</a></p></div>';
+			$message_err = '<div class="alert alert-success" role="alert"><h4 class="alert-heading">Account Information Updated!</h4><p>You have successfully update your account, Go back to the <a href="account.php">account!</a></p></div>';
 		}
 		else
 		{
 			// show an unsuccessful update message:
-			$message_err = '<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Account Update Unsuccessful!</h4><p>Something went wrong with the update!, Please Go back to the <a href="admin.php">account</a> and try again!</p></div>';
+			$message_err = '<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Account Update Unsuccessful!</h4><p>Something went wrong with the update!, Please Go back to the <a href="account.php">account</a> and try again!</p></div>';
 		}
 	}
 	else
 	{
-		// validation failed, show the form again with guidance:
+		// validation failed, show the form again with the new error messages
 		$show_account_form = true;
 	}
 	
@@ -157,51 +177,51 @@ if ( (isset($_POST['password'])) || (isset($_POST['firstname'])) || (isset($_POS
 // the user must be signed-in, show them suitable page content
 else
 {
-    // user is already logged in, read their username from the session:
+    // Get the username from the url header
     $username = $_GET["username"];
 	
-	// now read their account data from the table...
-	// connect directly to our database (notice 4th argument - database name):
+	// Create a new database connection
 	$connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 	
-	// if the connection fails, we need to know, so allow this exit:
+	// Check if the connection fails
 	if (!$connection)
 	{
 		die("Connection failed: " . $mysqli_connect_error);
 	}
 	
-	// check for a row in our profiles table with a matching username:
+	// Create a new query, this gets all the users information
 	$query = "SELECT `username`, `firstname`, `surname`, `email`, `dob`, `telephoneNumber` FROM `users` WHERE username='$username'";
 	
-	// this query can return data ($result is an identifier):
+	// This gets the sql query and uses that to get the users information from the database
 	$result = mysqli_query($connection, $query);
 	
-	// how many rows came back? (can only be 1 or 0 because username is the primary key in our table):
-	$n = mysqli_num_rows($result);
+	// Get the number of rows from the database result, to see if the query worked
+	$numberOfRows = mysqli_num_rows($result);
 
-	if ($n > 0)
+	// If the user exists then format the returned data
+	if ($numberOfRows > 0)
 	{
-		// use the identifier to fetch one row as an associative array (elements named after columns):
+		// Get the first and only row of data and set own variables to the returned info
 		$row = mysqli_fetch_assoc($result);
-		// extract their profile data for use in the HTML:
 		$firstname = $row['firstname'];
 		$surname = $row['surname'];
 		$telephoneNumber = substr($row['telephoneNumber'], 2);
 		$dateOfBirth = $row['dob'];
 		$email = $row['email'];
+		// ...
 	}
 
 	// show the set profile form:
 	$show_account_form = true;
-	
+
 	// we're finished with the database, close the connection:
 	mysqli_close($connection);
 }
 }
-		
-	// if there was a match then extract their profile data:
-
+// Display any errors messages we have
 echo $message_err;
+
+// This displays the account form, it includes client side validation and the input areas have placeholder values of the users data for easy editing.
 if ($show_account_form)	
 {
 // display their profile data:

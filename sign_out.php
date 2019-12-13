@@ -1,8 +1,11 @@
 <?php
-
-// Things to notice:
-// The main job of this script is to end the user's session
-// Meaning we want to destroy the current session data
+//    Page Name - || sign_out.php
+//                --
+// Page Purpose - || This is where the user can signout of the current account
+//                --
+//        Notes - || The session is destroyed here,
+//         		  ||
+//                --
 
 // execute the header script:
 require_once("header.php");

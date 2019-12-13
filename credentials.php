@@ -1,5 +1,5 @@
 <?php
-// default values for Xampp when accessing your MySQL database:
+// Here i store the database connection details
 $dbhost  = 'localhost';
 $dbuser  = 'root';
 $dbpass  = '';

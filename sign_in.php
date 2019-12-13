@@ -1,18 +1,11 @@
 <?php
-
-// Things to notice:
-// The main job of this script is to execute a SELECT statement to look for the submitted username and password in the appropriate database table
-// If the submitted username and password is found in the table, then the following session variable is set: $_SESSION["loggedInSkeleton"]=true;
-// All other scripts check for this session variable before loading (if it doesn't exist then the user isn't logged in and the page doesn't load)
-// However... the database table isn't currently being queried (at the moment the code is only checking for a username of "barryg", "mandyb" or "admin") and it's your job to add this query in... 
-//
-// Other notes:
-// client-side validation using "password","text" inputs and "required","maxlength" attributes (but we can't rely on it happening!)
-// we sanitise the user's credentials - see validationChecker.php (included via header.php) for the sanitisation function
-// we validate the user's credentials - see validationChecker.php (included via header.php) for the validation functions
-// the validation functions all follow the same rule: return an empty string if the data is valid...
-// ... otherwise return a help message saying what is wrong with the data.
-// if validation of any field fails then we display the help messages (see previous) when re-displaying the form
+//    Page Name - || sign_in.php
+//                --
+// Page Purpose - || This is the sign in page,
+//                --
+//        Notes - || The user inserts the details and gets access to the website
+//         		  ||
+//                --
 
 // execute the header script:
 require_once("header.php");
@@ -58,7 +51,6 @@ elseif ( (isset($_POST['username'])) && (isset($_POST['password'])) )
 	// VALIDATION (see validation_Checker.php for the function definitions)
 	
 	// now validate the data (both strings must be between 1 and 16 characters long):
-	// (reasons: we don't want empty credentials, and we used VARCHAR(16) in the database table)
 	$username_err = validateString($username, 1, 16, "Username");
 	$password_err = validateString($password, 1, 16, "Password");
 	
