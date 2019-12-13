@@ -26,7 +26,7 @@ if (!isset($_POST['username']) && !isset($_POST['survey_JSON']) && !isset($_POST
 // The API call has specified the user is a admin, we now need to return the data
 else 
 {
-    require_once('../../validationChecker.php');
+    require_once('../../validation_Checker.php');
     require_once('../../credentials.php');
 
     // connect to the host:

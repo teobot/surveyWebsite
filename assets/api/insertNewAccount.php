@@ -20,7 +20,7 @@ if ( !isset($_POST['username']) && !isset($_POST['accountInfoArray']) )
 } 
 else
 {
-    require_once('../../validationChecker.php');
+    require_once('../../validation_Checker.php');
     require_once('../../credentials.php');
     
     $username = $_POST['username'];

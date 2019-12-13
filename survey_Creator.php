@@ -24,7 +24,7 @@ if(isset($_GET['surveyID']))
   <script src="assets/javascript/questionCreation.js"></script>
   <script>
     $(document).ready(function(){
-      $.post('assets/api/checkSurveyCreator.php', {surveyID: '$surveyID', username: '$username' })
+      $.post('assets/api/checkSurvey_Creator.php', {surveyID: '$surveyID', username: '$username' })
         .done(function(data) {
         
           $.post('assets/api/returnSurveyData.php', {surveyID: '$surveyID' })
@@ -143,7 +143,7 @@ echo<<<_END
         //Now we post this array to a API that looks to see if the data is valid
             $.post('assets/api/insertSurveyIntoDatabase.php', {survey_JSON: surveyData, username: '$username', action: process, surveyID : '$surveyID'})
             .done(function(data) {
-              window.location.replace("surveys_manage.php");
+              window.location.replace("surveys_Manage.php");
             })
             .fail(function(error) {
               document.getElementById("errorMessage").style.display= 'block';

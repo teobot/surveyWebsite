@@ -22,7 +22,19 @@ if (!isset($_SESSION['loggedIn']))
 // the user must be signed-in, show them suitable page content
 else
 {
-	echo '<a class="btn btn-primary btn-lg btn-block" href="surveyCreator.php" role="button">Click to create new survey!</a><br>';
+	echo '<a class="btn btn-success btn-lg btn-block" href="survey_Creator.php" role="button">+ Click to create new survey!</a><br>';
+	echo<<<_END
+	<div style="border-left: 5px solid lightblue;" class="container">
+		<input id="searchForUser" class="form-control mr-sm-2" type="search" placeholder="Search By Survey Title"><br>
+
+		<div id="displaySearchedUser">
+			<div class="alert alert-info" role="alert">
+				Start Searching For Surveys...
+			</div>	
+		</div>
+
+	</div>
+_END;
 	echo<<<_END
 	<div class="table-responsive">
 		<table class="table table-hover table-sm text-center" id="surveyTable">
@@ -77,9 +89,9 @@ _END;
 							insideHTML += "<td>"+value.survey_id+"</td>";
 							insideHTML += "<td>"+value.creator+"</td>";
 							insideHTML += "<td>"+value.survey_title+"</td>";
-							insideHTML += "<td><a href='surveyCreator.php?surveyID="+value.survey_id+"'>Edit Survey<a></td>";
+							insideHTML += "<td><a href='survey_Creator.php?surveyID="+value.survey_id+"'>Edit Survey<a></td>";
 							insideHTML += "<td><a href='survey_view.php?surveyID=" + value.survey_id + "'>View Survey</a></td>";
-							insideHTML += "<td><a href='surveyAnalysis.php?surveyID="+value.survey_id+"'>View Analytics</a></td>";
+							insideHTML += "<td><a href='survey_Analysis.php?surveyID="+value.survey_id+"'>View Analytics</a></td>";
 							insideHTML += "<td><div class='text-center'><span class='badge badge-primary badge-pill'>"+value.responseCount+"</span></div></td>";
 							insideHTML += "<th><button type='button' data-surveyid='"+value.survey_id+"' class='deleteSurvey btn btn-outline-danger btn-sm'>Delete Survey</button></th>";
 							insideHTML += "</td>";

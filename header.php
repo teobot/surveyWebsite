@@ -21,7 +21,7 @@ _END;
 require_once("credentials.php");
 
 // our helper functions:
-require_once("validationChecker.php");
+require_once("validation_Checker.php");
 
 // start/restart the session:
 // this allows use to make use of session variables
@@ -43,7 +43,7 @@ echo <<<_END
 	    <a class="nav-link" href="account.php">My Account</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" href="surveys_manage.php">My Surveys</a>
+	    <a class="nav-link" href="surveys_Manage.php">My Surveys</a>
 	  </li>
 	  <li class="nav-item">
 	    <a class="nav-link" href="competitors.php">Design and Analysis</a>
